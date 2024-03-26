@@ -6,7 +6,7 @@
 | UWA ID   | Name        | Github     |
 | -------- | ----------- | ---------- |
 | 23080798 | Justin Arat | justinarat |
-| uwa id  | name | github |
+| 23431003 | Dominic Davies | dominictdavies |
 | uwa id  | name | github |
 | uwa id  | name | github |
 

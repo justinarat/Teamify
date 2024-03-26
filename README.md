@@ -8,7 +8,7 @@
 | -------- | ----------- | ---------- |
 | 23080798 | Justin Arat | justinarat |
 | 23431003 | Dominic Davies | dominictdavies |
-| uwa id  | name | github |
+| 23395411  | John Giampaolo | johnnyblockss |
 | uwa id  | name | github |
 
 ## Summary of Application Architecture

@@ -20,3 +20,9 @@
 3. Install project requirements `pip install -r requirements.txt`
 
 ## How to run the tests
+
+To run all tests:
+`python -m unittest`
+
+To run specific tests:
+`python -m unittest tests.test_name`

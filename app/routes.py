@@ -10,6 +10,7 @@ def hello():
 def test():
   return "Testing"
 
+# These endpoints could be in the final ver
 @app.route("/")
 @app.route("/introduction")
 def introduction():

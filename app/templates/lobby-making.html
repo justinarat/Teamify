@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
-{% block css%}
+{% block css %}
   <link rel="stylesheet" href="static/css/lobby-making.css">
 {% endblock %}
 
 {% block headScripts %}{% endblock %}
 
 {% block content %}
-  <div id="lobby-making" disabled="true">
+  <div id="lobby-making">
     <h2 id="lobby-making-title">Creating Lobby</h2>
     <form id="lobby-making-form">
       <input
@@ -27,5 +27,5 @@
 {% endblock %}
 
 {% block bodyScripts %}
-  <script scr="static/scripts/lobby-making.js"></script>
+  <script src="static/scripts/lobby-making.js"></script>
 {% endblock %}

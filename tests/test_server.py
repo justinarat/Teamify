@@ -1,22 +1,13 @@
+import unittest
 import requests
 
 
-def can_get_url(url: str):
-    try:
-        requests.get(url)
-        return True
-    except requests.RequestException as e:
-        return False
-
-
-def test_get_server():
-    server_url = "http://localhost:5000"
-
-    if can_get_url(server_url):
-        print(f"Got {server_url}")
-    else:
-        print(f"Could not get {server_url}")
+class ServerTestCase(unittest.TestCase):
+    def test_get_server(self):
+        server_url = "http://localhost:5000"
+        response = requests.get(server_url, timeout=10)
+        self.assertEqual(response.status_code, 200, f"Server responded with {response.status_code} rather than 200")
 
 
 if __name__ == "__main__":
-    test_get_server()
+    unittest.main()

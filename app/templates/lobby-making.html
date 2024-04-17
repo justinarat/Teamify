@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block css%}
+  <link rel="stylesheet" href="static/css/lobby-making.css">
+{% endblock %}
+
+{% block headScripts %}{% endblock %}
+
+{% block content %}
+  <div id="lobby-making" disabled="true">
+    <h2 id="lobby-making-title">Creating Lobby</h2>
+    <form id="lobby-making-form">
+      <input
+        type="text"
+        id="lobby-making-game"
+        placeholder="Enter game"
+        name="game"
+      >
+      <br>
+      <input
+        type="text"
+        id="lobby-making-description"
+        placeholder="Enter description"
+      >
+    </form>
+  </div>
+{% endblock %}
+
+{% block bodyScripts %}
+  <script scr="static/scripts/lobby-making.js"></script>
+{% endblock %}

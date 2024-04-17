@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block css %}
+  <link rel="stylesheet" href="static/css/admin.css">
+{% endblock %}
+
+{% block headScripts %}{% endblock %}
+
+{% block content %}
+  <main class="container-fluid">
+    <h1>Admin</h1>
+    <div class="search-bar" id="search-users">
+      <h2>Users</h2>
+      <!-- TODO: Fill out input parameters -->
+      <input><button>Search</button>
+    </div>
+    <div id="users">
+      <table id="UserTable">
+        <tr>
+          <th>Username</th>
+          <th>Rating</th>
+          <th>Action</th>
+        </tr>
+        <tr>
+          <td>Smith</td>
+          <td>0.0</td>
+          <td><button>Inspect</button></td>
+        </tr>
+        <tr>
+          <td>Jones</td>
+          <td>33.7</td>
+          <td><button>Inspect</button></td>
+        </tr>
+        <tr>
+          <td>Brown</td>
+          <td>-21.5</td>
+          <td><button>Inspect</button></td>
+        </tr>
+      </table>
+    </div>
+  </main>
+{% endblock %}
+
+{% block bodyScripts %}
+  <script src="static/scripts/admin.js"></script>
+{% endblock %}

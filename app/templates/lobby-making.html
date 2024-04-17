@@ -7,7 +7,12 @@
 {% block headScripts %}{% endblock %}
 
 {% block content %}
-  <div id="lobby-making">
+  {#
+    This div is set hidden and inputs are disabled.
+    When the create lobby button is clicked, change visibility to visible and
+    toggle the disabled attribute for the inputs.
+  #}
+  <div id="lobby-making" style="visibility: hidden;">
     <h2 id="lobby-making-title">Creating Lobby</h2>
     <form id="lobby-making-form">
       <input
@@ -15,12 +20,14 @@
         id="lobby-making-game"
         placeholder="Enter game"
         name="game"
+        disabled
       >
       <br>
       <input
         type="text"
         id="lobby-making-description"
         placeholder="Enter description"
+        disabled
       >
     </form>
   </div>

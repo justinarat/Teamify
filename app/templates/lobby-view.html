@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block css %}
+  <link rel="stylesheet" href="static/css/lobby-view.css">
+{% endblock %}
+
+{% block headScripts %}{% endblock %}
+
+{% block content %}
+  <main class="container-fluid">
+    <h1>Lobby View</h1>
+    <div id="game-name"></div>
+    <p>Lobby Code: <span id="lobby-code">XXXX</span></p>
+    <p>Time Schedule:</p>
+    <table id="time-schedule">
+      <tr>
+        <th>Day</th>
+        <th>Time</th>
+      </tr>
+      <tr>
+        <td>Monday</td>
+        <td>8pm-9pm</td>
+      </tr>
+      <tr>
+        <td>Tuesday</td>
+        <td>8pm-11pm</td>
+      </tr>
+      <tr>
+        <td>Wednesday</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>Thursday</td>
+        <td>8pm-9pm</td>
+      </tr>
+      <tr>
+        <td>Friday</td>
+        <td>7pm-11pm</td>
+      </tr>
+      <tr>
+        <td>Saturday</td>
+        <td>2pm-10pm</td>
+      </tr>
+      <tr>
+        <td>Sunday</td>
+        <td>1pm-5pm</td>
+      </tr>
+    </table>
+    <p>Host name: <span id="host-name">myname</span></p>
+    <p>
+      Lobby Capacity:<span id="current-num-players"></span> 0/0
+      <span id="max-num-players"></span>
+    </p>
+  </main>
+{% endblock %}
+
+{% block bodyScripts %}
+  <script src="static/scripts/lobby-view.js"></script>
+{% endblock %}

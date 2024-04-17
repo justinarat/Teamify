@@ -1,18 +1,25 @@
 import unittest
 from selenium import webdriver
-from selenium.webdriver.remote.command import Command
+from selenium.webdriver.remote.webdriver import WebDriver
+
 
 class SeleniumTestCase(unittest.TestCase):
-   def test_route(self, driver, route):
-      response = driver.command_executor.execute(Command.GET, {"url": f"http://localhost:5000{route}"})
-      print(response)
+    def check_routes_with_driver(self, driver: WebDriver):
+        domain = "http://localhost:5000"
+        routes = ["/", "/test/route"]
+        for route in routes:
+            driver.get(domain + route)
+        driver.quit()
 
-      # if response == 0:
-      #    print(f"Accessed '{route}'")
-      # else:
-      #    print(f"Could not access '{route}'")
+    def test_routes_with_chrome(self):
+        self.check_routes_with_driver(webdriver.Chrome())
 
-      driver.quit()
+    def test_routes_with_firefox(self):
+        self.check_routes_with_driver(webdriver.Firefox())
+
+    def test_routes_with_edge(self):
+        self.check_routes_with_driver(webdriver.Edge())
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

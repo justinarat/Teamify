@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
 	<meta charset="utf-8">
+  <script src="pages.js"></script>
+  <link rel="stylesheet" href="pages.css">
     <title>Lobby Making</title>
   </head>
   <body>
@@ -35,40 +37,73 @@
         >
         <br>
         <br>
-        <label for="mon-from">Monday:</label>
+        <!-- <label for="mon-from">Monday:</label>
         <input type="time" id="mon-from" name="mon-from">
         <label for="mon-to"> to </label>
-        <input type="time" id="mon-to" name="mon-to">
+        <input type="time" id="mon-to" name="mon-to"> -->
+        
+        <label for="mon-toggle">Monday:</label>
+        <button onclick="showTime('monday', event)">Toggle</button>
+        <div id="monday">
+          <label for="mon-from">From:</label>
+          <input type="time" id="mon-from">
+          <label for="mon-to"> To: </label>
+          <input type="time" id="mon-to">
+        </div>
         <br>
-        <label for="tue-from">Tuesday:</label>
-        <input type="time" id="tue-from" name="tue-from">
-        <label for="tue-to"> to </label>
-        <input type="time" id="tue-to" name="tue-to">
+        <label for="tue-toggle">Tuesday:</label>
+        <button onclick="showTime('tuesday', event)">Toggle</button>
+        <div id="tuesday">
+          <label for="tue-from">From:</label>
+          <input type="time" id="tue-from">
+          <label for="tue-to"> To: </label>
+          <input type="time" id="tue-to">
+        </div>
         <br>
-        <label for="wed-from">Wednesday:</label>
-        <input type="time" id="wed-from" name="wed-from">
-        <label for="wed-to"> to </label>
-        <input type="time" id="wed-to" name="wed-to">
+        <label for="wed-toggle">Wednesday:</label>
+        <button onclick="showTime('wednesday', event)">Toggle</button>
+        <div id="wednesday">
+          <label for="wed-from">From:</label>
+          <input type="time" id="wed-from">
+          <label for="wed-to"> To: </label>
+          <input type="time" id="wed-to">
+        </div>
         <br>
-        <label for="thu-from">Thursday:</label>
-        <input type="time" id="thu-from" name="thu-from">
-        <label for="thu-to"> to </label>
-        <input type="time" id="thu-to" name="thu-to">
+        <label for="thu-toggle">Thursday:</label>
+        <button onclick="showTime('thursday', event)">Toggle</button>
+        <div id="thursday">
+          <label for="thu-from">From:</label>
+          <input type="time" id="thu-from">
+          <label for="thu-to"> To: </label>
+          <input type="time" id="thu-to">
+        </div>
         <br>
-        <label for="fri-from">Friday:</label>
-        <input type="time" id="fri-from" name="fri-from">
-        <label for="fri-to"> to </label>
-        <input type="time" id="fri-to" name="fri-to">
+        <label for="fri-toggle">Friday:</label>
+        <button onclick="showTime('friday', event)">Toggle</button>
+        <div id="friday">
+          <label for="fri-from">From:</label>
+          <input type="time" id="fri-from">
+          <label for="fri-to"> To: </label>
+          <input type="time" id="fri-to">
+        </div>
         <br>
-        <label for="sat-from">Saturday:</label>
-        <input type="time" id="sat-from" name="sat-from">
-        <label for="sat-to"> to </label>
-        <input type="time" id="sat-to" name="sat-to">
+        <label for="sat-toggle">Saturday:</label>
+        <button onclick="showTime('saturday', event)">Toggle</button>
+        <div id="saturday">
+          <label for="sat-from">From:</label>
+          <input type="time" id="sat-from">
+          <label for="sat-to"> To: </label>
+          <input type="time" id="sat-to">
+        </div>
         <br>
-        <label for="sun-from">Sunday:</label>
-        <input type="time" id="sun-from" name="sun-from">
-        <label for="sun-to"> to </label>
-        <input type="time" id="sun-to" name="sun-to">
+        <label for="sun-toggle">Sunday:</label>
+        <button onclick="showTime('sunday', event)">Toggle</button>
+        <div id="sunday">
+          <label for="sun-from">From:</label>
+          <input type="time" id="sun-from">
+          <label for="sun-to"> To: </label>
+          <input type="time" id="sun-to">
+        </div>
         <br>
         <br>
         <input type="submit" value="Submit">

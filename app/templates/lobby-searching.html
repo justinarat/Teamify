@@ -20,18 +20,25 @@
     {#
       TODO: the view function (lobby_searching() in routes.py) for this page 
             should query the database for open lobbies, then loop through each 
-            lobby do add the divs below.
+            lobby do add the div below.
             something like:
       {% for lobby in lobbies %}
-        <div class="lobby">
-          <h3 class="game-name">{{ lobby.game_title }}</h3>
-          <p class="lobby-description">{{ lobby.description }}</p>
-          <div class="lobby-host">{{ lobby.host }}</div>
+      <div class="lobby">
+        <h3 class="game-name">{{ lobby.game_title }}</h3>
+        <p class="lobby-description">{{ lobby.description }}</p>
+        <div class="lobby-players">
+          <p class="lobby-host">{{ lobby.host.username }}</p>
           {% for player in lobby.players}
-          <div class="lobby-other-players">{{ player.username }}</div>
+          <p class="lobby-player">{{ player.username }}</p>
           {% endfor %}
-          <p class="time-available">lobby.times</p> <!--Maybe show next available time-->
         </div>
+        {# TODO: add lobby tags, example: 
+        {% for tag in lobby.tags}
+        <p class="lobby-tag">{{ tag }}</p>
+        {% endfor %}
+        #}
+        <p class="time-available">lobby.times</p> <!--Maybe show next available time-->
+      </div>
       {% endfor %}
     #}
     <div class="lobby">

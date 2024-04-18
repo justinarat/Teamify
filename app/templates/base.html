@@ -20,11 +20,11 @@
       <div id="links">
         <a href="{{ url_for('games_view') }}">Games</a>
         <a href="lobby-making.html">Make Lobby</a>
-        <a href="lobby-searching.html">Search for Lobby</a>
-		<a href="admin.html">Admin</a>
-        <a href="lobby-view.html">View Lobby</a>
+        <a href="{{ url_for('lobby_searching') }}">Search for Lobby</a>
+		<a href="{{ url_for('admin') }}">Admin</a>
+        <a href="{{ url_for('lobby_view', lobby_code='temp-lobby-code') }}">View Lobby</a>
         <a href="{{ url_for('introduction') }}">Home</a>
-		<a href="account-creation.html">Login Or Sign Up</a>
+		<a href="{{ url_for('account_creation') }}">Login Or Sign Up</a>
       </div>
     </nav>
 

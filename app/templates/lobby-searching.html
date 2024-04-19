@@ -1,11 +1,6 @@
-{#
-  Assuming that you can make a lobby from this page, so deriving from the
-  lobby-making.html template.
-#}
-{% extends "lobby-making.html" %}
+{% extends "base.html" %}
 
 {% block css %}
-  {{ super() }}
   <link rel="stylesheet" href="static/css/lobby-searching.css">
 {% endblock %}
 
@@ -66,7 +61,6 @@
       <p class="time-available">SUN 1pm-5pm</p> <!--Maybe show next available time-->
     </div>
   </main>
-  {{ super() }}
 {% endblock %}
 
 {% block bodyScripts %}

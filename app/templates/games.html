@@ -1,16 +1,6 @@
-{# 
-  This is an example of how we could implement the lobby making pop up.
-  If you want to remove it then:
-    - change extends to "base.html"
-    - remove {{ super() }}, this takes the contents of the same block from 
-      the parent template and copies it to where {{ super() }} is.
-    - remove this comment
-#}
-
-{% extends "lobby-making.html" %}
+{% extends "base.html" %}
 
 {% block css %}
-  {{ super() }}
   <link rel="stylesheet" href="static/css/games.css">
 {% endblock %}
 
@@ -43,10 +33,8 @@
       </div>
     </div>
   </main>
-  {{ super() }}
 {% endblock %}
 
 {% block bodyScripts %}
-  {{ super() }}
   <script src="static/scripts/games.js"></script>
 {% endblock %}

@@ -1,6 +1,6 @@
 console.log("Script is running");
 
-const days = ["mon", "tue"];
+const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
 
 
 

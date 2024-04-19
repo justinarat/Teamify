@@ -10,6 +10,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="lobby-view.css">
   </head>
   <body>
     <nav
@@ -51,8 +52,18 @@
       <div class="row">
         <div class="col-md-9">
           <h1>Lobby View</h1>
-          <div id="game-name">Game Name</div>
-          <p id="lobby-code" class="float-md-right">Lobby Code: <span id="lobby-code-value">XXXX</span></p>
+          <h2 id="game-name" class="d-md-inline">Game Name</h2>
+          <h3 id="lobby-code" class="d-md-inline float-end">Lobby Code: <span id="lobby-code-value">XXXX</span></h3>
+          <p id="host">Host: <span id="host-name">myname</span></p>
+          <div id="players">
+            <span>Player1</span>
+            <span>Player2</span>
+            <span>Player3</span>
+          </div>
+          <p id="lobby-capacity">
+            Lobby Capacity:<span id="current-num-players"></span> 0/0
+            <span id="max-num-players"></span>
+          </p>
           <div id="time-schedule">
             <p>Time Schedule:</p>
             <table>
@@ -90,20 +101,15 @@
               </tr>
             </table>
           </div>
-          <p id="host">Host name: <span id="host-name">myname</span></p>
-          <p id="lobby-capacity">
-            Lobby Capacity:<span id="current-num-players"></span> 0/0
-            <span id="max-num-players"></span>
-          </p>
         </div>
-        <div class="col-md-3">
-          <div class="chat">
-            <div id="chat-area">
-              <div class="player-text">Player 1: hello</div>
-              <div class="player-text">Player 2: hello</div>
-              <div class="player-text">Player 3: hello</div>
-            </div>
+        <div class="col-md-3 min-vh-100 bg-dark">
+          <div id="chat">
             <input id="chat-enter-text" placeholder="Enter message"></input>
+            <div id="chat-area">
+              <div class="player-text"><span class="chat-username">Player 1</span>: hello</div>
+              <div class="player-text"><span class="chat-username">Player 2</span>: hello</div>
+              <div class="player-text"><span class="chat-username">Player 3</span>: hello</div>
+            </div>
           </div>
         </div>
       </div>

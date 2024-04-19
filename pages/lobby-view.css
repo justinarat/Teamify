@@ -1,7 +1,3 @@
-#game-name {
-  display: inline;
-}
-
-#lobby-code {
-  display: inline;
+.chat-username {
+  font-weight: bold;
 }

@@ -1,6 +1,7 @@
 console.log("Script is running");
 
-const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+const days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]; 
+const daysFull = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 days.forEach(function(day){
   var toggleOption = day + "-toggle"
@@ -26,10 +27,28 @@ function showGeneral(day, toggleOption){
 document.getElementById("time-type").addEventListener("change", timeDisplay);
 
 function timeDisplay(){
-  var timeOptionChunk = document.getElementById("time-option");
-  let selectedOption = document.getElementById("time-type").value;
-  if (selectedOption != 'general' && timeOptionChunk != ""){
-    timeOptionChunk.innerHTML = "";
+  return function(){
+    console.log("Change detected");
+    var timeOptionChunk = document.getElementById("time-option");
+    let selectedOption = document.getElementById("time-type").value;
+    if (selectedOption == 'general' && timeOptionChunk == ""){
+      for (let i = 0; i < 7; i++){
+        let currDay = days[i];
+        let currDayFull = daysFull[i];
+        let htmlChunk = "<label for='" + currDay + "-toggle'>" + currDayFull + ":</label>" +
+        "<select id='" + currDay + "-toggle'>" +
+        "  <option value='no'>No</option>" +
+        "  <option value='yes'>Yes</option>" +
+        "</select>" +
+        "<div id='" + currDay + "'></div>" +
+        "<br />";
+        timeOptionChunk.insertAdjacentHTML("afterend", htmlChunk);
+      }
+    }
+    else if (selectedOption != 'general' && timeOptionChunk != ""){
+      timeOptionChunk.innerHTML = "";
+    }
   }
 }
+
 

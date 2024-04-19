@@ -50,28 +50,34 @@
     </nav>
 
     <main class="container">
-      <form class="row justify-content-center" action="lobby-searching.html" method="GET">
-        <div class="col-sm-6">
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              placeholder="Search lobbies"
-              aria-label="Search lobbies"
-              name="search"
-              class="form-control"
-            />
-            <button
-              type="submit"
-              aria-label="Submit search"
-              class="btn btn-outline-secondary"
-            >
-              <i class="bi bi-search" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-      </form>
+      <section id="lobbies" class="row">
+        <h1 class="text-center">Search Lobbies</h1>
 
-      <section id="lobby-listings" class="row">
+        <form
+          class="row justify-content-center"
+          action="lobby-searching.html"
+          method="GET"
+        >
+          <div class="col-sm-6">
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                placeholder="Lobby content"
+                aria-label="Lobby content"
+                name="search"
+                class="form-control"
+              />
+              <button
+                type="submit"
+                aria-label="Submit search"
+                class="btn btn-outline-secondary"
+              >
+                <i class="bi bi-search" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+
         <article class="col-sm-4">
           <div class="card bg-dark">
             <div class="card-body">

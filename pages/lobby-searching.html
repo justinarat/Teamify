@@ -5,11 +5,11 @@
     <title>Lobby Searching</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
     />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -41,35 +41,41 @@
 
       <div class="row">
         <div class="col-sm-4" id="lobby-card">
-          <div class="card-body">
-            <h3 class="game-name">Game 1</h3>
-            <p class="lobby-description">Lobby 1 description.</p>
-            <div class="lobby-host">Player 1</div>
-            <div class="lobby-other-players">Player 2, Player 3</div>
-            <p class="time-available">FRI 7pm-3am</p>
-            <!--Maybe show next available time-->
+          <div class="card">
+            <div class="card-body">
+              <h3 class="game-name">Game 1</h3>
+              <p class="lobby-description">Lobby 1 description.</p>
+              <div class="lobby-host">Player 1</div>
+              <div class="lobby-other-players">Player 2, Player 3</div>
+              <p class="time-available">FRI 7pm-3am</p>
+              <!--Maybe show next available time-->
+            </div>
           </div>
         </div>
 
         <div class="col-sm-4">
-          <div class="card-body" id="lobby-card">
-            <h3 class="game-name">Game 2</h3>
-            <p class="lobby-description">Lobby 2 description.</p>
-            <div class="lobby-host">Player 1</div>
-            <div class="lobby-other-players">Player 2, Player 3</div>
-            <p class="time-available">SAT 1pm-10pm</p>
-            <!--Maybe show next available time-->
+          <div class="card" id="lobby-card">
+            <div class="card-body">
+              <h3 class="game-name">Game 2</h3>
+              <p class="lobby-description">Lobby 2 description.</p>
+              <div class="lobby-host">Player 1</div>
+              <div class="lobby-other-players">Player 2, Player 3</div>
+              <p class="time-available">SAT 1pm-10pm</p>
+              <!--Maybe show next available time-->
+            </div>
           </div>
         </div>
 
         <div class="col-sm-4">
-          <div class="card-body" id="lobby-card">
-            <h3 class="game-name">Game 3</h3>
-            <p class="lobby-description">Lobby 3 description.</p>
-            <div class="lobby-host">Player 1</div>
-            <div class="lobby-other-players">Player 2, Player 3</div>
-            <p class="time-available">SUN 1pm-5pm</p>
-            <!--Maybe show next available time-->
+          <div class="card border-dark mb-3" id="lobby-card">
+            <div class="card-body">
+              <h3 class="game-name">Game 3</h3>
+              <p class="lobby-description">Lobby 3 description.</p>
+              <div class="lobby-host">Player 1</div>
+              <div class="lobby-other-players">Player 2, Player 3</div>
+              <p class="time-available">SUN 1pm-5pm</p>
+              <!--Maybe show next available time-->
+            </div>
           </div>
         </div>
       </div>

@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
 	<meta charset="utf-8">
-  <script src="pages.js"></script>
   <link rel="stylesheet" href="pages.css">
     <title>Lobby Making</title>
   </head>
@@ -43,15 +42,18 @@
         <input type="time" id="mon-to" name="mon-to"> -->
         
         <label for="mon-toggle">Monday:</label>
-        <button onclick="showTime('monday', event)">Toggle</button>
-        <div id="monday">
+        <select id="mon-toggle">
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+        </select>
+        <div id="monday" class="not-showing">
           <label for="mon-from">From:</label>
           <input type="time" id="mon-from">
           <label for="mon-to"> To: </label>
           <input type="time" id="mon-to">
         </div>
         <br>
-        <label for="tue-toggle">Tuesday:</label>
+        <!-- <label for="tue-toggle">Tuesday:</label>
         <button onclick="showTime('tuesday', event)">Toggle</button>
         <div id="tuesday">
           <label for="tue-from">From:</label>
@@ -104,10 +106,11 @@
           <label for="sun-to"> To: </label>
           <input type="time" id="sun-to">
         </div>
-        <br>
+        <br> -->
         <br>
         <input type="submit" value="Submit">
       </form>
     </div>
   </body>
+  <script src="pages.js"></script>
 </html>

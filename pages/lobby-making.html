@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-	<meta charset="utf-8">
-  <link rel="stylesheet" href="pages.css">
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="pages.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
     <title>Lobby Making</title>
   </head>
   <body>
@@ -12,30 +18,42 @@
         <a href="games.html">Games</a>
         <a href="lobby-making.html">Make Lobby</a>
         <a href="lobby-searching.html">Search for Lobby</a>
-		<a href="admin.html">Admin</a>
+        <a href="admin.html">Admin</a>
         <a href="lobby-view.html">View Lobby</a>
         <a href="introduction.html">Home</a>
-		<a href="account-creation.html">Login Or Sign Up</a>
+        <a href="account-creation.html">Login Or Sign Up</a>
       </div>
     </nav>
 
-    <div id="lobby-making">
+    <div id="lobby-making" class="container">
       <h2 id="lobby-making-title">Creating Lobby</h2>
       <form id="lobby-making-form">
-        <input
-          type="text"
-          id="lobby-making-game"
-          placeholder="Enter game"
-          name="game"
-        >
-        <br>
-        <input
-          type="text"
-          id="lobby-making-description"
-          placeholder="Enter description"
-        >
-        <br>
-        <br>
+        <div class="row">
+          <div class="col-sm-6">
+            <input
+              type="text"
+              id="lobby-making-game"
+              placeholder="Enter game"
+              name="game"
+            />
+            <br />
+            <input
+              type="text"
+              id="lobby-making-description"
+              placeholder="Enter description"
+            />
+          </div>
+          <div class="col-sm-6">
+            <label for="time-type">Time allocation:</label>
+            <select id="time-type">
+              <option value="general">General Schedule</option>
+              <option value="calendar-based">Calendar Based</option>
+            </select>
+          </div>
+        </div>
+
+        <br />
+        <br />
         <label for="mon-toggle">Monday:</label>
         <select id="mon-toggle">
           <option value="no">No</option>
@@ -43,12 +61,12 @@
         </select>
         <div id="mon" class="not-showing">
           <label for="mon-from">From:</label>
-          <input type="time" id="mon-from">
+          <input type="time" id="mon-from" />
           <label for="mon-to"> To: </label>
-          <input type="time" id="mon-to">
+          <input type="time" id="mon-to" />
         </div>
 
-        <br>
+        <br />
 
         <label for="tue-toggle">Tuesday:</label>
         <select id="tue-toggle">
@@ -57,13 +75,13 @@
         </select>
         <div id="tue" class="not-showing">
           <label for="tue-from">From:</label>
-          <input type="time" id="tue-from">
+          <input type="time" id="tue-from" />
           <label for="tue-to"> To: </label>
-          <input type="time" id="tue-to">
+          <input type="time" id="tue-to" />
         </div>
 
-        <br>
-        
+        <br />
+
         <label for="wed-toggle">Wednesday:</label>
         <select id="wed-toggle">
           <option value="no">No</option>
@@ -71,13 +89,13 @@
         </select>
         <div id="wed" class="not-showing">
           <label for="wed-from">From:</label>
-          <input type="time" id="wed-from">
+          <input type="time" id="wed-from" />
           <label for="wed-to"> To: </label>
-          <input type="time" id="wed-to">
+          <input type="time" id="wed-to" />
         </div>
 
-        <br>
-        
+        <br />
+
         <label for="thu-toggle">Thursday:</label>
         <select id="thu-toggle">
           <option value="no">No</option>
@@ -85,13 +103,13 @@
         </select>
         <div id="thu" class="not-showing">
           <label for="thu-from">From:</label>
-          <input type="time" id="thu-from">
+          <input type="time" id="thu-from" />
           <label for="thu-to"> To: </label>
-          <input type="time" id="thu-to">
+          <input type="time" id="thu-to" />
         </div>
 
-        <br>
-        
+        <br />
+
         <label for="fri-toggle">Friday:</label>
         <select id="fri-toggle">
           <option value="no">No</option>
@@ -99,13 +117,13 @@
         </select>
         <div id="fri" class="not-showing">
           <label for="fri-from">From:</label>
-          <input type="time" id="fri-from">
+          <input type="time" id="fri-from" />
           <label for="fri-to"> To: </label>
-          <input type="time" id="fri-to">
+          <input type="time" id="fri-to" />
         </div>
 
-        <br>
-        
+        <br />
+
         <label for="sat-toggle">Saturday:</label>
         <select id="sat-toggle">
           <option value="no">No</option>
@@ -113,13 +131,13 @@
         </select>
         <div id="sat" class="not-showing">
           <label for="sat-from">From:</label>
-          <input type="time" id="sat-from">
+          <input type="time" id="sat-from" />
           <label for="sat-to"> To: </label>
-          <input type="time" id="sat-to">
+          <input type="time" id="sat-to" />
         </div>
 
-        <br>
-        
+        <br />
+
         <label for="sun-toggle">Sunday:</label>
         <select id="sun-toggle">
           <option value="no">No</option>
@@ -127,15 +145,15 @@
         </select>
         <div id="sun" class="not-showing">
           <label for="sun-from">From:</label>
-          <input type="time" id="sun-from">
+          <input type="time" id="sun-from" />
           <label for="sun-to"> To: </label>
-          <input type="time" id="sun-to">
+          <input type="time" id="sun-to" />
         </div>
 
-        <br>
-     
-        <br>
-        <input type="submit" value="Submit">
+        <br />
+
+        <br />
+        <input type="submit" value="Submit" />
       </form>
     </div>
   </body>

@@ -1,0 +1,5 @@
+/* This css should be applied to all pages */
+body { /* Applies simple black background and white text, can change later to bg image maybe? */
+  background-color: rgb(40, 43, 46);
+  color: aliceblue;
+}

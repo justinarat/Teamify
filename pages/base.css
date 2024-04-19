@@ -2,8 +2,8 @@
   This css should be applied to all pages 
   It styles the page background and header/navbar
 */
-body { /* Applies simple black background and white text, can change later to bg image maybe? */
+body {
   background-color: rgb(24, 26, 28);
   color: rgb(220, 220, 220);
-  padding-top: 75px;
+  padding-top: 55px;
 }

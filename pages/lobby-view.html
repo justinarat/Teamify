@@ -9,67 +9,81 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="base.css">
   </head>
   <body>
-    <!-- Header taken from introduction skeleton -->
-    <!--fixed position-->
-    <nav id="header">
-      <div id="account-logo"></div>
-      <div id="links">
-        <a href="games.html">Games</a>
-        <a href="lobby-making.html">Make Lobby</a>
-        <a href="lobby-searching.html">Search for Lobby</a>
-        <a href="admin.html">Admin</a>
-        <a href="lobby-view.html">View Lobby</a>
-        <a href="introduction.html">Home</a>
-        <a href="account-creation.html">Login Or Sign Up</a>
-      </div>
+    <nav id="header" class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="games.html">Games</a></li>
+        <li class="nav-item"><a class="nav-link" href="lobby-making.html">Make Lobby</a></li>
+        <li class="nav-item"><a class="nav-link" href="lobby-searching.html">Search for Lobby</a></li>
+        <li class="nav-item"><a class="nav-link" href="admin.html">Admin</a></li>
+        <li class="nav-item"><a class="nav-link" href="lobby-view.html">View Lobby</a></li>
+        <li class="nav-item"><a class="nav-link" href="introduction.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="account-creation.html">Login Or Sign Up</a></li>
+      </ul>
     </nav>
 
     <main class="container-fluid">
-      <h1>Lobby View</h1>
-      <div id="game-name"></div>
-      <p>Lobby Code: <span id="lobby-code">XXXX</span></p>
-      <p>Time Schedule:</p>
-      <table id="time-schedule">
-        <tr>
-          <th>Day</th>
-          <th>Time</th>
-        </tr>
-        <tr>
-          <td>Monday</td>
-          <td>8pm-9pm</td>
-        </tr>
-        <tr>
-          <td>Tuesday</td>
-          <td>8pm-11pm</td>
-        </tr>
-        <tr>
-          <td>Wednesday</td>
-          <td>N/A</td>
-        </tr>
-        <tr>
-          <td>Thursday</td>
-          <td>8pm-9pm</td>
-        </tr>
-        <tr>
-          <td>Friday</td>
-          <td>7pm-11pm</td>
-        </tr>
-        <tr>
-          <td>Saturday</td>
-          <td>2pm-10pm</td>
-        </tr>
-        <tr>
-          <td>Sunday</td>
-          <td>1pm-5pm</td>
-        </tr>
-      </table>
-      <p>Host name: <span id="host-name">myname</span></p>
-      <p>
-        Lobby Capacity:<span id="current-num-players"></span> 0/0
-        <span id="max-num-players"></span>
-      </p>
+      <div class="row">
+        <div class="col-md-9">
+          <h1>Lobby View</h1>
+          <div id="game-name">Game Name</div>
+          <p id="lobby-code" class="float-md-right">Lobby Code: <span id="lobby-code-value">XXXX</span></p>
+          <div id="time-schedule">
+            <p>Time Schedule:</p>
+            <table>
+              <tr>
+                <th>Day</th>
+                <th>Time</th>
+              </tr>
+              <tr>
+                <td>Monday</td>
+                <td>8pm-9pm</td>
+              </tr>
+              <tr>
+                <td>Tuesday</td>
+                <td>8pm-11pm</td>
+              </tr>
+              <tr>
+                <td>Wednesday</td>
+                <td>N/A</td>
+              </tr>
+              <tr>
+                <td>Thursday</td>
+                <td>8pm-9pm</td>
+              </tr>
+              <tr>
+                <td>Friday</td>
+                <td>7pm-11pm</td>
+              </tr>
+              <tr>
+                <td>Saturday</td>
+                <td>2pm-10pm</td>
+              </tr>
+              <tr>
+                <td>Sunday</td>
+                <td>1pm-5pm</td>
+              </tr>
+            </table>
+          </div>
+          <p id="host">Host name: <span id="host-name">myname</span></p>
+          <p id="lobby-capacity">
+            Lobby Capacity:<span id="current-num-players"></span> 0/0
+            <span id="max-num-players"></span>
+          </p>
+        </div>
+        <div class="col-md-3">
+          <div class="chat">
+            <div id="chat-area">
+              <div class="player-text">Player 1: hello</div>
+              <div class="player-text">Player 2: hello</div>
+              <div class="player-text">Player 3: hello</div>
+            </div>
+            <input id="chat-enter-text" placeholder="Enter message"></input>
+          </div>
+        </div>
+      </div>
     </main>
   </body>
 </html>

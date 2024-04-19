@@ -1,0 +1,37 @@
+#lobby-header {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+#game-name {
+  font-size: xx-large;
+}
+
+#lobby-code {
+  margin-bottom: 0;
+}
+
+.tag {
+  background-color: rgb(0, 102, 133);
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 0px 5px 0px 5px;
+}
+
+#chat-column {
+  /*background-color: rgb(14, 17, 19);*/ /* Darker lobby chat */
+  background-color: rgb(29, 36, 39);
+}
+
+.chat-username {
+  font-weight: bold;
+}
+
+.server-text {
+  font-weight: bold;
+}
+
+.large-text {
+  font-size: large;
+  font-weight: bold;
+}

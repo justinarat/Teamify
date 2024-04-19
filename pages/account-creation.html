@@ -19,16 +19,16 @@
 		<a href="account-creation.html">Login Or Sign Up</a>
     </nav>
 
-    <form id="sign-up">
+    <form id="sign-up" onsubmit="return validateSignup()">
       <h1>Sign Up</h1>
-      <label for="NewEmail"> Email: </label>
-      <input type="text" id="NewEmail" >
+      <label for="new-email"> Email: </label>
+      <input type="email" id="new-email" >
       <br><br>
-      <label for="NewUsername"> Username: </label>
-      <input type="text" id="NewUsername" >
+      <label for="new-username"> Username: </label>
+      <input type="text" id="new-username" >
       <br><br>
-      <label for="NewPassword"> Password: </label>
-      <input type="text" id="NewPassword" >
+      <label for="new-password"> Password: </label>
+      <input type="text" id="new-password" >
       <br><br>
       <input type="submit" value="Submit">
     </form>
@@ -44,4 +44,5 @@
       <input type="submit" value="Submit">
     </form>
   </body>
+  <script src="account-creation.js"></script>
 </html>

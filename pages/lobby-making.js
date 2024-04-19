@@ -12,7 +12,6 @@ days.forEach(function(day){
 
 function showTime(day, toggleOption){
   return function(){
-    console.log("Change detected!");
     var element = document.getElementById(day);
     var selectedOption = document.getElementById(toggleOption).value;
     if (selectedOption == 'yes' && element.innerHTML == ""){

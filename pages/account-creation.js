@@ -1,8 +1,9 @@
-function validateSignup(){
-    for (let i = 0; i < 3; i++){
-        let field = document.forms["sign-up"][i].value;
+function validateSignup(formID){
+    let numFields = document.forms[formID].length;
+    for (let i = 0; i < numFields; i++){
+        let field = document.forms[formID][i].value;
         if (field == ""){
-            alert("All fields must be filled out");
+            alert("All fields must be filled out in form");
             return false;
         }
     }

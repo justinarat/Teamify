@@ -3,7 +3,7 @@ function validateSignup(formID){
     for (let i = 0; i < numFields; i++){
         let field = document.forms[formID][i].value;
         if (field == ""){
-            alert("All fields must be filled out in form");
+            alert("Missing fields in " + formID + " form. Please fill in all fields in this form before submitting.");
             return false;
         }
     }

@@ -1,3 +1,21 @@
+#lobby-header {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+#lobby-code {
+  margin-bottom: 0;
+}
+
 .chat-username {
+  font-weight: bold;
+}
+
+.server-text {
+  font-weight: bold;
+}
+
+.large-text {
+  font-size: large;
   font-weight: bold;
 }

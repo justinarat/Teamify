@@ -51,24 +51,37 @@
     <main class="container-fluid">
       <div class="row">
         <div class="col-md-9">
-          <h1>Lobby View</h1>
-          <h2 id="game-name" class="d-md-inline">Game Name</h2>
-          <h3 id="lobby-code" class="d-md-inline float-end">
-            Lobby Code: <span id="lobby-code-value">XXXX</span>
-          </h3>
-          <p id="lobby-description">Lobby description</p>
-          <p id="host">Host: <span id="host-name">myname</span></p>
+          <div id="lobby-header">
+            <span id="game-name" class="d-md-inline">Game Name</span> -
+            <span id="lobby-name" class="d-md-inline">Lobby Name</span>
+            <span id="lobby-code" class="d-md-inline float-end">
+              Lobby Code: <span id="lobby-code-value">XXXX</span>
+            </span>
+          </div>
+          <p id="lobby-description" class="d-block m-b-0">
+            Lobby description Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit. Pellentesque maximus odio id varius fermentum. Duis
+            asollicitudin lorem. Maecenas quis sapien eleifend, congue leo in,
+            mollis odio. Phasellus fermentum nunc sit amet dolor eleifend, vitae
+            volutpat ante tempor.
+          </p>
+          <p id="host" class="d-inline">
+            <span class="large-text">Host:</span>
+            <span id="host-name">PlayerHost</span>
+          </p>
           <div id="players">
+            <span class="large-text">Players:</span>
             <span>Player1</span>
             <span>Player2</span>
             <span>Player3</span>
           </div>
           <p id="lobby-capacity">
-            Lobby Capacity:<span id="current-num-players"></span> 0/0
+            <span class="large-text">Lobby Capacity:</span>
+            <span id="current-num-players">4/4</span>
             <span id="max-num-players"></span>
           </p>
           <div id="time-schedule">
-            <p>Time Schedule:</p>
+            <p class="d-inline large-text">Time Schedule:</p>
             <table>
               <tr>
                 <th>Day</th>
@@ -106,17 +119,38 @@
           </div>
         </div>
         <div class="col-md-3 min-vh-100 bg-dark">
+          <h2>Lobby Chat</h2>
           <div id="chat">
             <input id="chat-enter-text" placeholder="Enter message" />
             <div id="chat-area">
-              <div class="player-text">
-                <span class="chat-username">Player 1</span>: hello
+              <div class="chat-text">
+                <span class="chat-username">Player 3</span>: hello
               </div>
-              <div class="player-text">
+              <div class="chat-text">
                 <span class="chat-username">Player 2</span>: hello
               </div>
-              <div class="player-text">
-                <span class="chat-username">Player 3</span>: hello
+              <div class="chat-text">
+                <span class="server-text"
+                  ><span class="chat-username">Player 3</span> has joined</span
+                >
+              </div>
+              <div class="chat-text">
+                <span class="server-text"
+                  ><span class="chat-username">Player 2</span> has joined</span
+                >
+              </div>
+              <div class="chat-text">
+                <span class="chat-username">Player 1</span>: hello
+              </div>
+              <div class="chat-text">
+                <span class="server-text"
+                  ><span class="chat-username">Player 1</span> has joined</span
+                >
+              </div>
+              <div class="chat-text">
+                <span class="server-text"
+                  ><span class="chat-username">PlayerHost</span> created the lobby</span
+                >
               </div>
             </div>
           </div>

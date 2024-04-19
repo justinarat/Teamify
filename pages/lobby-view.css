@@ -13,6 +13,11 @@
   padding: 0px 5px 0px 5px;
 }
 
+#chat-column {
+  /*background-color: rgb(14, 17, 19);*/ /* Darker lobby chat */
+  background-color: rgb(42, 54, 58);
+}
+
 .chat-username {
   font-weight: bold;
 }

@@ -50,13 +50,14 @@
     </nav>
 
     <main class="container">
-      <div class="row justify-content-center">
+      <form class="row justify-content-center" action="/" method="GET">
         <div class="col-sm-6">
           <div class="input-group mb-3">
             <input
+              name="search"
               type="text"
-              class="form-control"
               placeholder="Search game"
+              class="form-control"
               aria-label="Search game"
             />
             <button
@@ -68,7 +69,7 @@
             </button>
           </div>
         </div>
-      </div>
+      </form>
 
       <section id="lobby-listings" class="row">
         <article class="col-sm-4">

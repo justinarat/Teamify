@@ -5,4 +5,5 @@
 body { /* Applies simple black background and white text, can change later to bg image maybe? */
   background-color: rgb(24, 26, 28);
   color: rgb(220, 220, 220);
+  padding-top: 75px;
 }

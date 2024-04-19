@@ -3,6 +3,10 @@
   font-weight: bold;
 }
 
+#game-name {
+  font-size: xx-large;
+}
+
 #lobby-code {
   margin-bottom: 0;
 }

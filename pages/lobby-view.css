@@ -23,11 +23,8 @@
   background-color: rgb(16, 18, 24);
 }
 
-.chat-username {
-  font-weight: bold;
-}
-
-.server-text {
+#chat .username, 
+#chat .server-text {
   font-weight: bold;
 }
 

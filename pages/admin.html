@@ -1,84 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-	<meta charset="utf-8">
-    <title>Admin</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="base.css" />
-  </head>
 
-  <body>
-    <nav
-      id="header"
-      class="navbar navbar-expand-sm navbar-dark fixed-top"
-    >
-      <div class="container-fluid">
-        <ul class="nav navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="introduction.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="games.html">Games</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="lobby-searching.html">Search Lobby</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="lobby-making.html">Make Lobby</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="lobby-view.html">View Lobby</a>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="nav-item">
-            <a class="nav-link" href="admin.html">Admin</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="account-creation.html"
-              >Login Or Sign Up</a
-            >
-          </li>
-        </ul>
-      </div>
-    </nav>
+<head>
+  <meta charset="utf-8">
+  <title>Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link rel="stylesheet" href="base.css" />
+</head>
 
-    <main class="container-fluid">
-      <h1>Admin</h1>
-      <div class="search-bar" id="search-users">
-        <h2>Users</h2>
-        <!-- TODO: Fill out input parameters -->
-        <input><button>Search</button>
-      </div>
-      <div id="users">
-        <table id="UserTable">
-          <tr>
-            <th>Username</th>
-            <th>Rating</th>
-            <th>Action</th>
-          </tr>
-          <tr>
-            <td>Smith</td>
-            <td>0.0</td>
-            <td><button>Inspect</button></td>
-          </tr>
-          <tr>
-            <td>Jones</td>
-            <td>33.7</td>
-            <td><button>Inspect</button></td>
-          </tr>
-          <tr>
-            <td>Brown</td>
-            <td>-21.5</td>
-            <td><button>Inspect</button></td>
-          </tr>
-        </table>
-      </div>
-    </main>
-  </body>
+<body>
+  <nav id="header" class="navbar navbar-expand-sm navbar-dark fixed-top">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="introduction.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="games.html">Games</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="lobby-searching.html">Search Lobby</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="lobby-making.html">Make Lobby</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="lobby-view.html">View Lobby</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item">
+          <a class="nav-link" href="admin.html">Admin</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="account-creation.html">Login Or Sign Up</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container-fluid">
+    <h1>Admin</h1>
+    <div class="search-bar" id="search-users">
+      <h2>Users</h2>
+      <!-- TODO: Fill out input parameters -->
+      <input><button>Search</button>
+    </div>
+    <div id="users">
+      <table id="UserTable">
+        <tr>
+          <th>Username</th>
+          <th>Rating</th>
+          <th>Action</th>
+        </tr>
+        <tr>
+          <td>Smith</td>
+          <td>0.0</td>
+          <td><button>Inspect</button></td>
+        </tr>
+        <tr>
+          <td>Jones</td>
+          <td>33.7</td>
+          <td><button>Inspect</button></td>
+        </tr>
+        <tr>
+          <td>Brown</td>
+          <td>-21.5</td>
+          <td><button>Inspect</button></td>
+        </tr>
+      </table>
+    </div>
+  </main>
+</body>
+
 </html>

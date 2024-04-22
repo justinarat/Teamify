@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-{% block css %}
-  <link rel="stylesheet" href="static/css/lobby-searching.css">
-{% endblock %}
+{% block css %}{% endblock %}
 
 {% block headScripts %}{% endblock %}
 
@@ -12,57 +10,63 @@
   </form>
 
   <main id="lobby-listings" class="container-fluid">
-    {#
-      TODO: the view function (lobby_searching() in routes.py) for this page 
-            should query the database for open lobbies, then loop through each 
-            lobby do add the div below.
-            something like:
-      {% for lobby in lobbies %}
-      <div class="lobby">
-        <h3 class="game-name">{{ lobby.game_title }}</h3>
-        <p class="lobby-description">{{ lobby.description }}</p>
-        <div class="lobby-players">
-          <p class="lobby-host">{{ lobby.host.username }}</p>
-          {% for player in lobby.players}
-          <p class="lobby-player">{{ player.username }}</p>
-          {% endfor %}
-        </div>
-        {# TODO: add lobby tags, example: 
-        {% for tag in lobby.tags}
-        <p class="lobby-tag">{{ tag }}</p>
-        {% endfor %}
-        #}
-        <p class="time-available">lobby.times</p> <!--Maybe show next available time-->
-      </div>
-      {% endfor %}
-    #}
-    <div class="lobby">
-      <!--Lobby div/card-->
-      <h3 class="game-name">Game 1</h3>
-      <p class="lobby-description">Lobby 1 description.</p>
-      <div class="lobby-host">Player 1</div>
-      <div class="lobby-other-players">Player 2, Player 3</div>
-      <p class="time-available">FRI 7pm-3am</p> <!--Maybe show next available time-->
-    </div>
-    <div class="lobby">
-      <!--Lobby div/card-->
-      <h3 class="game-name">Game 2</h3>
-      <p class="lobby-description">Lobby 2 description.</p>
-      <div class="lobby-host">Player 1</div>
-      <div class="lobby-other-players">Player 2, Player 3</div>
-      <p class="time-available">SAT 1pm-10pm</p> <!--Maybe show next available time-->
-    </div>
-    <div class="lobby">
-      <!--Lobby div/card-->
-      <h3 class="game-name">Game 3</h3>
-      <p class="lobby-description">Lobby 3 description.</p>
-      <div class="lobby-host">Player 1</div>
-      <div class="lobby-other-players">Player 2, Player 3</div>
-      <p class="time-available">SUN 1pm-5pm</p> <!--Maybe show next available time-->
-    </div>
+    <section id="lobbies" class="row">
+        <h1 class="text-center">Search Lobbies</h1>
+
+        <form class="row justify-content-center" action="lobby-searching.html" method="GET">
+          <div class="col-sm-6">
+            <div class="input-group mb-3">
+              <input type="text" placeholder="Lobby content" aria-label="Lobby content" name="search"
+                class="form-control" />
+              <button type="submit" aria-label="Submit search" class="btn btn-outline-secondary">
+                <i class="bi bi-search" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <article class="col-sm-4">
+          <div class="card bg-dark">
+            <div class="card-body">
+              <h3 class="game-name">Game 1</h3>
+              <p class="lobby-description">Lobby 1 description.</p>
+              <div class="lobby-host">Host Username</div>
+              <div class="lobby-other-players">Player 1</div>
+              <p class="time-available">FRI 7pm-3am</p>
+              <!--Maybe show next available time-->
+            </div>
+          </div>
+        </article>
+
+        <article class="col-sm-4">
+          <div class="card bg-dark">
+            <div class="card-body">
+              <h3 class="game-name">Game 2</h3>
+              <p class="lobby-description">Lobby 2 description.</p>
+              <div class="lobby-host">Host Username</div>
+              <div class="lobby-other-players">Player 1, Player 2</div>
+              <p class="time-available">SAT 1pm-10pm</p>
+              <!--Maybe show next available time-->
+            </div>
+          </div>
+        </article>
+
+        <article class="col-sm-4">
+          <div class="card bg-dark">
+            <div class="card-body">
+              <h3 class="game-name">Game 3</h3>
+              <p class="lobby-description">Lobby 3 description.</p>
+              <div class="lobby-host">Host Username</div>
+              <div class="lobby-other-players">
+                Player 1, Player 2, Player 3
+              </div>
+              <p class="time-available">SUN 1pm-5pm</p>
+              <!--Maybe show next available time-->
+            </div>
+          </div>
+        </article>
+      </section>
   </main>
 {% endblock %}
 
-{% block bodyScripts %}
-  <script src="static/scripts/lobby-searching.js"></script>
-{% endblock %}
+{% block bodyScripts %}{% endblock %}

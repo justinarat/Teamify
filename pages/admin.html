@@ -44,13 +44,21 @@
     </div>
   </nav>
 
-  <main class="container-fluid">
-    <h1>Admin</h1>
-    <div class="search-bar" id="search-users">
-      <h2>Users</h2>
-      <!-- TODO: Fill out input parameters -->
-      <input><button>Search</button>
-    </div>
+  <main class="container">
+    <h1 class="text-center">Admin</h1>
+
+    <h2>Search Users</h2>
+    <form id="user-search" class="row" action="admin.html" method="GET">
+      <div class="col-sm-6">
+        <div class="input-group mb-3">
+          <input type="text" placeholder="Username" aria-label="Username" name="search" class="form-control">
+          <button type="submit" aria-label="Submit search" class="btn btn-outline-secondary">
+            <i class="bi bi-search" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+    
     <div id="users">
       <table id="UserTable">
         <tr>

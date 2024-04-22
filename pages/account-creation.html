@@ -48,13 +48,13 @@
     <form id="sign-up" onsubmit="return validateSignup(id)">
       <h1 class="text-center">Sign Up</h1>
       <label for="new-email"> Email: </label>
-      <input type="email" id="new-email">
+      <input type="email" id="new-email" autocomplete="email">
       <br><br>
       <label for="new-username"> Username: </label>
-      <input type="text" id="new-username">
+      <input type="text" id="new-username" autocomplete="username">
       <br><br>
       <label for="new-password"> Password: </label>
-      <input type="text" id="new-password">
+      <input type="text" id="new-password" autocomplete="new-password">
       <br><br>
       <input type="submit" value="Submit">
     </form>
@@ -62,10 +62,10 @@
     <form id="login" onsubmit="return validateSignup(id)">
       <h1 class="text-center">Login</h1>
       <label for="username"> Username: </label>
-      <input type="text" id="username">
+      <input type="text" id="username" autocomplete="username">
       <br><br>
       <label for="password"> Password: </label>
-      <input type="text" id="password">
+      <input type="text" id="password" autocomplete="current-password">
       <br><br>
       <input type="submit" value="Submit">
     </form>

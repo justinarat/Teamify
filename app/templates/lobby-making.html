@@ -5,39 +5,37 @@
 {% block headScripts %}{% endblock %}
 
 {% block content %}
-  <div id="lobby-making" class="container">
-    <h2 id="lobby-making-title">Creating Lobby</h2>
-    <form id="lobby-making-form">
-      <div class="row">
-        <div class="col-sm-6">
-          <input type="text" id="lobby-making-game" placeholder="Enter game" name="game">
-          <br>
-          <input type="text" id="lobby-making-description" placeholder="Enter description">
-        </div>
-        <div class="col-sm-6">
-          <label for="time-type">Time allocation:</label>
-          <select id="time-type">
-            <option value="" disabled selected>Select</option>
-            <option value="general">General Schedule</option>
-            <option value="calendar-based">Calendar Based</option>
-          </select>
-        </div>
+<div id="lobby-making" class="container">
+  <h2 id="lobby-making-title">Creating Lobby</h2>
+  <form id="lobby-making-form">
+    <div class="row">
+      <div class="col-sm-6">
+        <input type="text" id="lobby-making-game" placeholder="Enter game" name="game">
+        <br>
+        <input type="text" id="lobby-making-description" placeholder="Enter description">
       </div>
-
-      <br>
-      <br>
-      <div class="row">
-        <div class="col-sm-6" id="time-option"></div>
+      <div class="col-sm-6">
+        <label for="time-type">Time allocation:</label>
+        <select id="time-type">
+          <option value="" disabled selected>Select</option>
+          <option value="general">General Schedule</option>
+          <option value="calendar-based">Calendar Based</option>
+        </select>
       </div>
-      <br>
-      <br>
-      <input type="submit" value="Submit">
-    </form>
-  </div>
+    </div>
 
-  <script src="/pages/js/lobby-making.js"></script>
+    <br>
+    <br>
+    <div class="row">
+      <div class="col-sm-6" id="time-option"></div>
+    </div>
+    <br>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+</div>
 {% endblock %}
 
 {% block bodyScripts %}
-  <script src="static/scripts/lobby-making.js"></script>
+<script src="static/scripts/lobby-making.js"></script>
 {% endblock %}

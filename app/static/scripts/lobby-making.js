@@ -36,7 +36,6 @@ function showGeneral(day, toggleOption) {
 document.getElementById("time-type").addEventListener("change", timeDisplay);
 
 function timeDisplay() {
-  console.log("Change detected");
   var timeOptionChunk = document.getElementById("time-option");
   let selectedOption = document.getElementById("time-type").value;
   if (selectedOption == "general" && timeOptionChunk.innerHTML == "") {

@@ -22,7 +22,7 @@
 
 ## How to run the tests
 
-First, start up the flask server if it's not running:
+First, in a separate terminal start up the flask server if it's not running:
 `flask run`
 
 To run all tests:

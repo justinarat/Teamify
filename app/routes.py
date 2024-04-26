@@ -28,8 +28,8 @@ def lobby_searching():
 def lobby_making():
   return render_template("lobby-making.html")
 
-@app.route("/lobby/<lobby_code>")
-def lobby_view(lobby_code):
+@app.route("/lobby")
+def lobby_view():
   # TODO: Render the right lobby using the lobby code
   return render_template("lobby-view.html")
 

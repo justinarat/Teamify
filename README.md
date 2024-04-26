@@ -18,5 +18,15 @@
 1. Create a virtual environment `python3 -m venv .venv`
 2. Activate the virtual environment `source .venv/bin/activate`
 3. Install project requirements `pip install -r requirements.txt`
+4. Start up the flask server `flask run`
 
 ## How to run the tests
+
+First, in a separate terminal start up the flask server if it's not running:
+`flask run`
+
+To run all tests:
+`python -m unittest`
+
+To run specific test modules:
+`python -m unittest tests.test_file`

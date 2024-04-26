@@ -14,7 +14,7 @@ def test():
 @app.route("/")
 @app.route("/introduction")
 def introduction():
-  return render_template("introduction.html")
+  return render_template("introduction.html", template_folder="templates")
 
 @app.route("/games")
 def games_view():
@@ -23,6 +23,10 @@ def games_view():
 @app.route("/lobby-searching")
 def lobby_searching():
   return render_template("lobby-searching.html")
+
+@app.route("/lobby-making")
+def lobby_making():
+  return render_template("lobby-making.html")
 
 @app.route("/lobby/<lobby_code>")
 def lobby_view(lobby_code):

@@ -37,3 +37,9 @@ def account_creation():
 def admin():
   # TODO: maybe use session information (or other way) to verify the user is an admin
   return render_template("admin.html")
+
+@app.route("/my-lobbies")
+def my_lobbies():
+  # TODO: Render lobbies user belongs to
+  # TODO: Render lobbies user owns with choice to view them from user view or admin view
+  return render_template("my-lobbies.html")

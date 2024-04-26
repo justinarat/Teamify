@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="static/css/lobby-view.css">
+{% endblock %}
+
+{% block headScripts %}{% endblock %}
+
+{% block content %}
+<main class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <div id="lobby-header">
+        <span id="game-name" class="d-inline">Game Name</span> -
+        <span id="lobby-name" class="d-inline">Lobby Name</span>
+        <span id="lobby-code" class="d-inline float-end">
+          Lobby Code: <span id="lobby-code-value">XXXX</span>
+        </span>
+      </div>
+      <p id="lobby-description" class="d-block">
+        Lobby description Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Pellentesque maximus odio id varius fermentum. Duis
+        asollicitudin lorem. Maecenas quis sapien eleifend, congue leo in,
+        mollis odio. Phasellus fermentum nunc sit amet dolor eleifend, vitae
+        volutpat ante tempor.
+      </p>
+      <div id="tags">
+        <span class="large-text">Tags:</span>
+        <span class="tag">tag 1</span>
+        <span class="tag">tag 2</span>
+        <span class="tag">tag 3</span>
+        <span class="tag">tag 4</span>
+        <span class="tag">tag 5</span>
+      </div>
+      <p id="host" class="d-inline">
+        <span class="large-text">Host:</span>
+        <span id="host-name">PlayerHost</span>
+      </p>
+      <div id="players">
+        <span class="large-text">Players:</span>
+        <span>Player1</span>
+        <span>Player2</span>
+        <span>Player3</span>
+      </div>
+      <p id="lobby-capacity">
+        <span class="large-text">Lobby Capacity:</span>
+        <span id="current-num-players">4/4</span>
+        <span id="max-num-players"></span>
+      </p>
+      <div id="time-schedule">
+        <p class="d-inline large-text">Time Schedule:</p>
+        <table>
+          <tr>
+            <th>Day</th>
+            <th>Time</th>
+          </tr>
+          <tr>
+            <td>Monday</td>
+            <td>8pm-9pm</td>
+          </tr>
+          <tr>
+            <td>Tuesday</td>
+            <td>8pm-11pm</td>
+          </tr>
+          <tr>
+            <td>Wednesday</td>
+            <td>N/A</td>
+          </tr>
+          <tr>
+            <td>Thursday</td>
+            <td>8pm-9pm</td>
+          </tr>
+          <tr>
+            <td>Friday</td>
+            <td>7pm-11pm</td>
+          </tr>
+          <tr>
+            <td>Saturday</td>
+            <td>2pm-10pm</td>
+          </tr>
+          <tr>
+            <td>Sunday</td>
+            <td>1pm-5pm</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div id="chat-column" class="col-md-3 min-vh-100">
+      <h2>Lobby Chat</h2>
+      <div id="chat">
+        <div class="input-group mb-3">
+          <input type="text" placeholder="Enter message" aria-label="Lobby content" name="text" class="form-control">
+          <button type="submit" aria-label="Submit text" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-return-left" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div id="chat-log">
+          <div class="chat-text">
+            <span class="username">Player 3</span>: hello
+          </div>
+          <div class="chat-text">
+            <span class="username">Player 2</span>: hello
+          </div>
+          <div class="chat-text">
+            <span class="server-text"><span class="chat-username">Player 3</span> has joined</span>
+          </div>
+          <div class="chat-text">
+            <span class="server-text"><span class="chat-username">Player 2</span> has joined</span>
+          </div>
+          <div class="chat-text">
+            <span class="username">Player 1</span>: hello
+          </div>
+          <div class="chat-text">
+            <span class="server-text"><span class="chat-username">Player 1</span> has joined</span>
+          </div>
+          <div class="chat-text">
+            <span class="server-text"><span class="chat-username">PlayerHost</span> created the lobby</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
+
+{% block bodyScripts %}{% endblock %}

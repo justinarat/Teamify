@@ -26,17 +26,17 @@ class DataRoutesTestCase(unittest.TestCase):
     self.url = "http://127.0.0.1:5000"
 
   def test_get_lobby_cards(self):
-    self._get_lobby_cards_no_query_string()
-    self._get_lobby_cards_count(1)
-    self._get_lobby_cards_count(32)
-    self._get_lobby_cards_data_format()
+    self._test_cards_no_query_string()
+    self._test_cards_count(1)
+    self._test_cards_count(32)
+    self._test_cards_data_format()
   
-  def _get_lobby_cards_no_query_string(self):
+  def _test_cards_no_query_string(self):
     url = self.url + "/get-lobby-cards"
     response = make_request(url, "get", query_string="")
     self.assertEqual(response.text, "")
 
-  def _get_lobby_cards_count(self, count):
+  def _test_cards_count(self, count):
     url = self.url + "/get-lobby-cards"
     response = make_request(url, "get", query_string="count=" + str(count))
     response_dict = response.json()
@@ -45,8 +45,8 @@ class DataRoutesTestCase(unittest.TestCase):
       return
     self.assertEqual(len(response_dict["lobbies"]), count)
 
-  def _get_lobby_cards_data_format(self):
+  def _test_cards_data_format(self):
     url = self.url + "/get-lobby-cards"
-    response = make_request(url, "get", query_string="count=2")
+    response = make_request(url, "get", query_string="count=1")
     response_dict = response.json()
     # TODO: Check if the format of the response was correct (has the correct keys and maybe values)

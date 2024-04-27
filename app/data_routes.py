@@ -15,6 +15,7 @@ def get_lobby_cards():
   body = {
     "lobby_cards"=[
       {
+        "lobby_id" : "1",
         "game_title": "game1_title",
         "lobby_name": "lobby1_name",
         "lobby_descrition": "lobby1_desc",
@@ -23,6 +24,7 @@ def get_lobby_cards():
         "next_available_time": "timeblock format...",
       },
       {
+        "lobby_id" : "2",
         "game_title": "game2_title",
         "lobby_name": "lobby2_name",
         "lobby_descrition": "lobby2_desc",
@@ -38,6 +40,4 @@ def get_lobby_cards():
   data_to_send = {"lobby_cards": []}
   # TODO: query the database for "count" number of lobby data and put them in data_to_send["lobby_cards"]
   #       Can't do this yet as databases haven't been setup yet in flask
-  # Data to get: game title, lobby name?, lobby description, host, player list,
-  #              next available time
   return jsonify(data_to_send)

@@ -15,20 +15,20 @@ def get_lobby_cards():
   body = {
     "lobby_cards"=[
       {
-        "game_title": "game1_title"
-        "lobby_name": "lobby1_name"
-        "lobby_descrition": "lobby1_desc"
-        "host": "host1"
-        "players": ["player_1", "player_2", ...]
-        "next_available_time": "timeblock format..."
+        "game_title": "game1_title",
+        "lobby_name": "lobby1_name",
+        "lobby_descrition": "lobby1_desc",
+        "host": "host1",
+        "players": ["player_1", "player_2", ...],
+        "next_available_time": "timeblock format...",
       },
       {
-        "game_title": "game2_title"
-        "lobby_name": "lobby2_name"
-        "lobby_descrition": "lobby2_desc"
-        "host": "host2"
-        "players": ["player_a", "player_b", ...]
-        "next_available_time": "timeblock format..."
+        "game_title": "game2_title",
+        "lobby_name": "lobby2_name",
+        "lobby_descrition": "lobby2_desc",
+        "host": "host2",
+        "players": ["player_a", "player_b", ...],
+        "next_available_time": "timeblock format...",
       },
       ...
     ]

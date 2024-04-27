@@ -27,17 +27,21 @@ class DataRoutesTestCase(unittest.TestCase):
     self.url = "http://127.0.0.1:5000"
 
   def test_get_lobby_cards(self):
-    self._test_cards_no_query_string()
+    """Tests the get_lobby_cards() endpoint in data_routes.py"""
+    self._test_cards_no_post_body()
     self._test_cards_count(1)
     self._test_cards_count(30)
     self._test_cards_data_format()
   
-  def _test_cards_no_query_string(self):
+  def _test_cards_no_count(self):
+    """Tests if status 400 and empty response is returned if POST body is invalid (no count)"""
     url = self.url + "/get-lobby-cards"
     response = make_request(url, "POST", data_json={})
+    self.assertEqual(response.status_code, 400)
     self.assertEqual(response.text, "")
 
   def _test_cards_count(self, count):
+    """Tests if the number of lobby cards returned matches the number requested"""
     url = self.url + "/get-lobby-cards"
     data_json = {"count": count}
     response = make_request(url, "POST", data_json=data_json)
@@ -45,6 +49,7 @@ class DataRoutesTestCase(unittest.TestCase):
     self.assertEqual(len(response_dict["lobbies"]), count)
 
   def _test_cards_data_format(self):
+    """Tests if the response data has the right lobby card keys and values"""
     url = self.url + "/get-lobby-cards"
     response = make_request(url, "POST", query_string="count=1")
     lobby_card_dict = response.json()["lobby_cards"]

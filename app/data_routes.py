@@ -1,5 +1,5 @@
 from app import app
-from flask import request, jsonify
+from flask import request, jsonify, make_response
 
 @app.route("/get-lobby-cards", methods=["POST"])
 def get_lobby_cards():
@@ -36,7 +36,9 @@ def get_lobby_cards():
     ]
   }
   """
-  count = request.get_json("count")
+  data_dict = request.get_json()
+  if not "count" in data_dict: 
+    return make_response("", 400)
   data_to_send = {"lobby_cards": []}
   # TODO: query the database for "count" number of lobby data and put them in data_to_send["lobby_cards"]
   #       Can't do this yet as databases haven't been setup yet in flask

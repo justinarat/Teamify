@@ -36,13 +36,15 @@ class DataRoutesTestCase(unittest.TestCase):
         params = {"count": 1}
         response = requests.get(self.url, params=params)
         lobby_cards = response.json()["lobby_cards"]
-        self.assertEqual(response.status_code, 200)
-        # TODO: Check if the format of the response was correct (has the correct keys and maybe values)
-        #       Still need to decide on the format, but will likely have:
-        self.assertTrue("lobby_id" in lobby_cards)
-        self.assertTrue("game_title" in lobby_cards)
-        self.assertTrue("lobby_name" in lobby_cards)
-        self.assertTrue("lobby_description" in lobby_cards)
-        self.assertTrue("host" in lobby_cards)
-        self.assertTrue("players" in lobby_cards)
-        self.assertTrue("next_available_time" in lobby_cards)
+        
+        for card in lobby_cards:
+            self.assertEqual(response.status_code, 200)
+            # TODO: Check if the format of the response was correct (has the correct keys and maybe values)
+            #       Still need to decide on the format, but will likely have:
+            self.assertTrue("lobby_id" in card)
+            self.assertTrue("game_title" in card)
+            self.assertTrue("lobby_name" in card)
+            self.assertTrue("lobby_description" in card)
+            self.assertTrue("host" in card)
+            self.assertTrue("players" in card)
+            self.assertTrue("next_available_time" in card)

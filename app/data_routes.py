@@ -4,6 +4,7 @@ from flask import request, jsonify, make_response
 @app.route("/get-lobby-cards", methods=["GET"])
 def get_lobby_cards():
     """Endpoint for getting lobby cards for the lobby searching page
+
     This endpoint takes a GET request with the query string format:
         ?count=<count>&search_tags=<tag1>&search_tags=<tag2>...&
             ignore_tags=<tag1>&ignore_tags=<tag2>...

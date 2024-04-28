@@ -11,12 +11,14 @@ class DataRoutesTestCase(unittest.TestCase):
         self._test_cards_count(1)
         self._test_cards_count(30)
 
-    # TODO: Complete implementation
     def test_cards_no_param(self):
-        pass
+        """Tests if status 400 and empty response is returned if GET request has no params"""
+        response = requests.get(self.url)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.text, "")
 
-    def _test_cards_string_count(self):
-        """Tests if status 400 and empty response is returned if GET request is invalid (string count param)"""
+    def test_cards_string_count(self):
+        """Tests if status 400 and empty response is returned if GET request has string count param"""
         params = {"count": ""}
         response = requests.get(self.url, params=params)
         self.assertEqual(response.status_code, 400)

@@ -26,18 +26,16 @@ class DataRoutesTestCase(unittest.TestCase):
 
     def _test_cards_count(self, count):
         """Tests if the number of lobby cards returned matches the number requested"""
-        url = self.domain + "/get-lobby-cards"
         params = {"count": 1}
-        response = requests.get(url, params=params)
+        response = requests.get(self.url, params=params)
         self.assertEqual(response.status_code, 200)
         response_dict = response.json()
-        self.assertEqual(len(response_dict["lobbies"]), count)
+        self.assertEqual(len(response_dict["lobby_cards"]), count)
 
     def _test_cards_data_format(self):
         """Tests if the response data has the right lobby card keys and values"""
-        url = self.domain + "/get-lobby-cards"
         params = {"count": 1}
-        response = requests.get(url, params=params)
+        response = requests.get(self.url, params=params)
         lobby_cards = response.json()["lobby_cards"]
         self.assertEqual(response.status_code, 200)
         # TODO: Check if the format of the response was correct (has the correct keys and maybe values)

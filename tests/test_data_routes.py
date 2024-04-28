@@ -27,8 +27,9 @@ class DataRoutesTestCase(unittest.TestCase):
     def _test_cards_count(self, count):
         """Tests if the number of lobby cards returned matches the number requested"""
         url = self.domain + "/get-lobby-cards"
-        data_json = {"count": count}
-        response = make_request(url, "POST", data_json=data_json)
+        count_json = {"count": count}
+        response = requests.post(url, json=count_json)
+        self.assertEqual(response.status_code, 200)
         response_dict = response.json()
         self.assertEqual(len(response_dict["lobbies"]), count)
 

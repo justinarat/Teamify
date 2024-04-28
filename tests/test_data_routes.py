@@ -8,13 +8,11 @@ class DataRoutesTestCase(unittest.TestCase):
 
     def test_get_lobby_cards(self):
         """Tests the get_lobby_cards() endpoint in data_routes.py"""
-        self._test_cards_no_param()
         self._test_cards_count(1)
         self._test_cards_count(30)
-        self._test_cards_data_format()
 
     # TODO: Complete implementation
-    def _test_cards_no_param(self):
+    def test_cards_no_param(self):
         pass
 
     def _test_cards_string_count(self):
@@ -32,7 +30,7 @@ class DataRoutesTestCase(unittest.TestCase):
         response_dict = response.json()
         self.assertEqual(len(response_dict["lobby_cards"]), count)
 
-    def _test_cards_data_format(self):
+    def test_cards_data_format(self):
         """Tests if the response data has the right lobby card keys and values"""
         params = {"count": 1}
         response = requests.get(self.url, params=params)

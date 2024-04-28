@@ -14,6 +14,9 @@ class DataRoutesTestCase(unittest.TestCase):
         self._test_cards_count(30)
         self._test_cards_data_format()
 
+    def _test_cards_no_post_body(self):
+        pass
+
     def _test_cards_no_count(self):
         """Tests if status 400 and empty response is returned if POST body is invalid (no count)"""
         url = self.domain + "/get-lobby-cards"

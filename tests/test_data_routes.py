@@ -2,7 +2,7 @@ import unittest
 import requests
 
 
-class DataRoutesTestCase(unittest.TestCase):
+class GetLobbyCardsTestCase(unittest.TestCase):
     def setUp(self):
         self.url = "http://localhost:5000/get-lobby-cards"
 

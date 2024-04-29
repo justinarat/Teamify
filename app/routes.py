@@ -20,7 +20,11 @@ def lobby_making():
 
 @app.route("/lobby")
 def lobby_view():
-  # TODO: Render the right lobby using the lobby code
+  # TODO: 
+  # - Figure out how the user gets the lobby code in session cookie
+  # - Render the right lobby using the lobby code
+  # - If user hasn't joined this lobby (has the lobby code in session cookie)
+  #     redirect them to lobby searching page
   return render_template("lobby-view.html")
 
 @app.route("/account-creation")

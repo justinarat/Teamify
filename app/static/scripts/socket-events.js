@@ -8,7 +8,6 @@ $(document).ready(function() {
 
   // Events for players joining or leaving
   socket.on("player_join", function(data) {
-    console.log("player joined")
     let username = data.sender_username;
     $("#players").append("<span class='lobby-player'>" + username + "</span>");
     let text = "<div class='chat-text'><span class='server-text'>" +

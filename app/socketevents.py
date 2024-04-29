@@ -17,7 +17,6 @@ import sys
 #   have been done when the player joins the server (in the lobby_view endpoint)
 @socketio.on("player_join")
 def player_join():
-    print("player joined", file=sys.stderr)
     sender_user_id, lobby_id = session["user_id"], session["lobby_id"]
     join_room(lobby_id)
     sender_username = "USERNAME" # TODO: Query database for sender username

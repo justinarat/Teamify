@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template
+from flask import render_template, session
 
 @app.route("/")
 @app.route("/introduction")
@@ -25,6 +25,8 @@ def lobby_view():
   # - Render the right lobby using the lobby code
   # - If user hasn't joined this lobby (has the lobby code in session cookie)
   #     redirect them to lobby searching page
+  session["lobby_id"] = "0000"
+  session["user_id"] = "0000"
   return render_template("lobby-view.html")
 
 @app.route("/account-creation")

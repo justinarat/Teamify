@@ -1,6 +1,7 @@
-from app import session, socketio
+from app import socketio
 from flask import session
 from flask_socketio import emit, join_room, leave_room
+import sys
 
 # TODO:
 # - Update database for each event if necessary
@@ -14,15 +15,16 @@ from flask_socketio import emit, join_room, leave_room
 # Events for players joining or leaving
 # Shouldn't need to update the database here to add the new player as it should 
 #   have been done when the player joins the server (in the lobby_view endpoint)
-@socketio.on("player-join")
+@socketio.on("player_join")
 def player_join():
+    print("player joined", file=sys.stderr)
     sender_user_id, lobby_id = session["user_id"], session["lobby_id"]
     join_room(lobby_id)
     sender_username = "USERNAME" # TODO: Query database for sender username
     data_to_send = {
         "sender_username": sender_username 
     }
-    emit("player_joined", data_to_send, to=lobby_id)
+    emit("player_join", data_to_send, to=lobby_id)
 
 @socketio.on("player_leave")
 def player_leave():
@@ -34,7 +36,7 @@ def player_leave():
     data_to_send = {
         "sender_username": sender_username
     }
-    emit("player_left", data_to_send, to=lobby_id)
+    emit("player_leave", data_to_send, to=lobby_id)
 
 @socketio.on("player_kick")
 def player_kick(data):

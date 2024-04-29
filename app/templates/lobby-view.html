@@ -38,9 +38,9 @@
       </p>
       <div id="players">
         <span class="large-text">Players:</span>
-        <span>Player1</span>
-        <span>Player2</span>
-        <span>Player3</span>
+        <span class="lobby-player">Player1</span>
+        <span class="lobby-player">Player2</span>
+        <span class="lobby-player">Player3</span>
       </div>
       <p id="lobby-capacity">
         <span class="large-text">Lobby Capacity:</span>
@@ -89,7 +89,7 @@
       <h2>Lobby Chat</h2>
       <div id="chat">
         <div class="input-group mb-3">
-          <input type="text" placeholder="Enter message" aria-label="Lobby content" name="text" class="form-control">
+          <input id="chat-input" type="text" placeholder="Enter message" aria-label="Lobby content" name="text" class="form-control">
           <button type="submit" aria-label="Submit text" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-return-left" aria-hidden="true"></i>
           </button>
@@ -124,5 +124,5 @@
 {% endblock %}
 
 {% block bodyScripts %}
-  <scirpt src="statc/scripts/socket-events.js"></scirpt>
+<script src="static/scripts/socket-events.js"></script>
 {% endblock %}

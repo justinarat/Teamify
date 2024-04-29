@@ -3,29 +3,31 @@ $(document).ready(function() {
   let socket = io.connect(url);
 
   socket.on("connect", function() {
-    socket.emit("player-join");
+    socket.emit("player_join");
   });
 
   // Events for players joining or leaving
-  socket.on("player-join", function(data) {
+  socket.on("player_join", function(data) {
+    console.log("player joined")
     let username = data.sender_username;
-    $("#players").append("<span>" + username + "</span>");
+    $("#players").append("<span class='lobby-player'>" + username + "</span>");
     let text = "<div class='chat-text'><span class='server-text'>" +
                 "<span class='username'>" + username + 
                 "</span> has joined</span></div>";
     $("#chat-log").append(text);
+    // TODO: Update number of players in the lobby
   });
 
   socket.on("player_leave", function(data) {
     let username = data.sender_username;
-    $(".players").map(function() {
-      if (this.innerHTML === "<span>" + username + "</span>") 
-        this.remove();
+    $(".lobby-player").map(function() {
+      if (this.innerHTML === username) this.remove();
     });
     let text = "<div class='chat-text'><span class='server-text'>" +
                 "<span class='username'>" + username + 
                 "</span> has left</span></div>";
     $("#chat-log").append(text);
+    // TODO: Update number of players in the lobby
   });
 
   socket.on("player_kick", function(data) {
@@ -38,7 +40,7 @@ $(document).ready(function() {
     let username = data.sender_username;
     let playerText = data.body;
     let text = "<div class='chat-text'><span class='username'>" +
-                username + "</span>:" +
+                username + "</span>: " +
                 playerText + "</div>";
     $("#chat-log").append(text);
   });
@@ -77,12 +79,12 @@ $(document).ready(function() {
     // TODO: clean up this code
     let keyCode = e.keyCode || e.which;
     if (keyCode === 13) { // "Enter" key code
-      let text = $("chat-input").val();
-      $("chat-input").val("");
+      let text = $("#chat-input").val();
+      $("#chat-input").val("");
       let dataToSend = {
         body: text
       };
-      socket.emit("player-text", dataToSend);
+      socket.emit("player_text", dataToSend);
     }
   });
 });

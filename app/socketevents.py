@@ -196,7 +196,7 @@ def change_time_schedule(data):
     }
     emit("change_time_schedule", data_to_send, to=lobby_id)
 
-def is_lobby_host(user_id):
+def is_lobby_host(user_id, lobby_id):
     """Checks if user_id is the host of lobby_id."""
     # TODO
     return True

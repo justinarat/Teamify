@@ -28,8 +28,11 @@ def lobby_view():
 def account_creation():
   login_form = LoginForm()
   signup_form = SignUpForm()
-  if login_form.validate_on_submit() or signup_form.validate_on_submit():
-    # TODO: Maybe add a flash message
+  if login_form.validate_on_submit():
+    # TODO: Use Flask Login to handle login data
+    return redirect(url_for("games_view"))
+  if signup_form.validate_on_submit():
+    # TODO: Use Flask Login to handle signup data
     return redirect(url_for("games_view"))
   return render_template("account-creation.html", title="Login or Sign Up", login_form=login_form, signup_form=signup_form)
 

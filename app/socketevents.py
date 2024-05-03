@@ -3,6 +3,8 @@ from flask import session
 from flask_socketio import emit, join_room, leave_room
 import sys
 
+# TODO: Change session["user_id"] when FlaskLogin is implemented
+
 # Events for players joining or leaving
 @socketio.on("player_join")
 def player_join():

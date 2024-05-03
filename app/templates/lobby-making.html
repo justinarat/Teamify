@@ -21,16 +21,34 @@
         <label for="time-type">Time allocation:</label>
         <input type="checkbox" id="time-type" onclick="timeDisplay()">
         <br>
-        <label for="skill-level">Enable Skill Level Sorting:</label>
-        <input type="checkbox" id="skill-level">
+        <label for="enable-skill-level">Enable Skill Level Sorting:</label>
+        <input type="checkbox" id="enable-skill-level">
+        <br>
+        <input type="radio" id="novice">
+        <label for="novice">Novice</label>
+        <br>
+        <input type="radio" id="casual">
+        <label for="casual">Casual</label>
+        <br>
+        <input type="radio" id="intermediate">
+        <label for="intermediate">Intermediate</label>
+        <br>
+        <input type="radio" id="proficient">
+        <label for="proficient">Proficient</label>
+        <br>
+        <input type="radio" id="expert">
+        <label for="expert">Expert</label>
+        <br>
+        <input type="radio" id="master">
+        <label for="master">Master</label>
         <br>
         <details>
           <summary>Add Tags</summary>
             <label for="battle-royale">Battle Royale</label>
-            <input type="checkbox" id="battle-royale" value="battle-royale">
+            <input type="checkbox" id="battle-royale">
             <br>
             <label for="rpg">RPG</label>
-            <input type="checkbox" id="rpg" value="rpg">
+            <input type="checkbox" id="rpg">
             <br>
             <div id="custom-tags"></div>
             <button id="add-custom-tag" onclick="makeCustomTag()" type="button">+ Add Custom Tag</button>

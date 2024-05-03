@@ -34,7 +34,8 @@ function timeDisplay() {
       timeOptionChunk.insertAdjacentHTML("beforeend", htmlChunk);
     }
     let htmlChunk =
-      "<button id='add-special-event' onclick='makeSpecialEvent()' type='button'>+ Add Special Event</button>"
+      "<div id='custom-events'></div>" +
+      "<button id='add-special-event' onclick='makeSpecialEvent()' type='button'>+ Add Special Event</button>";
     timeOptionChunk.insertAdjacentHTML("beforeend", htmlChunk);
   } else {
     timeOptionChunk.innerHTML = "";
@@ -68,24 +69,19 @@ addCustomTagButton.addEventListener("click", function () {
 
 function makeCustomTag() {
   let customTags = document.getElementById("custom-tags");
-  // let sectionID = "customSection" + customCount;
   let customTagHTML =
     "<div id='customSection" +
     customCount +
     "'>" +
-    "  <input type='text' id ='custom-tag-" +
-    customCount +
-    "' placeholder='Enter custom tag'>" +
-    "  <button id='remove-custom-tag" +
-    customCount +
-    "' onclick='removeCustomTag(this)' type='button'>- Remove Custom Tag</button>" +
+    "  <input type='text' id ='custom-tag-" + customCount + "' placeholder='Enter custom tag'>" +
+    "  <button id='remove-custom-tag" + customCount + "' onclick='removeCustom(this)' type='button'>- Remove Custom Tag</button>" +
     "  <br>" +
     "</div>";
 
   customTags.insertAdjacentHTML("beforeend", customTagHTML);
 }
 
-function removeCustomTag(removeButton) {
+function removeCustom(removeButton) {
   let sectionID = removeButton.parentNode.id;
   let customSection = document.getElementById(sectionID);
   customSection.remove();
@@ -113,4 +109,26 @@ function enableSkills() {
   } else {
     skillLevelField.innerHTML = "";
   }
+}
+
+let customEventCount = 0;
+
+function makeSpecialEvent() {
+  let customEvents = document.getElementById("custom-events");
+
+  let customEventHTML =
+    "<div id='customEventSection" + customEventCount + "'>" +
+    "  <input type='date' id ='custom-event-" + customCount + "'>" +
+    "  <br>" +
+    "  <label for='eventFrom" + customEventCount + "'>From:</label>" +
+    "  <input type='time' id='eventFrom" + customEventCount + "' />" +
+    "  <label for='eventTo" + customEventCount + "'> To: </label>" +
+    "  <input type='time' id='eventFrom" + customEventCount + "' />" +
+    "  <input type='text' id ='custom-event-description" + customCount + "' placeholder='Event Description (Opitonal)'>" +
+    "  <button id='remove-custom-event" + customCount + "' onclick='removeCustom(this)' type='button'>- Remove Special Event</button>" +
+    "  <br><br>" +
+    "</div>";
+
+  customEvents.insertAdjacentHTML("beforeend", customEventHTML);
+  customEventCount++;
 }

@@ -1,5 +1,6 @@
 from app import app
-from flask import render_template
+from flask import render_template, redirect
+from forms import SignUpForm, LoginForm
 
 @app.route("/")
 @app.route("/introduction")
@@ -23,9 +24,14 @@ def lobby_view():
   # TODO: Render the right lobby using the lobby code
   return render_template("lobby-view.html")
 
-@app.route("/account-creation")
+@app.route("/account-creation", methods=["GET", "POST"])
 def account_creation():
-  return render_template("account-creation.html")
+  login_form = LoginForm()
+  signup_form = SignUpForm()
+  if login_form.validate_on_submit() or signup_form.validate_on_submit():
+    # TODO: Maybe add a flash message
+    return redirect(url_for("games_view"))
+  return render_template("account-creation.html", login_form=login_form, signup_form=signup_form)
 
 @app.route("/admin")
 def admin():

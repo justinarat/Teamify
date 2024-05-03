@@ -1,6 +1,6 @@
-from app import app
-from flask import render_template, redirect
-from forms import SignUpForm, LoginForm
+from app import app, forms
+from flask import render_template, redirect, url_for
+from app.forms import SignUpForm, LoginForm
 
 @app.route("/")
 @app.route("/introduction")
@@ -31,7 +31,7 @@ def account_creation():
   if login_form.validate_on_submit() or signup_form.validate_on_submit():
     # TODO: Maybe add a flash message
     return redirect(url_for("games_view"))
-  return render_template("account-creation.html", login_form=login_form, signup_form=signup_form)
+  return render_template("account-creation.html", title="Login or Sign Up", login_form=login_form, signup_form=signup_form)
 
 @app.route("/admin")
 def admin():

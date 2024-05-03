@@ -79,5 +79,10 @@ addCustomTagButton.addEventListener("click", function(){
 });
 
 function makeCustomTag(){
-
+  let customTags = document.getElementById("custom-tags");
+  let customTagHTML =
+    "<input type='text' id ='custom-tag-" + customCount +"' placeholder='Enter custom tag'>"+
+    "<br>";
+  
+  customTags.insertAdjacentHTML("beforeend", customTagHTML);
 }

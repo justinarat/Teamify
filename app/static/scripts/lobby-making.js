@@ -18,8 +18,8 @@ function timeDisplay() {
       let currDay = days[i];
       let currDayFull = daysFull[i];
       let htmlChunk =
-        "<label for='" +currDay + "-checkbox'>" + currDayFull + ":</label>" +
         "<input type='checkbox' id='" + currDay + "-checkbox'>" +
+        "<label for='" +currDay + "-checkbox'>" + currDayFull + ":</label>" +
         "<div id='" + currDay + "'></div>" +
         "<br />";
       timeOptionChunk.insertAdjacentHTML("beforeend", htmlChunk);

@@ -6,6 +6,18 @@
 
 {% block content %}
 <main class="container">
+  <form id="login" onsubmit="return validateSignup(id)">
+    {{ login_form.hidden_tag() }}
+    <h1 class="text-center">Login</h1>
+    {{ login_form.username.label }}
+    {{ login_form.username() }}
+    <br><br>
+    {{ login_form.password.label }}
+    {{ login_form.password() }}
+    <br><br>
+    {{ login_form.submit() }}
+  </form>
+  <br>
   <form id="sign-up" onsubmit="return validateSignup(id)">
     {{ signup_form.hidden_tag() }}
     <h1 class="text-center">Sign Up</h1>
@@ -19,18 +31,6 @@
     {{ signup_form.password() }}
     <br><br>
     {{ signup_form.submit() }}
-  </form>
-  <br>
-  <form id="login" onsubmit="return validateSignup(id)">
-    {{ login_form.hidden_tag() }}
-    <h1 class="text-center">Login</h1>
-    {{ login_form.username.label }}
-    {{ login_form.username() }}
-    <br><br>
-    {{ login_form.password.label }}
-    {{ login_form.password() }}
-    <br><br>
-    {{ login_form.submit() }}
   </form>
 </main>
 {% endblock %}

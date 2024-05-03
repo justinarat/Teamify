@@ -84,3 +84,14 @@ function removeCustomTag(removeButton){
   let customSection = document.getElementById(sectionID);
   customSection.remove();
 }
+
+function enableSkills(){
+  var skillCheck = document.getElementById("enable-skill-level");
+  var skillLevelField = document.getElementById("skill-levels");
+  if (skillCheck.checked == true) {
+    skillLevelField.insertAdjacentHTML("beforeend", "Hi");
+  }
+  else{
+    skillLevelField.innerHTML = "";
+  }
+}

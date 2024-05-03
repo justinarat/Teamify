@@ -81,7 +81,8 @@ addCustomTagButton.addEventListener("click", function(){
 function makeCustomTag(){
   let customTags = document.getElementById("custom-tags");
   let customTagHTML =
-    "<input type='text' id ='custom-tag-" + customCount +"' placeholder='Enter custom tag'>"+
+    "<input type='text' id ='custom-tag-" + customCount + "' placeholder='Enter custom tag'>"+
+    "<button id='remove-custom-tag" + customCount + "' onclick='removeCustomTag()' type='button'>- Remove Custom Tag</button>"+
     "<br>";
   
   customTags.insertAdjacentHTML("beforeend", customTagHTML);

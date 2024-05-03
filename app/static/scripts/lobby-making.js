@@ -8,6 +8,14 @@ const daysFull = [
   "Saturday",
   "Sunday",
 ];
+const skillLevels = [
+  "Novice",
+  "Casual",
+  "Intermediate",
+  "Proficient",
+  "Expert",
+  "Master"
+];
 
 
 function timeDisplay() {
@@ -89,7 +97,15 @@ function enableSkills(){
   var skillCheck = document.getElementById("enable-skill-level");
   var skillLevelField = document.getElementById("skill-levels");
   if (skillCheck.checked == true) {
-    skillLevelField.insertAdjacentHTML("beforeend", "Hi");
+    for (let i = 0; i <= 5; i++) {
+      let currSkillLevel = skillLevels[i];
+      let skillID = currSkillLevel.toLowerCase;
+      let htmlChunk =
+        "<input type='radio' id='" + skillID + "' name='skill-level'>" +
+        "<label for='" + skillID + "'>" + currSkillLevel + "</label>" +
+        "<br>";
+      skillLevelField.insertAdjacentHTML("beforeend", htmlChunk);
+    }
   }
   else{
     skillLevelField.innerHTML = "";

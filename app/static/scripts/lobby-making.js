@@ -9,7 +9,6 @@ const daysFull = [
   "Sunday",
 ];
 
-// document.getElementById("time-type").addEventListener("change", timeDisplay);
 
 function timeDisplay() {
   var selectedOption = document.getElementById("time-type");
@@ -19,25 +18,14 @@ function timeDisplay() {
       let currDay = days[i];
       let currDayFull = daysFull[i];
       let htmlChunk =
-        "<label for='" +
-        currDay +
-        "-toggle'>" +
-        currDayFull +
-        ":</label>" +
-        "<select id='" +
-        currDay +
-        "-toggle'>" +
-        "  <option value='no'>No</option>" +
-        "  <option value='yes'>Yes</option>" +
-        "</select>" +
-        "<div id='" +
-        currDay +
-        "'></div>" +
+        "<label for='" +currDay + "-checkbox'>" + currDayFull + ":</label>" +
+        "<input type='checkbox' id='" + currDay + "-checkbox'>" +
+        "<div id='" + currDay + "'></div>" +
         "<br />";
       timeOptionChunk.insertAdjacentHTML("beforeend", htmlChunk);
     }
     days.forEach(function (day) {
-      var toggleOption = day + "-toggle";
+      var toggleOption = day + "-checkbox";
       document
         .getElementById(toggleOption)
         .addEventListener("change", showGeneral(day, toggleOption));
@@ -50,8 +38,8 @@ function timeDisplay() {
 function showGeneral(day, toggleOption) {
   return function () {
     var dayElement = document.getElementById(day);
-    let selectedOption = document.getElementById(toggleOption).value;
-    if (selectedOption == "yes" && dayElement.innerHTML == "") {
+    let selectedOption = document.getElementById(toggleOption);
+    if (selectedOption.checked == true) {
       dayElement.innerHTML =
         "<label for='" +
         day +
@@ -65,7 +53,7 @@ function showGeneral(day, toggleOption) {
         "<input type='time' id='" +
         day +
         "-to' />";
-    } else if (selectedOption == "no" && dayElement.innerHTML != "") {
+    } else {
       dayElement.innerHTML = "";
     }
   };

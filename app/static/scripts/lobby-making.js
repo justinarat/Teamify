@@ -70,3 +70,14 @@ function timeDisplay() {
     timeOptionChunk.innerHTML = "";
   }
 }
+
+let customCount = 0;
+let addCustomTagButton = document.getElementById("add-custom-tag");
+
+addCustomTagButton.addEventListener("click", function(){
+  customCount++;
+});
+
+function makeCustomTag(){
+
+}

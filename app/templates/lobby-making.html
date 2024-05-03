@@ -16,11 +16,7 @@
       </div>
       <div class="col-sm-6">
         <label for="time-type">Time allocation:</label>
-        <select id="time-type">
-          <option value="" disabled selected>Select</option>
-          <option value="general">General Schedule</option>
-          <option value="calendar-based">Calendar Based</option>
-        </select>
+        <input type="checkbox" id="time-type" onclick="timeDisplay()">
         <br>
         <details>
           <summary>Add Tags</summary>
@@ -41,7 +37,7 @@
     <div class="row">
       <div class="col-sm-4" id="time-option"></div>
       <div class="col-sm-8" id="calendar-view">
-        <table class="table">
+        <table class="table-bordered">
           <thead>
             <tr>
               <th scope="col"> </th>

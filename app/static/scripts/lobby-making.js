@@ -9,36 +9,12 @@ const daysFull = [
   "Sunday",
 ];
 
-function showGeneral(day, toggleOption) {
-  return function () {
-    var dayElement = document.getElementById(day);
-    let selectedOption = document.getElementById(toggleOption).value;
-    if (selectedOption == "yes" && dayElement.innerHTML == "") {
-      dayElement.innerHTML =
-        "<label for='" +
-        day +
-        "-from'>From:</label>" +
-        "<input type='time' id='" +
-        day +
-        "-from' />" +
-        "<label for='" +
-        day +
-        "-to'> To: </label>" +
-        "<input type='time' id='" +
-        day +
-        "-to' />";
-    } else if (selectedOption == "no" && dayElement.innerHTML != "") {
-      dayElement.innerHTML = "";
-    }
-  };
-}
-
-document.getElementById("time-type").addEventListener("change", timeDisplay);
+// document.getElementById("time-type").addEventListener("change", timeDisplay);
 
 function timeDisplay() {
+  var selectedOption = document.getElementById("time-type");
   var timeOptionChunk = document.getElementById("time-option");
-  let selectedOption = document.getElementById("time-type").value;
-  if (selectedOption == "general" && timeOptionChunk.innerHTML == "") {
+  if (selectedOption.checked == true) {
     for (let i = 0; i < 7; i++) {
       let currDay = days[i];
       let currDayFull = daysFull[i];
@@ -66,9 +42,33 @@ function timeDisplay() {
         .getElementById(toggleOption)
         .addEventListener("change", showGeneral(day, toggleOption));
     });
-  } else if (selectedOption != "general" && timeOptionChunk.innerHTML != "") {
+  } else {
     timeOptionChunk.innerHTML = "";
   }
+}
+
+function showGeneral(day, toggleOption) {
+  return function () {
+    var dayElement = document.getElementById(day);
+    let selectedOption = document.getElementById(toggleOption).value;
+    if (selectedOption == "yes" && dayElement.innerHTML == "") {
+      dayElement.innerHTML =
+        "<label for='" +
+        day +
+        "-from'>From:</label>" +
+        "<input type='time' id='" +
+        day +
+        "-from' />" +
+        "<label for='" +
+        day +
+        "-to'> To: </label>" +
+        "<input type='time' id='" +
+        day +
+        "-to' />";
+    } else if (selectedOption == "no" && dayElement.innerHTML != "") {
+      dayElement.innerHTML = "";
+    }
+  };
 }
 
 let customCount = 0;

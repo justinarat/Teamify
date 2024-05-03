@@ -6,20 +6,20 @@
 
 {% block content %}
 <main class="container">
-  <section id="lobbies" class="row">
-    <h1 class="text-center">Search Lobbies</h1>
+  <h1 class="text-center">Search Lobbies</h1>
 
-    <form id="lobby-search" class="row justify-content-center" action="lobby-searching.html" method="GET">
-      <div class="col-sm-6">
-        <div class="input-group mb-3">
-          <input type="text" placeholder="Lobby content" aria-label="Lobby content" name="search" class="form-control">
-          <button type="submit" aria-label="Submit search" class="btn btn-outline-secondary">
-            <i class="bi bi-search" aria-hidden="true"></i>
-          </button>
-        </div>
+  <form id="lobby-search" class="row justify-content-center" action="lobby-searching.html" method="GET">
+    <div class="col-sm-6">
+      <div class="input-group mb-3">
+        <input type="text" placeholder="Lobby content" aria-label="Lobby content" name="search" class="form-control">
+        <button type="submit" aria-label="Submit search" class="btn btn-outline-secondary">
+          <i class="bi bi-search" aria-hidden="true"></i>
+        </button>
       </div>
-    </form>
+    </div>
+  </form>
 
+  <section id="lobbies" class="row">
     <article class="col-sm-4">
       <div class="card bg-dark text-light">
         <div class="card-body">

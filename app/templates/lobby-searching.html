@@ -2,7 +2,9 @@
 
 {% block css %}{% endblock %}
 
-{% block headScripts %}{% endblock %}
+{% block headScripts %}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+{% endblock %}
 
 {% block content %}
 <main class="container">
@@ -19,48 +21,7 @@
     </div>
   </form>
 
-  <section id="lobbies" class="row">
-    <article class="col-sm-4">
-      <div class="card bg-dark text-light">
-        <div class="card-body">
-          <h3 class="game-name">Game 1</h3>
-          <p class="lobby-description">Lobby 1 description.</p>
-          <div class="lobby-host">Host Username</div>
-          <div class="lobby-other-players">Player 1</div>
-          <p class="time-available">FRI 7pm-3am</p>
-          <!--Maybe show next available time-->
-        </div>
-      </div>
-    </article>
-
-    <article class="col-sm-4">
-      <div class="card bg-dark text-light">
-        <div class="card-body">
-          <h3 class="game-name">Game 2</h3>
-          <p class="lobby-description">Lobby 2 description.</p>
-          <div class="lobby-host">Host Username</div>
-          <div class="lobby-other-players">Player 1, Player 2</div>
-          <p class="time-available">SAT 1pm-10pm</p>
-          <!--Maybe show next available time-->
-        </div>
-      </div>
-    </article>
-
-    <article class="col-sm-4">
-      <div class="card bg-dark text-light">
-        <div class="card-body">
-          <h3 class="game-name">Game 3</h3>
-          <p class="lobby-description">Lobby 3 description.</p>
-          <div class="lobby-host">Host Username</div>
-          <div class="lobby-other-players">
-            Player 1, Player 2, Player 3
-          </div>
-          <p class="time-available">SUN 1pm-5pm</p>
-          <!--Maybe show next available time-->
-        </div>
-      </div>
-    </article>
-  </section>
+  <section id="lobbies" class="row"></section>
 </main>
 {% endblock %}
 

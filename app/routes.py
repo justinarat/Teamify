@@ -28,14 +28,24 @@ def lobby_view():
 def account_creation():
   login_form = LoginForm()
   signup_form = SignUpForm()
+  return render_template("account-creation.html", title="Login or Sign Up", login_form=login_form, signup_form=signup_form)
+
+@app.route("/login-request", methods=["post"])
+def login_request():
+  """Handles login form requests"""
+  login_form = LoginForm()
   if login_form.validate_on_submit():
     # TODO: Use Flask Login to handle login data
     return redirect(url_for("games_view"))
+
+@app.route("/signup-request", methods=["post"])
+def signup_request():
+  """Handles signup form requests"""
+  signup_form = SignUpForm()
   if signup_form.validate_on_submit():
     # TODO: Use Flask Login to handle signup data
     #       Then update the database
     return redirect(url_for("games_view"))
-  return render_template("account-creation.html", title="Login or Sign Up", login_form=login_form, signup_form=signup_form)
 
 @app.route("/admin")
 def admin():

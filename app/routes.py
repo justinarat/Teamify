@@ -1,6 +1,10 @@
 from app import app, forms
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, request
 from app.forms import SignUpForm, LoginForm
+import sys
+from flask_sqlalchemy import SQLAlchemy 
+from app.model import Users
+
 
 @app.route("/")
 @app.route("/introduction")
@@ -36,6 +40,22 @@ def login_request():
   login_form = LoginForm()
   if login_form.validate_on_submit():
     # TODO: Use Flask Login to handle login data
+    
+    username = request.form['username']
+    password = request.form['password']
+    print(username, file=sys.stderr)
+    print(password, file=sys.stderr)
+
+    # Check if username and password match in the database
+    user = Users.query.filter_by(Username=username, Password=password).first_or_404()
+    print(user, file=sys.stderr)
+
+    if user:
+        # Authentication successful, redirect to some page
+        print('Match', file=sys.stderr)
+    else:
+        # Authentication failed, redirect back to login page
+        print('No Match', file=sys.stderr)
     return redirect(url_for("games_view"))
 
 @app.route("/signup-request", methods=["post"])

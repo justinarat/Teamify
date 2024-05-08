@@ -1,9 +1,9 @@
-from app import app, forms
+from app import app
 from flask import render_template, redirect, url_for
 from app.forms import SignUpForm, LoginForm
-import sys
-from flask_sqlalchemy import SQLAlchemy 
 from app.model import Users
+from flask_login import login_user
+import sys
 
 
 @app.route("/")
@@ -39,8 +39,6 @@ def login_request():
   """Handles login form requests"""
   login_form = LoginForm()
   if login_form.validate_on_submit():
-    # TODO: Use Flask Login to handle login data
-    
     username = login_form.username.data
     password = login_form.password.data
     print(username, file=sys.stderr)
@@ -53,6 +51,7 @@ def login_request():
     if user:
         # Authentication successful, redirect to some page
         print('Match', file=sys.stderr)
+        login_user(user)
     else:
         # Authentication failed, redirect back to login page
         print('No Match', file=sys.stderr)

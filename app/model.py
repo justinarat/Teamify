@@ -1,8 +1,9 @@
 from typing import List
-from app import db
+from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
-
+    
 class Games(db.Model):
     __tablename__ = 'Games' 
     UID = db.Column(db.Text(), primary_key=True, unique=True, nullable=False)
@@ -15,7 +16,7 @@ class Tags(db.Model):
     Name = db.Column(db.Text(), nullable=False)
 
 
-class Users(db.Model):
+class Users(UserMixin, db.Model):
     __tablename__ = 'Users' 
     UID = db.Column(db.Text(), primary_key=True, unique=True, nullable=False)
     Username = db.Column(db.Text(), nullable=False)
@@ -27,6 +28,10 @@ class Users(db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.Password, password)
+
+@login.user_loader
+def load_student(user_id):
+    return Users.query.get(user_id)
 
 
 class Lobby(db.Model):

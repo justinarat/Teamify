@@ -1,5 +1,5 @@
 from app import app, forms
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for
 from app.forms import SignUpForm, LoginForm
 import sys
 from flask_sqlalchemy import SQLAlchemy 

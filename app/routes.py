@@ -41,8 +41,8 @@ def login_request():
   if login_form.validate_on_submit():
     # TODO: Use Flask Login to handle login data
     
-    username = request.form['username']
-    password = request.form['password']
+    username = login_form.username.data
+    password = login_form.password.data
     print(username, file=sys.stderr)
     print(password, file=sys.stderr)
 

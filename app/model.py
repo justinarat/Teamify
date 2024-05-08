@@ -1,5 +1,6 @@
 from typing import List
 from app import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class Games(db.Model):
@@ -20,6 +21,12 @@ class Users(db.Model):
     Username = db.Column(db.Text(), nullable=False)
     Password = db.Column(db.Text(), nullable=False)
     Email = db.Column(db.Text(), unique=True, nullable=False)
+
+    def set_password(self, password):
+        self.Password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.Password, password)
 
 
 class Lobby(db.Model):

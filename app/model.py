@@ -28,6 +28,9 @@ class Users(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.Password, password)
+    
+    def get_id(self):
+        return self.UID
 
 @login.user_loader
 def load_student(user_id):

@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, flash
 from app.forms import SignUpForm, LoginForm
 from app.model import Users
 from flask_login import login_user
@@ -45,17 +45,20 @@ def login_request():
     print(password, file=sys.stderr)
 
     # Check if username and password match in the database
-    user = Users.query.filter_by(Username=username, Password=password).first_or_404()
+    user = Users.query.filter_by(Username=username, Password=password).first()
     print(user, file=sys.stderr)
 
     if user:
         # Authentication successful, redirect to some page
         print('Match', file=sys.stderr)
         login_user(user)
+        return redirect(url_for("games_view"))
     else:
         # Authentication failed, redirect back to login page
         print('No Match', file=sys.stderr)
-    return redirect(url_for("games_view"))
+        signup_form = SignUpForm({}) # {} is to init signup_form with empty data as for some reason it shares data with login_form
+        return render_template("account-creation.html", title="Login or Sign Up", 
+                login_form=login_form, signup_form=signup_form)
 
 @app.route("/signup-request", methods=["post"])
 def signup_request():

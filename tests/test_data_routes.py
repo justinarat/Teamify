@@ -4,7 +4,7 @@ import unittest
 import requests
 
 
-class GetLobbyCardsTestCase(unittest.TestCase):
+class TestGetLobbyCards(unittest.TestCase):
     """
     Tests the get-lobby-cards data route
     """

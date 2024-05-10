@@ -40,6 +40,14 @@ function timeDisplay() {
     timeOptionChunk.insertAdjacentHTML("beforeend", htmlChunk);
   } else {
     timeOptionChunk.innerHTML = "";
+    let htmlChunk =
+      "<div id='onetimeSet'>" +
+      "  <label for='onetimeFrom'>From:</label>" +
+      "  <input type='datetime-local' id='onetimeFrom' />" +
+      "  <label for='onetimeTo'> To: </label>" +
+      "  <input type='datetime-local' id='onetimeFrom' />" +
+      "</div>";
+    timeOptionChunk.insertAdjacentHTML("beforeend", htmlChunk);
   }
 }
 

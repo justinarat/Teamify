@@ -1,5 +1,8 @@
-from app import app
+"""Defines all data routes that the server responds to"""
+
 from flask import request, jsonify, make_response
+from app import app
+
 
 @app.route("/get-lobby-cards", methods=["GET"])
 def get_lobby_cards():
@@ -34,12 +37,16 @@ def get_lobby_cards():
         ]
     }
     """
-    if not "count" in request.args: 
+
+    if not "count" in request.args:
         return make_response("", 400)
     count = request.args.get("count")
     search_tags = request.args.getlist("search_tags")
     ignore_tags = request.args.getlist("ignore_tags")
     data_to_send = {"lobby_cards": []}
-    # TODO: query the database for "count" number of lobby data and put them in data_to_send["lobby_cards"]
-    #       Can't do this yet as databases haven't been setup yet in flask
+
+    # TODO:
+    # Query the database for "count" number of lobby data and put them in
+    # data_to_send["lobby_cards"], but can't do this until databases have been setup in flask
+
     return jsonify(data_to_send)

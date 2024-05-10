@@ -1,9 +1,7 @@
 from app import socketio
 from flask import session
 from flask_socketio import emit, join_room, leave_room
-import sys
-
-# TODO: Change session["user_id"] when FlaskLogin is implemented
+from flask_login import current_user
 
 # Events for players joining or leaving
 @socketio.on("player_join")
@@ -18,9 +16,9 @@ def player_join():
     Note: this doesn't update the database for adding a player to the lobby.
     This should be done in the lobby_view() function in routes.py.
     """
-    sender_user_id, lobby_id = session["user_id"], session["lobby_id"]
+    lobby_id = session["lobby_id"]
     join_room(lobby_id)
-    sender_username = "USERNAME" # TODO: Query database for sender username
+    sender_username = current_user.username
     data_to_send = {
         "sender_username": sender_username 
     }
@@ -35,10 +33,10 @@ def player_leave():
             "sender_username": "sender_username" 
         }
     """
-    sender_user_id, lobby_id = session["user_id"], session["lobby_id"]
+    lobby_id = session["lobby_id"]
     # TODO: remove player from lobby in database
     session.pop("lobby_id")
-    sender_username = "USERNAME" # TODO: Query database for sender username
+    sender_username = current_user.username
     leave_room(lobby_id)
     data_to_send = {
         "sender_username": sender_username
@@ -47,7 +45,7 @@ def player_leave():
 
 @socketio.on("player_kick")
 def player_kick(data):
-    sender_user_id, lobby_id = session["user_id"], session["lobby_id"]
+    lobby_id = session["lobby_id"]
     # TODO: Need to figure out how to kick the player so that they can't just
     #       edit the javascript that disconnects them from the lobby
     emit("player_kick", data, to=lobby_id)
@@ -69,10 +67,10 @@ def player_text(data):
             "body": "text_message"
         }
     """
-    sender_user_id, lobby_id = session["user_id"], session["lobby_id"]
+    lobby_id = session["lobby_id"]
     text_message = data["body"]
     # TODO: Add message to database if needed
-    sender_username = "USERNAME" # TODO: Query database for sender username
+    sender_username = current_user.username
     data_to_send = {
         "sender_username": sender_username, 
         "body": text_message
@@ -95,8 +93,8 @@ def add_tag(data):
             "body": "tag"
         }
     """
-    sender_user_id, lobby_id = session["user_id"], session["lobby_id"]
-    if not is_lobby_host(sender_user_id): return
+    lobby_id = session["lobby_id"]
+    if not is_lobby_host(current_user.get_id()): return
     tag = data["body"]
     # TODO: Add tag to database
     data_to_send = {
@@ -118,8 +116,8 @@ def remove_tag(data):
             "body": "tag"
         }
     """
-    sender_user_id, lobby_id = session["user_id"], session["lobby_id"]
-    if not is_lobby_host(sender_user_id): return
+    lobby_id = session["lobby_id"]
+    if not is_lobby_host(current_user.get_id()): return
     tag = data["body"]
     # TODO: Remove tag from database
     data_to_send = {
@@ -141,8 +139,8 @@ def change_lobby_name(data):
             "body": "new lobby name"
         }
     """
-    sender_user_id, lobby_id = session["user_id"], session["lobby_id"]
-    if not is_lobby_host(sender_user_id): return
+    lobby_id = session["lobby_id"]
+    if not is_lobby_host(current_user.get_id()): return
     new_lobby_name = data["body"]
     # TODO: Update lobby name in database
     data_to_send = {
@@ -164,8 +162,8 @@ def change_description(data):
             "body": "new description"
         }
     """
-    sender_user_id, lobby_id = session["user_id"], session["lobby_id"]
-    if not is_lobby_host(sender_user_id): return
+    lobby_id = session["lobby_id"]
+    if not is_lobby_host(current_user.get_id()): return
     new_description = data["body"]
     # TODO: Update lobby description in database
     data_to_send = {
@@ -187,8 +185,8 @@ def change_time_schedule(data):
             "body": "new time schedule"
         }
     """
-    sender_user_id, lobby_id = session["user_id"], session["lobby_id"]
-    if not is_lobby_host(sender_user_id): return
+    lobby_id = session["lobby_id"]
+    if not is_lobby_host(current_user.get_id()): return
     new_time_schedule = data["body"]
     # TODO: Update lobby time schedule in database
     data_to_send = {

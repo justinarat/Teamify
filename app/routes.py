@@ -18,6 +18,7 @@ def lobby_searching():
 @app.route("/lobby-making", methods=["GET", "POST"])
 def lobby_making():
   game_titles = [game[0] for game in Games.query.values(Games.Name)]
+  game_titles = game_titles[1:]
   return render_template("lobby-making.html", game_titles=game_titles)
 
 @app.route("/lobby")

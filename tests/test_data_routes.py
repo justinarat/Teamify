@@ -1,8 +1,14 @@
+"""Tests all data routes present in data_routes.py"""
+
 import unittest
 import requests
 
 
 class GetLobbyCardsTestCase(unittest.TestCase):
+    """
+    Tests the get-lobby-cards data route
+    """
+
     def setUp(self):
         self.url = "http://localhost:5000/get-lobby-cards"
 
@@ -13,7 +19,7 @@ class GetLobbyCardsTestCase(unittest.TestCase):
         self.assertEqual(response.text, "")
 
     def test_cards_string_count(self):
-        """Tests if status 400 and empty response is returned if GET request has string count param"""
+        """Tests if status 400 and empty response is returned if GET request has string count"""
         params = {"count": ""}
         response = requests.get(self.url, params=params)
         self.assertEqual(response.status_code, 400)
@@ -36,11 +42,10 @@ class GetLobbyCardsTestCase(unittest.TestCase):
         params = {"count": 1}
         response = requests.get(self.url, params=params)
         lobby_cards = response.json()["lobby_cards"]
-        
+
         for card in lobby_cards:
             self.assertEqual(response.status_code, 200)
-            # TODO: Check if the format of the response was correct (has the correct keys and maybe values)
-            #       Still need to decide on the format, but will likely have:
+            # TODO: Check if the format of the response was correct
             self.assertTrue("lobby_id" in card)
             self.assertTrue("game_title" in card)
             self.assertTrue("lobby_name" in card)

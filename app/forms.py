@@ -17,3 +17,5 @@ class CreateLobbyForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired()])
     description = StringField("Description", validators=[DataRequired()])
     capacity = IntegerField("Capacity", validators=[DataRequired()])
+    hidden_tag_field = StringField()
+    #input field value attribute

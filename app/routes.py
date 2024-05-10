@@ -19,6 +19,7 @@ def lobby_searching():
 def lobby_making():
   game_titles = [game[0] for game in Games.query.values(Games.Name)]
   game_titles = game_titles[1:]
+  game_titles.sort()
   return render_template("lobby-making.html", game_titles=game_titles)
 
 @app.route("/lobby")

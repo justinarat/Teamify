@@ -14,6 +14,7 @@
         <input type="text" id="lobby-name" placeholder="Lobby Name">
         <br>
         <select>
+          <option disabled selected value="">Select Game</option>
           {% for game in game_titles %}
           <option value="{{game}}">{{game}}</option>
           {% endfor %}

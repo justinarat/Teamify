@@ -1,5 +1,7 @@
-from app import app
-from flask import render_template, session, request
+from app import app, db
+from flask import render_template, redirect, url_for, session, request
+from app.forms import SignUpForm, LoginForm
+from app.model import Users
 
 @app.route("/")
 @app.route("/introduction")
@@ -28,9 +30,11 @@ def lobby_view():
   session["user_id"] = "0000" # TODO: Use FLaskLogin to get user object
   return render_template("lobby-view.html", template_folder="templates")
 
-@app.route("/account-creation")
+@app.route("/account-creation", methods=["GET", "POST"])
 def account_creation():
-  return render_template("account-creation.html")
+  login_form = LoginForm()
+  signup_form = SignUpForm()
+  return render_template("account-creation.html", title="Login or Sign Up", login_form=login_form, signup_form=signup_form)
 
 @app.route("/admin")
 def admin():

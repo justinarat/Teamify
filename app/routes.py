@@ -1,7 +1,9 @@
 from app import app, db
-from flask import render_template, redirect, url_for, session, request
-from app.forms import SignUpForm, LoginForm
+from app.model import Lobby, LobbyPlayers
+from flask import render_template, redirect, url_for, session, request, flash
+from app.forms import SignUpForm, LoginForm, JoinLobbyForm
 from app.model import Users
+from flask_login import current_user
 
 @app.route("/")
 @app.route("/introduction")
@@ -20,15 +22,47 @@ def lobby_searching():
 def lobby_making():
   return render_template("lobby-making.html")
 
-@app.route("/lobby")
+@app.route("/lobby", methods=["GET", "POST"])
 def lobby_view():
-  # TODO: 
-  # - Render the right lobby using the lobby code.
-  # - If user hasn't joined the lobby (not joined in database), redirect to 
-  #     lobby searching page.
-  session["lobby_id"] = request.args.get("lobby_id")
-  session["user_id"] = "0000" # TODO: Use FLaskLogin to get user object
-  return render_template("lobby-view.html", template_folder="templates")
+    """Responds with the lobby view page
+    
+        This expects a query string with a "lobby_id" key which holds the 
+        code of the lobby that the user wants to join.
+    """
+    # Check if the lobby and lobby id exist
+    lobby_id = request.args.get("lobby_id")
+    lobby = Lobby.query.filter_by(LobbyID=lobby_id).first()
+    if lobby_id == None or lobby == None:
+        flash("Lobby not found")
+        return redirect(url_for("lobby_searching"))
+
+    # Check if the player is already in the lobby
+    lobby_players = LobbyPlayers.query.filter_by(LobbyID=lobby_id)
+    user_in_lobby = (lobby_players.filter_by(UserID=current_user.get_id()).first() != None)
+    if user_in_lobby:
+        session["lobby_id"] = lobby_id
+        return render_template("lobby-view.html", template_folder="templates", 
+                lobby=lobby, user_in_lobby=user_in_lobby, join_lobby_form=join_lobby_form)
+
+    # Check if the lobby is full
+    if lobby.is_full():
+        flash("Lobby is full, can't join.")
+        return redirect(url_for("lobby_searching"))
+
+    # Set the form to ask if the user wants to join
+    join_lobby_form = JoinLobbyForm()
+    if join_lobby_form.validate_on_submit():
+        user_joined = (join_lobby_form.join_radio.data == "Yes")
+        if user_joined:
+            user_in_lobby = True
+            new_lobby_player = LobbyPlayers(LobbyID=lobby, userID=current_user.UID)
+            db.session.add(new_lobby_player)
+            db.session.commit()
+        else:
+            return redirect(url_for("lobby_searching"))
+
+    return render_template("lobby-view.html", template_folder="templates", 
+            lobby=lobby, user_in_lobby=user_in_lobby, join_lobby_form=join_lobby_form)
 
 @app.route("/account-creation", methods=["GET", "POST"])
 def account_creation():

@@ -20,7 +20,7 @@ def games_view():
 def lobby_searching():
   return render_template("lobby-searching.html")
 
-@app.route("/lobby-making")
+@app.route("/lobby-making", methods=["POST"])
 def lobby_making():
   return render_template("lobby-making.html")
 

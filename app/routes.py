@@ -1,5 +1,6 @@
 from app import app
 from flask import render_template
+from app.model import Games
 
 @app.route("/")
 @app.route("/introduction")

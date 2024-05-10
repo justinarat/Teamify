@@ -3,7 +3,7 @@ from app.model import Lobby, LobbyPlayers
 from flask import render_template, redirect, url_for, session, request, flash
 from app.forms import SignUpForm, LoginForm, JoinLobbyForm
 from app.model import Users
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 @app.route("/")
 @app.route("/introduction")
@@ -23,6 +23,7 @@ def lobby_making():
   return render_template("lobby-making.html")
 
 @app.route("/lobby", methods=["GET", "POST"])
+@login_required
 def lobby_view():
     """Responds with the lobby view page
     
@@ -42,7 +43,7 @@ def lobby_view():
     if user_in_lobby:
         session["lobby_id"] = lobby_id
         return render_template("lobby-view.html", template_folder="templates", 
-                lobby=lobby, user_in_lobby=user_in_lobby, join_lobby_form=join_lobby_form)
+                lobby=lobby, user_in_lobby=user_in_lobby, join_lobby_form=None)
 
     # Check if the lobby is full
     if lobby.is_full():

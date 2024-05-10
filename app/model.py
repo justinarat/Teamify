@@ -43,6 +43,11 @@ class Lobby(db.Model):
     GameID = db.Column(db.Text(), db.ForeignKey("Games.UID"), nullable=False)
     Desc = db.Column(db.Text())
     gamesRel = db.relationship('Games', backref='games', lazy=True)
+    lobby_players_rel = db.relationship('LobbyPlayers', backref='lobbyPlayers', lazy=True)
+
+    def is_full(self) -> bool:
+        # TODO
+        return False
 
 
 class LobbyPlayers(db.Model):

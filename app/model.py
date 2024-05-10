@@ -12,7 +12,8 @@ class Tags(db.Model):
     __tablename__ = 'Tags' 
     TagID = db.Column(db.Text(), primary_key=True, unique=True, nullable=False)
     Name = db.Column(db.Text(), nullable=False)
-
+    TagGroup=db.Column(db.Text())
+    Suggestion=db.Column(db.Integer(),default=0)
 
 class Users(db.Model):
     __tablename__ = 'Users' 

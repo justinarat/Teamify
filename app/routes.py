@@ -14,9 +14,10 @@ def games_view():
 def lobby_searching():
   return render_template("lobby-searching.html")
 
-@app.route("/lobby-making")
+@app.route("/lobby-making", methods=["GET", "POST"])
 def lobby_making():
-  return render_template("lobby-making.html")
+  game_titles = Games.query.with_entities(Games.Name)
+  return render_template("lobby-making.html", game_titles=game_titles)
 
 @app.route("/lobby")
 def lobby_view():

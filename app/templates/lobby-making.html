@@ -11,14 +11,13 @@
     <div class="row">
       <div class="col-sm-4">
         <h4>Game Description</h4>
-        <input type="text" id="lobby-name" placeholder="Lobby Name">
-        <br>
         <select>
           <option disabled selected value="">Select Game</option>
           {% for game in game_titles %}
           <option value="{{game}}">{{game}}</option>
           {% endfor %}
         </select>
+        <input type="text" id="lobby-name" placeholder="Lobby Name">
         <br>
         <input type="text" id="lobby-making-description" placeholder="Enter description">
         <br>
@@ -26,16 +25,15 @@
         <input type="number" id="lobby-max-capacity" min="1">
       </div>
       <div class="col-sm-4">
-        <h4>Tags</h4>
+        <h4>Skill Level</h4>
         <input type="checkbox" id="enable-skill-level" onclick="enableSkills()">
         <label for="enable-skill-level">Enable Skill Level Sorting:</label>
         <br>
         <div id="skill-levels"></div>
-        <details>
-          <summary>Add Tags</summary>
-          <div id="custom-tags"></div>
-          <button id="add-custom-tag" onclick="makeCustomTag()" type="button">+ Add Custom Tag</button>
-        </details>
+        <br>
+        <h4>Tags</h4>
+        <div id="custom-tags"></div>
+        <button id="add-custom-tag" onclick="makeCustomTag()" type="button">+ Add Custom Tag</button>
       </div>
       <div class="col-sm-4">
         <h4>Time Allocation Options</h4>

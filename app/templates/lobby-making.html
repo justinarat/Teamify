@@ -8,7 +8,6 @@
 <div id="lobby-making" class="container">
   <h2 id="lobby-making-title">Creating Lobby</h2>
   <form id="lobby-making-form" methd="post">
-    {{form.hidden_tag()}}
     <div class="row">
       <div class="col-sm-6">
         <h4>Game Description</h4>
@@ -52,6 +51,13 @@
         <br>
         <br>
         <div id="time-option"></div>
+        <h4>Testing with Jinja</h4>
+        <button id="jinja-test" onclick="jinjaTest()">Click Me</button>
+        <div id="dynamic-jinja">
+          {% if code_inserted %}
+            {{ code_inserted}}
+          {% endif %}
+        </div>
       </div>
       <div class="col-sm-8" id="calendar-view">
         <table class="table table-bordered">

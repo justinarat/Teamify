@@ -141,3 +141,8 @@ function makeSpecialEvent() {
   customEvents.insertAdjacentHTML("beforeend", customEventHTML);
   customEventCount++;
 }
+
+function jinjaTest(){
+  var codeInserted = "<p>This HTML was inserted via Jinja</p>";
+  document.getElementById("dynamic-jinja").innerHTML = codeInserted;
+}

@@ -92,7 +92,7 @@ def signup_request():
               db.session.commit()
            else:
               tests=tests+1
-        
+        user = Users.query.filter_by(UID=uid).first()
         login_user(user)
         return redirect(url_for("games_view"))
     else:

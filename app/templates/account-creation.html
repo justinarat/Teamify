@@ -6,30 +6,42 @@
 
 {% block content %}
 <main class="container">
-  <form id="sign-up" onsubmit="return validateSignup(id)">
-    <h1 class="text-center">Sign Up</h1>
-    <label for="new-email"> Email: </label>
-    <input type="email" id="new-email" autocomplete="email">
+  <form id="login" action="{{ url_for('login_request') }}" method="post" onsubmit="return validateSignup(id)">
+    {{ login_form.hidden_tag() }}
+    <h1 class="text-center">Login</h1>
+    {{ login_form.username.label }}
+    {{ login_form.username() }}
     <br><br>
-    <label for="new-username"> Username: </label>
-    <input type="text" id="new-username" autocomplete="username">
+    {{ login_form.password.label }}
+    {{ login_form.password() }}
     <br><br>
-    <label for="new-password"> Password: </label>
-    <input type="password" id="new-password" autocomplete="new-password">
-    <br><br>
-    <input type="submit" value="Submit">
+    {{ login_form.submit() }}
   </form>
   <br>
-  <form id="login" onsubmit="return validateSignup(id)">
-    <h1 class="text-center">Login</h1>
-    <label for="username"> Username: </label>
-    <input type="text" id="username" autocomplete="username">
+  <form id="sign-up" action="{{ url_for('signup_request') }}" method="post" onsubmit="return validateSignup(id)">
+    {{ signup_form.hidden_tag() }}
+    <h1 class="text-center">Sign Up</h1>
+    {{ signup_form.email.label }}
+    {{ signup_form.email() }}
     <br><br>
-    <label for="password"> Password: </label>
-    <input type="password" id="password" autocomplete="current-password">
+    {{ signup_form.username.label }}
+    {{ signup_form.username() }}
     <br><br>
-    <input type="submit" value="Submit">
+    {{ signup_form.password.label }}
+    {{ signup_form.password() }}
+    <br><br>
+    {{ signup_form.submit() }}
   </form>
+  <br><br>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
 </main>
 {% endblock %}
 

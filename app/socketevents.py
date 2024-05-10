@@ -1,4 +1,5 @@
-from app import socketio
+from app import socketio, db
+from app.model import LobbyPlayers
 from flask import session
 from flask_socketio import emit, join_room, leave_room
 from flask_login import current_user
@@ -34,7 +35,8 @@ def player_leave():
         }
     """
     lobby_id = session["lobby_id"]
-    # TODO: remove player from lobby in database
+    db.session.delete(LobbyPlayers.query.filter_by(LobbyID=lobby_id, userID=current_user.get_id()).first())
+    db.session.commit()
     session.pop("lobby_id")
     sender_username = current_user.username
     leave_room(lobby_id)

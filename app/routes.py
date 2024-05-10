@@ -1,9 +1,10 @@
-from app import app
+from app import app,db
 from flask import render_template, redirect, url_for, flash
 from app.forms import SignUpForm, LoginForm
 from app.model import Users
 from flask_login import login_user
 import sys
+from sqlalchemy import desc
 
 
 @app.route("/")
@@ -76,9 +77,22 @@ def signup_request():
     user = Users.query.filter_by(Email=email).first()
     print(user, file=sys.stderr)
 
-    if email!=None:
-        # Authentication successful, redirect to some page
+    if user==None:
+        # email not in system
         print('New email', file=sys.stderr)
+        uid=0
+        tests=Users.query.order_by(desc(Users.UID)).first()#gets last uid
+        tests=int(tests.UID)+1 #gets theoretically new UID
+        while uid==0:
+           tests2=Users.query.filter_by(UID=tests).first()#checks if uid is valid
+           if tests2==None:
+              uid=tests
+              user=Users(UID=uid,Username=username,Password=password,Email=email)#should add way to confirm addition of user
+              db.session.add(user)
+              db.session.commit()
+           else:
+              tests=tests+1
+        
         login_user(user)
         return redirect(url_for("games_view"))
     else:

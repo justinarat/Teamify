@@ -55,7 +55,8 @@ def signup_request():
             new_uid = int(user_with_last_uid.UID)+1 # Gets theoretically new UID
             while Users.query.filter_by(UID=new_uid).first() != None: # Guarantees that new_uid is unique
                 new_uid += 1
-            user = Users(UID=new_uid, Username=username, Password=password, Email=email)
+            user = Users(UID=new_uid, Username=username, Email=email)
+            user.set_password(password)
             db.session.add(user)
             db.session.commit()
             print("New user added to database", file=sys.stderr)

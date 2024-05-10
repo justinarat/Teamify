@@ -57,3 +57,14 @@ class LobbyTimes(db.Model):
     Repeat = db.Column(db.Text(), unique=True, nullable=False)
     TimeBlockEnd = db.Column(db.Text(), nullable=False)
     lobbyRel = db.relationship('Lobby', backref='lobby1', lazy=True)
+
+class UserTracker(db.Model):
+    __tablename__ = 'UserTracker' 
+    RowID = db.Column(db.Text(), primary_key=True, unique=True, nullable=False)
+    LobbyID = db.Column(db.Text(), db.ForeignKey("Lobby.LobbyID"), nullable=False)
+    UserID = db.Column(db.Text(), db.ForeignKey("Users.UID"), nullable=False)
+    Action = db.Column(db.Text(), nullable=False)
+    Desc = db.Column(db.Text())
+    userRel = db.relationship('Users', backref='users2', lazy=True)
+    lobbyRel = db.relationship('Lobby', backref='lobby4', lazy=True)
+

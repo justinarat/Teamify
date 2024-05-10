@@ -18,9 +18,10 @@ const skillLevels = [
 ];
 
 function timeDisplay() {
-  var selectedOption = document.getElementById("time-type");
+  var selectedOption = document.getElementById("reoccuring-time");
   var timeOptionChunk = document.getElementById("time-option");
   if (selectedOption.checked == true) {
+    timeOptionChunk.innerHTML = "";
     for (let i = 0; i < 7; i++) {
       let currDay = days[i];
       let currDayFull = daysFull[i];

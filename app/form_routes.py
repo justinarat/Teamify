@@ -2,7 +2,7 @@ from app import app, db
 from app.model import Users
 from app.forms import LoginForm, SignUpForm
 from flask import render_template, url_for, redirect, flash
-from flask_login import login_user
+from flask_login import login_user, login_required, logout_user
 import sys
 from sqlalchemy import desc
 
@@ -70,3 +70,9 @@ def signup_request():
             login_form = LoginForm({}) # {} is to init signup_form with empty data as for some reason it shares data with login_form
             return render_template("account-creation.html", title="Login or Sign Up", 
                     login_form=login_form, signup_form=signup_form)
+
+@app.route("/logout-request", methods=["post"])
+@login_required
+def logout_request():
+    logout_user()
+    return redirect(url_for("introduction"))

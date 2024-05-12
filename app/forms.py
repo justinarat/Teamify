@@ -13,6 +13,3 @@ class LoginForm(FlaskForm):
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Login")
 
-class JoinLobbyForm(FlaskForm):
-    join_radio = RadioField(choices=[("Yes", "Yes"), ("No", "No")], validators=[DataRequired()])
-    submit = SubmitField("Login")

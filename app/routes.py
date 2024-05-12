@@ -1,7 +1,7 @@
 from app import app, db
 from app.model import Lobby, LobbyPlayers
 from flask import render_template, redirect, url_for, session, request, flash
-from app.forms import SignUpForm, LoginForm, JoinLobbyForm
+from app.forms import SignUpForm, LoginForm
 from app.model import Users
 from flask_login import current_user, login_required
 
@@ -37,33 +37,21 @@ def lobby_view():
         flash("Lobby not found")
         return redirect(url_for("lobby_searching"))
 
-    # Check if the player is already in the lobby
+    # If the player is already in the lobby, render full lobby
     lobby_players = LobbyPlayers.query.filter_by(LobbyID=lobby_id)
-    user_in_lobby = (lobby_players.filter_by(UserID=current_user.get_id()).first() != None)
+    user_in_lobby = lobby_players.filter_by(UserID=current_user.get_id()).first() 
     if user_in_lobby:
         session["lobby_id"] = lobby_id
         return render_template("lobby-view.html", template_folder="templates", 
-                lobby=lobby, user_in_lobby=user_in_lobby, join_lobby_form=None)
+                lobby=lobby, user_in_lobby=user_in_lobby)
 
     # Check if the lobby is full
     if lobby.is_full():
         flash("Lobby is full, can't join.")
         return redirect(url_for("lobby_searching"))
 
-    # Set the form to ask if the user wants to join
-    join_lobby_form = JoinLobbyForm()
-    if join_lobby_form.validate_on_submit():
-        user_joined = (join_lobby_form.join_radio.data == "Yes")
-        if user_joined:
-            user_in_lobby = True
-            new_lobby_player = LobbyPlayers(LobbyID=lobby, userID=current_user.UID)
-            db.session.add(new_lobby_player)
-            db.session.commit()
-        else:
-            return redirect(url_for("lobby_searching"))
-
     return render_template("lobby-view.html", template_folder="templates", 
-            lobby=lobby, user_in_lobby=user_in_lobby, join_lobby_form=join_lobby_form)
+            lobby=lobby, user_in_lobby=None)
 
 @app.route("/account-creation", methods=["GET", "POST"])
 def account_creation():

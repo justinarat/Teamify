@@ -1,7 +1,7 @@
 from app import app, db
 from app.model import Users
 from app.forms import LoginForm, SignUpForm
-from flask import render_template, url_for, redirect, flash
+from flask import render_template, url_for, redirect, flash, request
 from flask_login import login_user
 import sys
 from sqlalchemy import desc
@@ -70,3 +70,28 @@ def signup_request():
             login_form = LoginForm({}) # {} is to init signup_form with empty data as for some reason it shares data with login_form
             return render_template("account-creation.html", title="Login or Sign Up", 
                     login_form=login_form, signup_form=signup_form)
+
+@app.route("/join-lobby-request", methods=["post"])
+def join_lobby_request():
+    """Handles request to join lobby
+    
+        Keys in POST body
+            lobby_id - The id of the lobby the user wants to join
+            is_join - "True" if the user wants to join, "False" otherwise
+    """
+
+    lobby_id = requests.args.get("lobby_id")
+    is_join = requests.args.get("is_join")
+
+    if False: # TODO: Check if the user can join (e.g. lobby full...)
+        flash("Lobby is full")
+        return redirect(url_for("lobby_searching"))
+
+    if not is_join: 
+        return redirect(url_for("lobby_searching"))
+
+    new_lobby_player = LobbyPlayers(LobbyID=lobby, userID=current_user.UID) # TODO: Make new rowid
+    db.session.add(new_lobby_player)
+    db.session.commit()
+    return redirect(url_for("lobby_view"))
+

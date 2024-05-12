@@ -86,6 +86,7 @@
       </div>
     </div>
     <div id="chat-column" class="col-md-3">
+      {% if user_in_lobby %}
       <h2>Lobby Chat</h2>
       <div id="chat">
         <div class="input-group mb-3">
@@ -94,7 +95,6 @@
             <i class="bi bi-arrow-return-left" aria-hidden="true"></i>
           </button>
         </div>
-        {% if user_in_lobby %}
           <div id="chat-log">
             <div class="chat-text">
               <span class="username">Player 3</span>: hello
@@ -118,8 +118,13 @@
               <span class="server-text"><span class="chat-username">PlayerHost</span> created the lobby</span>
             </div>
           </div>
-        {% endif %}
       </div>
+	  {% else %}
+	  <div>
+		  <button id="join-lobby">Join</button>
+		<button id="dont-join-lobby">Don't join</button>
+	  </div>
+      {% endif %}
     </div>
   </div>
 </main>

@@ -71,7 +71,7 @@ def signup_request():
             return render_template("account-creation.html", title="Login or Sign Up", 
                     login_form=login_form, signup_form=signup_form)
 
-@app.route("/logout-request", methods=["post"])
+@app.route("/logout-request")
 @login_required
 def logout_request():
     logout_user()

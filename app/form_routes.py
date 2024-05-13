@@ -1,8 +1,8 @@
 from app import app, db
-from app.model import Users
+from app.model import Users, LobbyPlayers
 from app.forms import LoginForm, SignUpForm
 from flask import render_template, url_for, redirect, flash, request
-from flask_login import login_user
+from flask_login import login_user, current_user
 import sys
 from sqlalchemy import desc
 
@@ -75,23 +75,23 @@ def signup_request():
 def join_lobby_request():
     """Handles request to join lobby
     
-        Keys in POST body
+        Keys in POST body:
             lobby_id - The id of the lobby the user wants to join
-            is_join - "True" if the user wants to join, "False" otherwise
+
+            is_joining - "True" if the user wants to join, "False" otherwise
     """
 
-    lobby_id = requests.args.get("lobby_id")
-    is_join = requests.args.get("is_join")
+    lobby_id = request.args.get("lobby_id")
+    is_joining = request.args.get("is_join")
 
     if False: # TODO: Check if the user can join (e.g. lobby full...)
         flash("Lobby is full")
         return redirect(url_for("lobby_searching"))
 
-    if not is_join: 
+    if not is_joining: 
         return redirect(url_for("lobby_searching"))
 
-    new_lobby_player = LobbyPlayers(LobbyID=lobby, userID=current_user.UID) # TODO: Make new rowid
+    new_lobby_player = LobbyPlayers(LobbyID=lobby_id, userID=current_user.UID) # TODO: Make new rowid
     db.session.add(new_lobby_player)
     db.session.commit()
     return redirect(url_for("lobby_view"))
-

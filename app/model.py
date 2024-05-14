@@ -59,6 +59,10 @@ class LobbyPlayers(db.Model):
     userRel = db.relationship('Users', backref='users', lazy=True)
     lobbyRel = db.relationship('Lobby', backref='lobby3', lazy=True)
 
+    def is_host(self) -> bool:
+        # TODO
+        return True
+
 
 class LobbyTags(db.Model):
     __tablename__ = 'LobbyTags' 

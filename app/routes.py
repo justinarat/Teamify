@@ -22,7 +22,7 @@ def lobby_searching():
 def lobby_making():
   return render_template("lobby-making.html")
 
-@app.route("/lobby", methods=["GET", "POST"])
+@app.route("/lobby", methods=["GET"])
 @login_required
 def lobby_view():
     """Responds with the lobby view page

@@ -28,9 +28,14 @@ class TestGetLobbyCards(unittest.TestCase):
             with self.subTest(count=count):
                 params = {"count": count}
                 response = requests.get(self.url, params=params, timeout=5)
-                self.assertEqual(response.status_code, 200)
-                lobby_cards = response.json()["lobby_cards"]
-                self.assertEqual(len(lobby_cards), count)
+
+                if count == 0:
+                    self.assertEqual(response.status_code, 400)
+                    self.assertNotEqual(response.text, "")
+                else:
+                    self.assertEqual(response.status_code, 200)
+                    lobby_cards = response.json()["lobby_cards"]
+                    self.assertEqual(len(lobby_cards), count)
 
     def test_cards_data_format(self):
         """Response data has correct lobby card keys and values"""

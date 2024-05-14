@@ -43,10 +43,28 @@ def get_lobby_cards():
 
     count = request.args.get("count")
 
+    try:
+        count = int(count)
+    except ValueError:
+        return make_response("Count must be an integer", 400)
+
     if count == 0:
         return make_response("Count must be greater than 0", 400)
 
     lobby_cards = []
+
+    for i in range(count):
+        lobby_cards.append(
+            {
+                "lobby_id": f"{i}",
+                "game_title": f"game{i}_title",
+                "lobby_name": f"lobby{i}_name",
+                "lobby_description": f"lobby{i}_desc",
+                "host": f"host{i}",
+                "players": [f"player_{i}", f"player_{i+1}"],
+                "next_available_time": "timeblock format",
+            }
+        )
 
     # TODO:
     # search_tags = request.args.getlist("search_tags")
@@ -54,4 +72,4 @@ def get_lobby_cards():
     # Query the database for "count" number of lobby data and put them in
     # data_to_send["lobby_cards"], but can't do this until databases have been setup in flask
 
-    return jsonify(lobby_cards)
+    return { "lobby_cards": lobby_cards }

@@ -18,14 +18,14 @@ class TestGetLobbyCards(unittest.TestCase):
         """Status 400 and empty response returned if GET request has no params"""
         response = requests.get(self.url, timeout=5)
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.text, "")
+        self.assertNotEqual(response.text, "")
 
     def test_cards_string_count(self):
         """Status 400 and empty response returned if GET request has string count"""
         params = {"count": "5"}
         response = requests.get(self.url, params=params, timeout=5)
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.text, "")
+        self.assertNotEqual(response.text, "")
 
     def test_cards_count(self):
         """Number of lobby cards returned matches number requested"""

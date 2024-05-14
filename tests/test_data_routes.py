@@ -15,7 +15,7 @@ class TestGetLobbyCards(unittest.TestCase):
         self.url = f"http://{host}:{port}/get-lobby-cards"
 
     def test_cards_no_param(self):
-        """Status 400 and empty response is returned if GET request has no params"""
+        """Status 400 and empty response returned if GET request has no params"""
         response = requests.get(self.url, timeout=5)
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.text, "")
@@ -28,7 +28,7 @@ class TestGetLobbyCards(unittest.TestCase):
         self.assertEqual(response.text, "")
 
     def test_cards_count(self):
-        """Number of lobby cards returned matches the number requested"""
+        """Number of lobby cards returned matches number requested"""
         test_counts = [0, 1, 5, 25, 125]
 
         for count in test_counts:

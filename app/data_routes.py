@@ -39,17 +39,17 @@ def get_lobby_cards():
     """
 
     if "count" not in request.args:
-        return make_response("Missing 'count' parameter", 400)
+        return make_response("Parameter 'count' is missing", 400)
 
     count = request.args.get("count")
 
     try:
         count = int(count)
     except ValueError:
-        return make_response("Count must be an integer", 400)
+        return make_response("Parameter 'count' must be an integer", 400)
 
     if count == 0:
-        return make_response("Count must be greater than 0", 400)
+        return make_response("Parameter 'count' must be greater than 0", 400)
 
     lobby_cards = []
 

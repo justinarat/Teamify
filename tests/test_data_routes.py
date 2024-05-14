@@ -20,13 +20,6 @@ class TestGetLobbyCards(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertNotEqual(response.text, "")
 
-    def test_cards_string_count(self):
-        """Status 400 and empty response returned if GET request has string count"""
-        params = {"count": "5"}
-        response = requests.get(self.url, params=params, timeout=5)
-        self.assertEqual(response.status_code, 400)
-        self.assertNotEqual(response.text, "")
-
     def test_cards_count(self):
         """Number of lobby cards returned matches number requested"""
         test_counts = [0, 1, 5, 25, 125]

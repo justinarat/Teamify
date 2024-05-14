@@ -61,7 +61,5 @@ def get_lobby_cards():
     # TODO:
     # search_tags = request.args.getlist("search_tags")
     # ignore_tags = request.args.getlist("ignore_tags")
-    # Query the database for "count" number of lobby data and put them in
-    # data_to_send["lobby_cards"], but can't do this until databases have been setup in flask
 
     return jsonify({ "lobby_cards": lobby_cards })

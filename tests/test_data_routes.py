@@ -10,7 +10,9 @@ class TestGetLobbyCards(unittest.TestCase):
     """
 
     def setUp(self):
-        self.url = "http://localhost:5000/get-lobby-cards"
+        host = "localhost"
+        port = 5000
+        self.url = f"http://{host}:{port}/get-lobby-cards"
 
     def test_cards_no_param(self):
         """Tests if status 400 and empty response is returned if GET request has no params"""

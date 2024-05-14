@@ -4,6 +4,7 @@ from app.forms import LoginForm, SignUpForm
 from flask import render_template, url_for, redirect, flash
 from flask_login import login_user, login_required, logout_user
 from sqlalchemy import desc
+from werkzeug.security import generate_password_hash
 
 @app.route("/login-request", methods=["post"])
 def login_request():
@@ -11,9 +12,9 @@ def login_request():
     login_form = LoginForm()
     if login_form.validate_on_submit():
         username = login_form.username.data
-        password = login_form.password.data
+        password_hash = generate_password_hash(login_form.password.data)
 
-        user = Users.query.filter_by(Username=username, Password=password).first()
+        user = Users.query.filter_by(Username=username, Password=password_hash).first()
         if user != None:
             # Authentication successful, redirect to some page
             login_user(user)

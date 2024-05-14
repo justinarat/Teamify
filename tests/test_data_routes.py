@@ -59,6 +59,7 @@ class TestGetLobbyCards(unittest.TestCase):
         lobby_cards = response.get_json()["lobby_cards"]
 
         for card in lobby_cards:
+            self.assertIsNotNone(card, "Lobby card is 'NoneType'")
             self.assertEqual(response.status_code, 200)
             self.assertIn("lobby_id", card)
             self.assertIn("game_title", card)
@@ -74,5 +75,6 @@ class TestGetLobbyCards(unittest.TestCase):
         lobby_cards = response.get_json()["lobby_cards"]
 
         for card in lobby_cards:
+            self.assertIsNotNone(card, "Lobby card is 'NoneType'")
             result = db.session.query(Lobby).filter_by(LobbyID=card["lobby_id"]).first()
             self.assertIsNotNone(result)

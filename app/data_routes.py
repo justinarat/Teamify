@@ -1,7 +1,8 @@
 """Defines all data routes that the server responds to"""
 
 from flask import request, make_response, jsonify
-from app import app
+from app import app, db
+from app.model import Lobby
 
 
 @app.route("/get-lobby-cards", methods=["GET"])
@@ -48,23 +49,14 @@ def get_lobby_cards():
     except ValueError:
         return make_response("Parameter 'count' must be an integer", 400)
 
-    if count == 0:
+    if count <= 0:
         return make_response("Parameter 'count' must be greater than 0", 400)
 
     lobby_cards = []
 
     for i in range(count):
-        lobby_cards.append(
-            {
-                "lobby_id": f"{i}",
-                "game_title": f"game{i}_title",
-                "lobby_name": f"lobby{i}_name",
-                "lobby_description": f"lobby{i}_desc",
-                "host": f"host{i}",
-                "players": [f"player_{i}", f"player_{i+1}"],
-                "next_available_time": "timeblock format",
-            }
-        )
+        query = db.session.query(Lobby).filter_by(LobbyID=i+1).first()
+        lobby_cards.append(query)
 
     # TODO:
     # search_tags = request.args.getlist("search_tags")
@@ -72,4 +64,4 @@ def get_lobby_cards():
     # Query the database for "count" number of lobby data and put them in
     # data_to_send["lobby_cards"], but can't do this until databases have been setup in flask
 
-    return { "lobby_cards": lobby_cards }
+    return jsonify({ "lobby_cards": lobby_cards })

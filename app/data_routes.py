@@ -56,7 +56,8 @@ def get_lobby_cards():
 
     for i in range(count):
         lobby_id = i + 1
-        lobby_query = db.session.query(Lobby).filter_by(LobbyID=lobby_id).first()
+        # lobby_query = db.session.query(Lobby).filter_by(LobbyID=lobby_id).first()
+        lobby_query = db.session.query(Lobby).first()
 
         if lobby_query:
             game_query = (

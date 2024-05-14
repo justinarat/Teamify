@@ -2,6 +2,8 @@
 
 import unittest
 import requests
+from app import app, db
+from app.model import Lobby
 
 
 class TestGetLobbyCards(unittest.TestCase):
@@ -13,6 +15,14 @@ class TestGetLobbyCards(unittest.TestCase):
         host = "localhost"
         port = 5000
         self.url = f"http://{host}:{port}/get-lobby-cards"
+
+        # Add test client and app context
+        self.app = app.test_client()
+        self.app_context = app.app_context()
+        self.app_context.push()
+
+    def tearDown(self):
+        self.app_context.pop()
 
     def test_cards_no_param(self):
         """Status 400 and empty response returned if GET request has no params"""
@@ -38,7 +48,9 @@ class TestGetLobbyCards(unittest.TestCase):
 
                 if count == 0:
                     self.assertEqual(response.status_code, 400)
-                    self.assertEqual(response.text, "Parameter 'count' must be greater than 0")
+                    self.assertEqual(
+                        response.text, "Parameter 'count' must be greater than 0"
+                    )
                 else:
                     self.assertEqual(response.status_code, 200)
                     lobby_cards = response.json()["lobby_cards"]
@@ -60,3 +72,13 @@ class TestGetLobbyCards(unittest.TestCase):
             self.assertTrue("host" in card)
             self.assertTrue("players" in card)
             self.assertTrue("next_available_time" in card)
+
+    def test_cards_in_database(self):
+        """Response data has lobby IDs that are in the database"""
+        params = {"count": 10}
+        response = requests.get(self.url, params=params, timeout=5)
+        lobby_cards = response.json()["lobby_cards"]
+
+        for card in lobby_cards:
+            result = db.session.query(Lobby).filter_by(LobbyID=card["lobby_id"]).first()
+            self.assertIsNotNone(result)

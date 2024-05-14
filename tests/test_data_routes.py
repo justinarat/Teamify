@@ -56,18 +56,17 @@ class TestGetLobbyCards(unittest.TestCase):
     def test_cards_data_format(self):
         """Response data has correct lobby card keys and values"""
         response = self.app.get(self.url, query_string={"count": 1})
-        lobby_cards = response.get_json()["lobby_cards"]
+        self.assertEqual(response.status_code, 200)
 
-        for card in lobby_cards:
-            self.assertIsNotNone(card, "Lobby card is 'NoneType'")
-            self.assertEqual(response.status_code, 200)
-            self.assertIn("lobby_id", card)
-            self.assertIn("game_title", card)
-            self.assertIn("lobby_name", card)
-            self.assertIn("lobby_description", card)
-            self.assertIn("host", card)
-            self.assertIn("players", card)
-            self.assertIn("next_available_time", card)
+        card = response.get_json()["lobby_cards"][0]
+        self.assertIsNotNone(card, "Lobby card is 'NoneType'")
+        self.assertIn("lobby_id", card)
+        self.assertIn("game_title", card)
+        self.assertIn("lobby_name", card)
+        self.assertIn("lobby_description", card)
+        self.assertIn("host", card)
+        self.assertIn("players", card)
+        self.assertIn("next_available_time", card)
 
     def test_cards_in_database(self):
         """Response data has lobby IDs that are in the database"""

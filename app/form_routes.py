@@ -74,5 +74,9 @@ def signup_request():
 @app.route("/logout-request")
 @login_required
 def logout_request():
+    """Handles request for logging out
+    
+        Redirects user to the introduction page.
+    """
     logout_user()
     return redirect(url_for("introduction"))

@@ -44,9 +44,11 @@
         {% endif %}
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
-        </li>
+        {% if current_user.is_admin %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
+          </li>
+        {% endif %}
         {% if current_user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('logout_request') }}">Logout</a>
@@ -59,7 +61,7 @@
       </ul>
     </div>
   </nav>
-
+ 
   {# the content block will contain the page content #}
   {% block content %}{% endblock %}
 

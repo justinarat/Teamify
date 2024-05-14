@@ -21,6 +21,7 @@ class Users(db.Model):
     Username = db.Column(db.Text(), nullable=False)
     Password = db.Column(db.Text(), nullable=False)
     Email = db.Column(db.Text(), unique=True, nullable=False)
+    IsAdmin = db.Column(db.Integer(), nullable=False,default=0)
 
 
 class Lobby(db.Model):

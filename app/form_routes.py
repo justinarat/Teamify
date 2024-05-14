@@ -11,14 +11,15 @@ def login_request():
     """Handles login form requests"""
     login_form = LoginForm()
     if login_form.validate_on_submit():
-        username = login_form.username.data
-        password_hash = generate_password_hash(login_form.password.data)
+        email = login_form.email.data
+        password = login_form.password.data
 
-        user = Users.query.filter_by(Username=username, Password=password_hash).first()
+        user = Users.query.filter_by(Email=email).first()
         if user != None:
-            # Authentication successful, redirect to some page
-            login_user(user)
-            return redirect(url_for("games_view"))
+            if user.check_password(password):
+                # Authentication successful, redirect to some page
+                login_user(user)
+                return redirect(url_for("games_view"))
         else:
             # Authentication failed, redirect back to login page
             flash("Invalid username or password")

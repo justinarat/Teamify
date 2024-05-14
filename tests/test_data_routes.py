@@ -18,7 +18,14 @@ class TestGetLobbyCards(unittest.TestCase):
         """Status 400 and empty response returned if GET request has no params"""
         response = requests.get(self.url, timeout=5)
         self.assertEqual(response.status_code, 400)
-        self.assertNotEqual(response.text, "")
+        self.assertEqual(response.text, "Parameter 'count' is missing")
+
+    def test_cards_not_int(self):
+        """Status 400 and empty response returned if GET request has non-int count"""
+        params = {"count": "fifty"}
+        response = requests.get(self.url, params=params, timeout=5)
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.text, "Parameter 'count' must be an integer")
 
     def test_cards_count(self):
         """Number of lobby cards returned matches number requested"""
@@ -31,7 +38,7 @@ class TestGetLobbyCards(unittest.TestCase):
 
                 if count == 0:
                     self.assertEqual(response.status_code, 400)
-                    self.assertNotEqual(response.text, "")
+                    self.assertEqual(response.text, "Parameter 'count' must be greater than 0")
                 else:
                     self.assertEqual(response.status_code, 200)
                     lobby_cards = response.json()["lobby_cards"]

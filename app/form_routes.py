@@ -1,10 +1,11 @@
 from app import app, db
-from app.model import Users, LobbyPlayers
+from app.model import Lobby, Users, LobbyPlayers
 from app.forms import LoginForm, SignUpForm
-from flask import render_template, url_for, redirect, flash, request
+from flask import render_template, url_for, redirect, flash, request, session
 from flask_login import login_user, current_user
 from sqlalchemy import desc
 from werkzeug.security import generate_password_hash
+import sys
 
 @app.route("/login-request", methods=["post"])
 def login_request():
@@ -69,8 +70,12 @@ def join_lobby_request():
             is_joining - "True" if the user wants to join, "False" otherwise
     """
 
-    lobby_id = request.args.get("lobby_id")
-    is_joining = request.args.get("is_joining")
+    # TODO: Check if the POST body is valid
+
+    data = request.get_json();
+
+    lobby_id = data.get("lobby_id")
+    is_joining = data.get("is_joining")
 
     if False: # TODO: Check if the user can join (e.g. lobby full...)
         flash("Lobby is full")
@@ -79,7 +84,14 @@ def join_lobby_request():
     if not is_joining: 
         return redirect(url_for("lobby_searching"))
 
-    new_lobby_player = LobbyPlayers(LobbyID=lobby_id, userID=current_user.UID) # TODO: Make new rowid
+    new_row_id = 1000 # TODO: Need to do something better than this to get a new rowid
+    while LobbyPlayers.query.filter_by(RowID=new_row_id).first() != None: # Guarantees that new_uid is unique
+        new_row_id += 1
+
+    new_lobby_player = LobbyPlayers(RowID=new_row_id, LobbyID=lobby_id, UserID=current_user.UID, Authority="player") # TODO: Make new rowid
     db.session.add(new_lobby_player)
     db.session.commit()
+
+    session["lobby_id"] = lobby_id
+
     return redirect(url_for("lobby_view", lobby_id=lobby_id))

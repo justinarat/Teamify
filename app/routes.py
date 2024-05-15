@@ -1,6 +1,6 @@
 from app import app,db
 from flask import render_template, redirect, url_for, flash
-from app.forms import SignUpForm, LoginForm
+from app.forms import SignUpForm, LoginForm, CreateLobbyForm
 from app.model import Users, Games
 from flask_login import login_user
 import sys
@@ -22,10 +22,11 @@ def lobby_searching():
 
 @app.route("/lobby-making", methods=["GET", "POST"])
 def lobby_making():
+  lobby_making_form = CreateLobbyForm()
   game_titles = [game[0] for game in Games.query.values(Games.Name)]
   game_titles = game_titles[1:]
   game_titles.sort()
-  return render_template("lobby-making.html", game_titles=game_titles)
+  return render_template("lobby-making.html", game_titles=game_titles, lobby_making_form=lobby_making_form)
 
 @app.route("/lobby")
 def lobby_view():

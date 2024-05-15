@@ -14,8 +14,9 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 class CreateLobbyForm(FlaskForm):
-    title = StringField("Title", validators=[DataRequired()])
-    description = StringField("Description", validators=[DataRequired()])
+    game = StringField("Game", validators=[DataRequired()])
+    lobby_name = StringField("Lobby Name", validators=[DataRequired()])
+    lobby_description = StringField("Lobby Description", validators=[DataRequired()])
     capacity = IntegerField("Capacity", validators=[DataRequired()])
     hidden_tag_field = StringField()
     #input field value attribute

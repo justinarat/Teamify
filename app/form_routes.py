@@ -59,7 +59,7 @@ def signup_request():
 
 @app.route("/join-lobby-request", methods=["post"])
 def join_lobby_request():
-    """Handles request to join lobby
+    """Handles request to join lobby, responds with a redirect
     
         Keys in POST body:
             lobby_id - The id of the lobby the user wants to join
@@ -68,7 +68,7 @@ def join_lobby_request():
     """
 
     lobby_id = request.args.get("lobby_id")
-    is_joining = request.args.get("is_join")
+    is_joining = request.args.get("is_joining")
 
     if False: # TODO: Check if the user can join (e.g. lobby full...)
         flash("Lobby is full")
@@ -80,4 +80,4 @@ def join_lobby_request():
     new_lobby_player = LobbyPlayers(LobbyID=lobby_id, userID=current_user.UID) # TODO: Make new rowid
     db.session.add(new_lobby_player)
     db.session.commit()
-    return redirect(url_for("lobby_view"))
+    return redirect(url_for("lobby_view", lobby_id=lobby_id))

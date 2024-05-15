@@ -120,11 +120,11 @@
           </div>
       </div>
 	  {% else %}
-	  <div>
-		  <button id="join-lobby">Join</button>
-		<button id="dont-join-lobby">Don't join</button>
-	  </div>
-      {% endif %}
+      <div>
+          <button id="join-lobby">Join</button>
+      <button id="dont-join-lobby">Don't join</button>
+      </div>
+    {% endif %}
     </div>
   </div>
 </main>
@@ -132,4 +132,5 @@
 
 {% block bodyScripts %}
 <script src="static/scripts/socket-events.js"></script>
+<script src="statc/scripts/lobby-view.js"></script>
 {% endblock %}

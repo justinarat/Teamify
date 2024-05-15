@@ -68,8 +68,6 @@ def join_lobby_request():
 
             is_joining - True if the user wants to join, False otherwise
     """
-
-    # TODO: Check if the POST body is valid
     data = request.get_json();
     lobby_id = data.get("lobby_id")
     is_joining = data.get("is_joining")
@@ -81,8 +79,8 @@ def join_lobby_request():
     if lobby == None:
         return "lobby id does not exist.", 400
 
-    if False: # TODO: Check if the user can join (e.g. lobby full...)
-        flash("Lobby is full")
+    if lobby.is_full():
+        flash("Lobby is full, can't join")
         return redirect(url_for("lobby_searching"))
 
     if not is_joining: 

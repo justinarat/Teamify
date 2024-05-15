@@ -30,7 +30,6 @@ def lobby_view():
         This expects a query string with a "lobby_id" key which holds the 
         code of the lobby that the user wants to join.
     """
-    # Check if the lobby and lobby id exist
     lobby_id = request.args.get("lobby_id")
     lobby = Lobby.query.filter_by(LobbyID=lobby_id).first()
     if lobby_id == None or lobby == None:
@@ -45,7 +44,6 @@ def lobby_view():
         return render_template("lobby-view.html", template_folder="templates", 
                 lobby=lobby, user_in_lobby=user_in_lobby)
 
-    # Check if the lobby is full
     if lobby.is_full():
         flash("Lobby is full, can't join.")
         return redirect(url_for("lobby_searching"))

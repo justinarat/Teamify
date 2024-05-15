@@ -2,9 +2,10 @@ from app import app, db
 from app.model import Lobby, Users, LobbyPlayers
 from app.forms import LoginForm, SignUpForm
 from flask import render_template, url_for, redirect, flash, request, session
-from flask_login import login_user, current_user
+from flask_login import login_user, current_user, login_required
 from sqlalchemy import desc
 from werkzeug.security import generate_password_hash
+import flask_socketio
 
 @app.route("/login-request", methods=["post"])
 def login_request():
@@ -60,6 +61,7 @@ def signup_request():
                     login_form=login_form, signup_form=signup_form)
 
 @app.route("/join-lobby-request", methods=["post"])
+@login_required
 def join_lobby_request():
     """Handles request to join lobby, responds with a redirect
     
@@ -102,3 +104,21 @@ def join_lobby_request():
     session["lobby_id"] = lobby_id
 
     return redirect(url_for("lobby_view", lobby_id=lobby_id))
+
+@app.route("/leave-lobby-request", methods=["post"])
+@login_required
+def leave_lobby_request():
+    user_id = current_user.get_id()
+    lobby_id = session["lobby_id"]
+
+    LobbyPlayers.query.filter_by(UserID=user_id, LobbyID=lobby_id).delete()
+    db.session.commit()
+
+    del session["lobby_id"]
+
+    data_to_send = {
+        "sender_username": current_user.Username
+    }
+    flask_socketio.emit("player_leave", data_to_send, to=lobby_id, namespace="/")
+
+    return redirect(url_for("lobby_searching"))

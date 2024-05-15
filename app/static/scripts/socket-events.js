@@ -9,7 +9,7 @@ $(document).ready(function() {
   // Events for players joining or leaving
   socket.on("player_join", function(data) {
     let username = data.sender_username;
-    $("#players").append("<span class='lobby-player'>" + username + "</span>");
+    $("#players").append("<span class='lobby-player'>" + username + " </span>");
     let text = "<div class='chat-text'><span class='server-text'>" +
                 "<span class='username'>" + username + 
                 "</span> has joined</span></div>";
@@ -20,7 +20,7 @@ $(document).ready(function() {
   socket.on("player_leave", function(data) {
     let username = data.sender_username;
     $(".lobby-player").map(function() {
-      if (this.innerHTML === username) this.remove();
+      if (this.innerHTML === (username + " ")) this.remove();
     });
     let text = "<div class='chat-text'><span class='server-text'>" +
                 "<span class='username'>" + username + 
@@ -75,7 +75,6 @@ $(document).ready(function() {
   // Events that the user sends to the server
   // TODO: setup commands for sendings events to server
   $("#chat-input").keypress(function(e) {
-    // TODO: clean up this code
     let keyCode = e.keyCode || e.which;
     if (keyCode === 13) { // "Enter" key code
       let text = $("#chat-input").val();

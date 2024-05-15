@@ -86,7 +86,8 @@
       </div>
     </div>
     <div id="chat-column" class="col-md-3">
-      {% if user_in_lobby %}
+    {% if user_in_lobby %}
+      <button id="leave-lobby">Leave</button>
       <h2>Lobby Chat</h2>
       <div id="chat">
         <div class="input-group mb-3">
@@ -131,6 +132,9 @@
 {% endblock %}
 
 {% block bodyScripts %}
-<script src="static/scripts/socket-events.js"></script>
+{% if user_in_lobby %}
+  <script src="static/scripts/socket-events.js"></script>
+  <script src="static/scripts/lobby-view-player.js"></script>
+{% endif %}
 <script src="static/scripts/lobby-view.js"></script>
 {% endblock %}

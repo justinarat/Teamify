@@ -1,6 +1,3 @@
-const joinButton = document.getElementById("join-lobby");
-const dontJoinButton = document.getElementById("dont-join-lobby");
-
 function sendJoinLobbyRequest(isJoining) {
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "/join-lobby-request");
@@ -20,6 +17,9 @@ function sendJoinLobbyRequest(isJoining) {
 
   xhr.send(body);
 }
+
+const joinButton = document.getElementById("join-lobby");
+const dontJoinButton = document.getElementById("dont-join-lobby");
 
 joinButton.addEventListener("click", function() {
   sendJoinLobbyRequest(true)

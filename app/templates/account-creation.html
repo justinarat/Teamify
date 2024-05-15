@@ -9,8 +9,8 @@
   <form id="login" action="{{ url_for('login_request') }}" method="post" onsubmit="return validateSignup(id)">
     {{ login_form.hidden_tag() }}
     <h1 class="text-center">Login</h1>
-    {{ login_form.username.label }}
-    {{ login_form.username() }}
+    {{ login_form.email.label }}
+    {{ login_form.email() }}
     <br><br>
     {{ login_form.password.label }}
     {{ login_form.password() }}

@@ -17,12 +17,15 @@
           <option value="{{game}}">{{game}}</option>
           {% endfor %}
         </select>
-        <input type="text" id="lobby-name" placeholder="Lobby Name">
-        <br>
-        <input type="text" id="lobby-making-description" placeholder="Enter description">
-        <br>
-        <label for="lobby-max-capacity">Maximum Capacity:</label>
-        <input type="number" id="lobby-max-capacity" min="1">
+        <br><br>
+        {{ lobby_making_form.lobby_name.label }}
+        {{ lobby_making_form.lobby_name() }}
+        <br><br>
+        {{ lobby_making_form.lobby_description.label }}
+        {{ lobby_making_form.lobby_description() }}
+        <br><br>
+        {{ lobby_making_form.capacity.label }}
+        {{ lobby_making_form.capacity() }}
       </div>
       <div class="col-sm-4">
         <h4>Skill Level</h4>

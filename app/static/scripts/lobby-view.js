@@ -2,7 +2,6 @@ const joinButton = document.getElementById("join-lobby");
 const dontJoinButton = document.getElementById("dont-join-lobby");
 
 function sendJoinLobbyRequest(isJoining) {
-  console.log(isJoining);
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "/join-lobby-request");
   xhr.setRequestHeader("Content-Type", "application/json");

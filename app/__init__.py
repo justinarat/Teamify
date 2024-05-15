@@ -13,4 +13,4 @@ login = LoginManager(app)
 login.login_view = "account_creation"
 socketio = SocketIO(app, manage_session=False)
 
-from app import routes, form_routes, model
+from app import routes, form_routes, model, socketevents

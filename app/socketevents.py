@@ -1,8 +1,13 @@
 from app import socketio, db
 from app.model import LobbyPlayers
 from flask import session
-from flask_socketio import emit, join_room, leave_room
+from flask_socketio import SocketIO, emit, join_room, leave_room
 from flask_login import current_user
+
+@socketio.on("connect")
+def connect():
+    if not "lobby_id" in session:
+        socketio.stop()
 
 # Events for players joining or leaving
 @socketio.on("player_join")
@@ -19,7 +24,7 @@ def player_join():
     """
     lobby_id = session["lobby_id"]
     join_room(lobby_id)
-    sender_username = current_user.username
+    sender_username = current_user.Username
     data_to_send = {
         "sender_username": sender_username 
     }
@@ -38,7 +43,7 @@ def player_leave():
     db.session.delete(LobbyPlayers.query.filter_by(LobbyID=lobby_id, userID=current_user.get_id()).first())
     db.session.commit()
     session.pop("lobby_id")
-    sender_username = current_user.username
+    sender_username = current_user.Username
     leave_room(lobby_id)
     data_to_send = {
         "sender_username": sender_username
@@ -72,7 +77,7 @@ def player_text(data):
     lobby_id = session["lobby_id"]
     text_message = data["body"]
     # TODO: Add message to database if needed
-    sender_username = current_user.username
+    sender_username = current_user.Username
     data_to_send = {
         "sender_username": sender_username, 
         "body": text_message
@@ -96,7 +101,8 @@ def add_tag(data):
         }
     """
     lobby_id = session["lobby_id"]
-    if not is_lobby_host(current_user.get_id()): return
+    if not is_lobby_host(current_user.get_id(), lobby_id): 
+        return
     tag = data["body"]
     # TODO: Add tag to database
     data_to_send = {
@@ -119,7 +125,8 @@ def remove_tag(data):
         }
     """
     lobby_id = session["lobby_id"]
-    if not is_lobby_host(current_user.get_id()): return
+    if not is_lobby_host(current_user.get_id(), lobby_id): 
+        return
     tag = data["body"]
     # TODO: Remove tag from database
     data_to_send = {
@@ -142,7 +149,8 @@ def change_lobby_name(data):
         }
     """
     lobby_id = session["lobby_id"]
-    if not is_lobby_host(current_user.get_id()): return
+    if not is_lobby_host(current_user.get_id(), lobby_id): 
+        return
     new_lobby_name = data["body"]
     # TODO: Update lobby name in database
     data_to_send = {
@@ -165,7 +173,8 @@ def change_description(data):
         }
     """
     lobby_id = session["lobby_id"]
-    if not is_lobby_host(current_user.get_id()): return
+    if not is_lobby_host(current_user.get_id(), lobby_id): 
+        return
     new_description = data["body"]
     # TODO: Update lobby description in database
     data_to_send = {
@@ -188,7 +197,8 @@ def change_time_schedule(data):
         }
     """
     lobby_id = session["lobby_id"]
-    if not is_lobby_host(current_user.get_id()): return
+    if not is_lobby_host(current_user.get_id(), lobby_id): 
+        return
     new_time_schedule = data["body"]
     # TODO: Update lobby time schedule in database
     data_to_send = {

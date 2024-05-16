@@ -13,6 +13,13 @@ def connect():
     join_room(lobby_id)
 
 
+@socketio.on("disconnect")
+def disconnect():
+    lobby_id = session["lobby_id"]
+    leave_room(lobby_id)
+    session.pop("lobby_id")
+
+
 # Events all users can send
 @socketio.on("player_text")
 def player_text(data):
@@ -42,7 +49,7 @@ def player_text(data):
     emit("player_text", data_to_send, to=lobby_id)
 
 
-# Events only the host (or lobby mods) can send
+# Events only the host can send
 @socketio.on("add_tag")
 def add_tag(data):
     """Broadcasts the tag that was added.

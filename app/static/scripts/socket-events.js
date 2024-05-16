@@ -25,11 +25,6 @@ $(document).ready(function() {
     // TODO: Update number of players in the lobby
   });
 
-  socket.on("player_kick", function(data) {
-    // TODO: figure out how to implement this so that the kicked player can't
-    //       just remove this code to avoid being kicked.
-  });
-
   // Events all users can send
   socket.on("player_text", function(data) {
     let username = data.sender_username;
@@ -40,7 +35,7 @@ $(document).ready(function() {
     $("#chat-log").append(text);
   });
 
-  // Events only the host (or lobby mods) can send
+  // Events only the host can send
   socket.on("add_tag", function(data) {
     let tag = data.body;
     $("#tags").append("<span class='tag'>" + tag + "</span>");
@@ -69,7 +64,6 @@ $(document).ready(function() {
   });
 
   // Events that the user sends to the server
-  // TODO: setup commands for sendings events to server
   $("#chat-input").keypress(function(e) {
     let keyCode = e.keyCode || e.which;
     if (keyCode === 13) { // "Enter" key code

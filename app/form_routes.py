@@ -112,13 +112,16 @@ def join_lobby_request():
 @app.route("/leave-lobby-request", methods=["post"])
 @login_required
 def leave_lobby_request():
+    """Handles request to leave a lobby
+
+        Keys in POST body:
+            lobby_id - The id of the lobby the user wants to join
+    """
     user_id = current_user.get_id()
     lobby_id = session["lobby_id"]
 
     LobbyPlayers.query.filter_by(UserID=user_id, LobbyID=lobby_id).delete()
     db.session.commit()
-
-    session.pop("lobby_id")
 
     data_to_send = {
         "sender_username": current_user.Username

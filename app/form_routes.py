@@ -101,6 +101,10 @@ def join_lobby_request():
     db.session.add(new_lobby_player)
     db.session.commit()
 
+    data_to_send = {
+        "sender_username": current_user.Username 
+    }
+    flask_socketio.emit("player_join", data_to_send, to=lobby_id, namespace="/")
     session["lobby_id"] = lobby_id
 
     return redirect(url_for("lobby_view", lobby_id=lobby_id))
@@ -114,7 +118,7 @@ def leave_lobby_request():
     LobbyPlayers.query.filter_by(UserID=user_id, LobbyID=lobby_id).delete()
     db.session.commit()
 
-    del session["lobby_id"]
+    session.pop("lobby_id")
 
     data_to_send = {
         "sender_username": current_user.Username

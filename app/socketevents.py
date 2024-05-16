@@ -9,53 +9,8 @@ def connect():
     if not "lobby_id" in session:
         socketio.stop()
 
-# Events for players joining or leaving
-@socketio.on("player_join")
-def player_join():
-    """Broadcasts the new player's username to players.
-    
-    Sent data is in the format:
-        data_to_send = {
-            "sender_username": "sender_username", 
-        }
-
-    Note: this doesn't update the database for adding a player to the lobby.
-    This should be done in the lobby_view() function in routes.py.
-    """
     lobby_id = session["lobby_id"]
     join_room(lobby_id)
-    sender_username = current_user.Username
-    data_to_send = {
-        "sender_username": sender_username 
-    }
-    emit("player_join", data_to_send, to=lobby_id)
-
-@socketio.on("player_leave")
-def player_leave():
-    """Broadcasts the username of the player that left.
-    
-    Sent data is in the format:
-        data_to_send = {
-            "sender_username": "sender_username" 
-        }
-    """
-    lobby_id = session["lobby_id"]
-    db.session.delete(LobbyPlayers.query.filter_by(LobbyID=lobby_id, userID=current_user.get_id()).first())
-    db.session.commit()
-    session.pop("lobby_id")
-    sender_username = current_user.Username
-    leave_room(lobby_id)
-    data_to_send = {
-        "sender_username": sender_username
-    }
-    emit("player_leave", data_to_send, to=lobby_id)
-
-@socketio.on("player_kick")
-def player_kick(data):
-    lobby_id = session["lobby_id"]
-    # TODO: Need to figure out how to kick the player so that they can't just
-    #       edit the javascript that disconnects them from the lobby
-    emit("player_kick", data, to=lobby_id)
 
 
 # Events all users can send
@@ -76,7 +31,9 @@ def player_text(data):
     """
     lobby_id = session["lobby_id"]
     text_message = data["body"]
+
     # TODO: Add message to database if needed
+
     sender_username = current_user.Username
     data_to_send = {
         "sender_username": sender_username, 

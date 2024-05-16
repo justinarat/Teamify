@@ -2,6 +2,7 @@ from typing import List
 from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from sqlalchemy.orm import Mapped
 
     
 class Games(db.Model):
@@ -42,12 +43,19 @@ class Lobby(db.Model):
     LobbyID = db.Column(db.Text(), primary_key=True, unique=True, nullable=False)
     GameID = db.Column(db.Text(), db.ForeignKey("Games.UID"), nullable=False)
     Desc = db.Column(db.Text())
-    gamesRel = db.relationship('Games', backref='games', lazy=True)
-    lobby_players_rel = db.relationship('LobbyPlayers', backref='lobbyPlayers', lazy=True)
+    game = db.relationship('Games', backref='games', lazy=True)
+    players: Mapped[List[Users]] = db.relationship(secondary='LobbyPlayers', backref='lobbyPlayers', lazy=True)
+    tags: Mapped[List[Tags]] = db.relationship(secondary='LobbyTags', backref='lobbyPlayers', lazy=True)
 
     def is_full(self) -> bool:
         # TODO
         return False
+
+    def get_host(self): # There's probably be a better way of doing this
+        host_rel = LobbyPlayers.query.filter_by(LobbyID=self.LobbyID, Authority="host").first()
+        if host_rel == None:
+            return Users.query.filter_by(UID=0).first()
+        return Users.query.filter_by(UID=host_rel.UserID).first()
 
 
 class LobbyPlayers(db.Model):
@@ -56,8 +64,6 @@ class LobbyPlayers(db.Model):
     LobbyID = db.Column(db.Text(), db.ForeignKey("Lobby.LobbyID"), nullable=False)
     UserID = db.Column(db.Text(), db.ForeignKey("Users.UID"), nullable=False)
     Authority = db.Column(db.Text(), nullable=False)
-    userRel = db.relationship('Users', backref='users', lazy=True)
-    lobbyRel = db.relationship('Lobby', backref='lobby3', lazy=True)
 
     def is_host(self) -> bool:
         return self.Authority == "host"
@@ -68,8 +74,6 @@ class LobbyTags(db.Model):
     RowID = db.Column(db.Text(), primary_key=True, unique=True, nullable=False)
     LobbyID = db.Column(db.Text(), db.ForeignKey("Lobby.LobbyID"), nullable=False)
     TagID = db.Column(db.Text(), db.ForeignKey("Tags.TagID"), nullable=False)
-    tagRel = db.relationship('Tags', backref='tags', lazy=True)
-    lobbyRel = db.relationship('Lobby', backref='lobby2', lazy=True)
 
 
 class LobbyTimes(db.Model):

@@ -2,10 +2,6 @@ $(document).ready(function() {
   let url = "http://localhost:5000";
   let socket = io.connect(url);
 
-  socket.on("connect", function() {
-    socket.emit("player_join");
-  });
-
   // Events for players joining or leaving
   socket.on("player_join", function(data) {
     let username = data.sender_username;

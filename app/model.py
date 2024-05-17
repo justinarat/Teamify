@@ -18,7 +18,7 @@ class Tags(db.Model):
     Suggestion = db.Column(db.Integer(), default=0)
 
 
-class Users(db.Model):
+class Users(UserMixin, db.Model):
     __tablename__ = 'Users'
     UID = db.Column(db.Text(), primary_key=True, unique=True, nullable=False)
     Username = db.Column(db.Text(), nullable=False)
@@ -36,7 +36,7 @@ class Users(db.Model):
         return self.UID
 
     def is_admin(self):
-        return True # TODO
+        return self.IsAdmin == 1
 
 @login.user_loader
 def load_student(user_id):

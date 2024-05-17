@@ -1,13 +1,12 @@
 from flask import Flask
-from app.config import DeploymentConfig
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from app.config import DeploymentConfig
 
 db = SQLAlchemy()
 
 def create_app(config):
     app = Flask(__name__)
-    app.config.from_object(DeploymentConfig)
+    app.config.from_object(config)
 
     db.init_app(app)
 
@@ -16,5 +15,5 @@ def create_app(config):
 
     return app
 
+app = create_app(DeploymentConfig) # Don't think this should be here but getting error without it
 
-from app import routes, model

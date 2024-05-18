@@ -1,6 +1,6 @@
 from app import app, db
 from app.model import Lobby, LobbyPlayers
-from flask import render_template, redirect, url_for, session, request, flash
+from flask import render_template, redirect, url_for, session, request, flash,jsonify
 from app.forms import SignUpForm, LoginForm
 from app.model import Users, Games
 from flask_login import current_user, login_required
@@ -70,3 +70,21 @@ def my_lobbies():
   # TODO: Render lobbies user belongs to
   # TODO: Render lobbies user owns with choice to view them from user view or admin view
   return render_template("my-lobbies.html")
+
+
+
+#CODE HERE
+def get_max_players(lobby_id):
+    lobby = Lobby.query.filter_by(LobbyID=lobby_id).first()
+    if lobby:
+        return lobby.maxPlayers
+    else:
+        return None
+
+@app.route('/get_max_players/<int:lobby_id>', methods=['GET'])
+def get_max_players_route(lobby_id):
+    max_players = get_max_players(lobby_id)
+    if max_players is not None:
+        return jsonify({'max_players': max_players}), 200
+    else:
+        return jsonify({'error': 'Lobby not found'}), 404

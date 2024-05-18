@@ -33,16 +33,59 @@
         <div id="custom-tags"></div>
         <button id="add-custom-tag" onclick="makeCustomTag()" type="button">+ Add Custom Tag</button>
       </div>
+
       <div class="col-sm-4">
         <h4>Time Allocation Options</h4>
-        <input type="radio" id="one-time" name="time-mode" onclick="timeDisplay()">
-        <label for="one-time">One-Time Use</label>
-        <br>
-        <input type="radio" id="reoccuring-time" name="time-mode" onclick="timeDisplay()">
-        <label for="reoccuring-time">Reoccuring</label>
-        <br>
-        <br>
-        <div id="time-option"></div>
+
+        <div id="mon-section">
+          <input type='checkbox' id="mon-checkbox" onclick="showGeneral(this)">
+          <label for="mon-checkbox">Monday</label>
+          <div id="mon"></div>
+          <br>
+        </div>
+
+        <div id="tue-section">
+          <input type='checkbox' id="tue-checkbox" onclick="showGeneral(this)">
+          <label for="tue-checkbox">Tuesday</label>
+          <div id="tue"></div>
+          <br>
+        </div>
+
+        <div id="wed-section">
+          <input type='checkbox' id="wed-checkbox" onclick="showGeneral(this)">
+          <label for="wed-checkbox">Wednesday</label>
+          <div id="wed"></div>
+          <br>
+        </div>
+
+        <div id="thu-section">
+          <input type='checkbox' id="thu-checkbox" onclick="showGeneral(this)">
+          <label for="thu-checkbox">Thursday</label>
+          <div id="thu"></div>
+          <br>
+        </div>
+
+        <div id="fri-section">
+          <input type='checkbox' id="fri-checkbox" onclick="showGeneral(this)">
+          <label for="fri-checkbox">Friday</label>
+          <div id="fri"></div>
+          <br>
+        </div>
+
+        <div id="sat-section">
+          <input type='checkbox' id="sat-checkbox" onclick="showGeneral(this)">
+          <label for="sat-checkbox">Saturday</label>
+          <div id="sat"></div>
+          <br>
+        </div>
+
+        <div id="sun-section">
+          <input type='checkbox' id="sun-checkbox" onclick="showGeneral(this)">
+          <label for="sun-checkbox">Sunday</label>
+          <div id="sun"></div>
+          <br>
+        </div>
+
       </div>
     </div>
     <br>

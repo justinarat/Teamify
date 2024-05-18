@@ -8,14 +8,6 @@ const daysFull = [
   "Saturday",
   "Sunday",
 ];
-const skillLevels = [
-  "Novice",
-  "Casual",
-  "Intermediate",
-  "Proficient",
-  "Expert",
-  "Master",
-];
 
 function timeDisplay() {
   var selectedOption = document.getElementById("reoccuring-time");
@@ -94,30 +86,6 @@ function removeCustom(removeButton) {
   let sectionID = removeButton.parentNode.id;
   let customSection = document.getElementById(sectionID);
   customSection.remove();
-}
-
-function enableSkills() {
-  var skillCheck = document.getElementById("enable-skill-level");
-  var skillLevelField = document.getElementById("skill-levels");
-  if (skillCheck.checked == true) {
-    for (let i = 0; i <= 5; i++) {
-      let currSkillLevel = skillLevels[i];
-      let skillID = currSkillLevel.toLowerCase;
-      let htmlChunk =
-        "<input type='radio' id='" +
-        skillID +
-        "' name='skill-level'>" +
-        "<label for='" +
-        skillID +
-        "'>" +
-        currSkillLevel +
-        "</label>" +
-        "<br>";
-      skillLevelField.insertAdjacentHTML("beforeend", htmlChunk);
-    }
-  } else {
-    skillLevelField.innerHTML = "";
-  }
 }
 
 let customEventCount = 0;

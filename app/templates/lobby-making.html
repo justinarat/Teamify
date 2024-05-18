@@ -9,27 +9,46 @@
   <h2 id="lobby-making-title">Creating Lobby</h2>
   <form id="lobby-making-form">
     <div class="row">
-      <div class="col-sm-6">
-        <input type="text" id="lobby-making-game" placeholder="Enter game" name="game">
+      <div class="col-sm-4">
+        <h4>Game Description</h4>
+        <input list="game-options" id="game-selected">
+        <datalist id="game-options">
+          <option disabled selected value="">Select Game</option>
+          {% for game in game_titles %}
+          <option value="{{game}}">{{game}}</option>
+          {% endfor %}
+        </datalist>
+        <br>
+        <input type="text" id="lobby-name" placeholder="Lobby Name">
         <br>
         <input type="text" id="lobby-making-description" placeholder="Enter description">
+        <br>
+        <label for="lobby-max-capacity">Maximum Capacity:</label>
+        <input type="number" id="lobby-max-capacity" min="1">
       </div>
-      <div class="col-sm-6">
-        <label for="time-type">Time allocation:</label>
-        <select id="time-type">
-          <option value="" disabled selected>Select</option>
-          <option value="general">General Schedule</option>
-          <option value="calendar-based">Calendar Based</option>
-        </select>
+      <div class="col-sm-4">
+        <h4>Skill Level</h4>
+        <input type="checkbox" id="enable-skill-level" onclick="enableSkills()">
+        <label for="enable-skill-level">Enable Skill Level Sorting:</label>
+        <br>
+        <div id="skill-levels"></div>
+        <br>
+        <h4>Tags</h4>
+        <div id="custom-tags"></div>
+        <button id="add-custom-tag" onclick="makeCustomTag()" type="button">+ Add Custom Tag</button>
+      </div>
+      <div class="col-sm-4">
+        <h4>Time Allocation Options</h4>
+        <input type="radio" id="one-time" name="time-mode" onclick="timeDisplay()">
+        <label for="one-time">One-Time Use</label>
+        <br>
+        <input type="radio" id="reoccuring-time" name="time-mode" onclick="timeDisplay()">
+        <label for="reoccuring-time">Reoccuring</label>
+        <br>
+        <br>
+        <div id="time-option"></div>
       </div>
     </div>
-
-    <br>
-    <br>
-    <div class="row">
-      <div class="col-sm-6" id="time-option"></div>
-    </div>
-    <br>
     <br>
     <input type="submit" value="Submit">
   </form>

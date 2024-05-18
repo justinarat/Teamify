@@ -1,10 +1,11 @@
 from app import app, db
-from app.model import Users
+from app.model import Lobby, Users, LobbyPlayers
 from app.forms import LoginForm, SignUpForm
-from flask import render_template, url_for, redirect, flash
-from flask_login import login_user, login_required, logout_user
+from flask import render_template, url_for, redirect, flash, request, session
+from flask_login import login_user, current_user, login_required, logout_user
 from sqlalchemy import desc
 from werkzeug.security import generate_password_hash
+import flask_socketio
 
 @app.route("/login-request", methods=["post"])
 def login_request():
@@ -68,3 +69,73 @@ def logout_request():
     """
     logout_user()
     return redirect(url_for("introduction"))
+
+@app.route("/join-lobby-request", methods=["post"])
+@login_required
+def join_lobby_request():
+    """Handles request to join lobby, responds with a redirect
+    
+        Keys in POST body:
+            lobby_id - The id of the lobby the user wants to join
+
+            is_joining - True if the user wants to join, False otherwise
+    """
+    data = request.get_json();
+    lobby_id = data.get("lobby_id")
+    is_joining = data.get("is_joining")
+
+    if lobby_id == None or is_joining == None:
+        return "lobby_id or is_joining not given.", 400
+
+    lobby = Lobby.query.filter_by(LobbyID = lobby_id).first()
+    if lobby == None:
+        return "lobby id does not exist.", 400
+
+    if lobby.is_full():
+        flash("Lobby is full, can't join.")
+        return redirect(url_for("lobby_searching"))
+
+    if not is_joining: 
+        return redirect(url_for("lobby_searching"))
+
+    new_row_id = 1000 # TODO: Need to do something better than this to get a new rowid
+    while LobbyPlayers.query.filter_by(RowID=new_row_id).first() != None: # Guarantees that new_uid is unique
+        new_row_id += 1
+
+    new_lobby_player = LobbyPlayers( \
+        RowID=new_row_id,
+        LobbyID=lobby_id, 
+        UserID=current_user.UID, 
+        Authority="player"
+    )
+    db.session.add(new_lobby_player)
+    db.session.commit()
+
+    data_to_send = {
+        "sender_username": current_user.Username 
+    }
+    flask_socketio.emit("player_join", data_to_send, to=lobby_id, namespace="/")
+    session["lobby_id"] = lobby_id
+
+    return redirect(url_for("lobby_view", lobby_id=lobby_id))
+
+@app.route("/leave-lobby-request", methods=["post"])
+@login_required
+def leave_lobby_request():
+    """Handles request to leave a lobby
+
+        Keys in POST body:
+            lobby_id - The id of the lobby the user wants to join
+    """
+    user_id = current_user.get_id()
+    lobby_id = session["lobby_id"]
+
+    LobbyPlayers.query.filter_by(UserID=user_id, LobbyID=lobby_id).delete()
+    db.session.commit()
+
+    data_to_send = {
+        "sender_username": current_user.Username
+    }
+    flask_socketio.emit("player_leave", data_to_send, to=lobby_id, namespace="/")
+
+    return redirect(url_for("lobby_searching"))

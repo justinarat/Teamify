@@ -58,40 +58,35 @@ def get_lobby_cards():
         return make_response("Parameter 'search_string' is missing", 400)
 
     search_string = request.args.get("search_string")
-
     search_tags = request.args.getlist("search_tags")
 
-    lobby_ids = search_db(count, search_string, search_tags)
+    lobbies = search_db(count, search_string, search_tags)
 
     lobby_cards = []
-
-    for i in range(count):
-        lobby_query = Lobby.query.filter_by(LobbyID=lobby_ids[i]).first()
-
-        if lobby_query:
-            game_query = Games.query.filter_by(UID=lobby_query.GameID).first()
-            players_query = db.session.query(LobbyPlayers).filter_by(LobbyID=lobby_id)
-            lobby_card = {
-                "lobby_id": lobby_query.LobbyID,
-                "game_title": game_query.Name,
-                "lobby_name": "Lobby Name",
-                "lobby_description": lobby_query.Desc,
-                "host": "Host Name",
-                "players": players_query.all(),
-                "next_available_time": "Time",
-            }
-            lobby_cards.append(lobby_card)
-
-    # TODO:
-    # search_tags = request.args.getlist("search_tags")
-    # ignore_tags = request.args.getlist("ignore_tags")
+    for lobby in lobbies:
+        player_usernames = [player.Username for player in lobby.players]
+        next_available_time = "" # TODO
+        lobby_card = {
+            "lobby_id": lobby.LobbyID,
+            "game_title": lobby.game.Name,
+            "lobby_name": "Lobby Name", # TODO: Change to lobby.Name when that's been merged
+            "lobby_description": lobby.Desc,
+            "host": lobby.get_host().Username,
+            "players": player_usernames,
+            "next_available_time": next_available_time,
+        }
+        lobby_cards.append(lobby_card)
 
     return jsonify({"lobby_cards": lobby_cards})
 
 def search_db(count, search_string, search_tags):
-    """Based on search params, returns 'count' lobby IDs"""
-    lobby_ids = []
+    """Returns 'count' lobby IDs based on search params"""
+    # Filter by tags
+    lobby_query = Lobby.query
+    for tag in search_tags:
+        lobby_query = lobby_query.filter(Lobby.tags.has(Name=tag))
 
-    # TODO
-    
-    return lobby_ids
+    # Check if search_string is in the lobby game name
+    lobby_query = lobby_query.join(Lobby.game).filter(Games.Name.contains(search_string))
+
+    return lobby_query.limit(count).all()

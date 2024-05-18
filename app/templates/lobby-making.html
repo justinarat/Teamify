@@ -7,7 +7,7 @@
 {% block content %}
 <div id="lobby-making" class="container">
   <h2 id="lobby-making-title">Creating Lobby</h2>
-  <form id="lobby-making-form">
+  <form id="lobby-making-form" method="post">
     <div class="row">
       <div class="col-sm-4">
         <h4>Game Description</h4>
@@ -18,13 +18,15 @@
           <option value="{{game}}">{{game}}</option>
           {% endfor %}
         </datalist>
-        <br>
-        <input type="text" id="lobby-name" placeholder="Lobby Name">
-        <br>
-        <input type="text" id="lobby-making-description" placeholder="Enter description">
-        <br>
-        <label for="lobby-max-capacity">Maximum Capacity:</label>
-        <input type="number" id="lobby-max-capacity" min="1">
+        <br><br>
+        {{ lobby_making_form.lobby_name.label }}
+        {{ lobby_making_form.lobby_name() }}
+        <br><br>
+        {{ lobby_making_form.lobby_description.label }}
+        {{ lobby_making_form.lobby_description() }}
+        <br><br>
+        {{ lobby_making_form.capacity.label }}
+        {{ lobby_making_form.capacity() }}
       </div>
       <div class="col-sm-4">
         <h4>Skill Level</h4>
@@ -47,6 +49,13 @@
         <br>
         <br>
         <div id="time-option"></div>
+        <h4>Testing with Jinja</h4>
+        <button id="jinja-test" onclick="jinjaTest()">Click Me</button>
+        <div id="dynamic-jinja">
+          {% if code_inserted %}
+            {{code_inserted}}
+          {% endif %}
+        </div>
       </div>
     </div>
     <br>

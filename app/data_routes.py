@@ -87,6 +87,8 @@ def search_db(count, search_string, search_tags):
         lobby_query = lobby_query.filter(Lobby.tags.has(Name=tag))
 
     # Check if search_string is in the lobby game name
-    lobby_query = lobby_query.join(Lobby.game).filter(Games.Name.contains(search_string))
+    DEFAULT_SEARCH = ""
+    if search_string != DEFAULT_SEARCH:
+        lobby_query = lobby_query.join(Lobby.game).filter(Games.Name.contains(search_string))
 
     return lobby_query.limit(count).all()

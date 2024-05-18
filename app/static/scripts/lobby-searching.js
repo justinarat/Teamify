@@ -100,7 +100,8 @@ function createLobbyCard(lobbyCardData) {
   lobbyCardBodyDiv.appendChild(otherLobbyPlayersDiv);
   lobbyCardBodyDiv.appendChild(timeTableDiv);
 
-  lobbyCard.addEventListener("click", function(e) {
+  gameNameHeader.addEventListener("click", function(e) {
+    e.preventDefault();
     lobbyID = lobbyCardData.lobby_id;
     window.location.pathname.replace("lobby");
     window.location.search.replace("lobby_id=" + lobbyID);

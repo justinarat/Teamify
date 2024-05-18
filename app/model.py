@@ -54,17 +54,9 @@ class Lobby(db.Model):
     def get_curr_player_count(self):
         return len(self.players)
 
-    def get_max_player_count(self, lobby_id):
-        # Query the database to retrieve the Lobby row with the specified lobby_id
-        lobby = Lobby.query.filter_by(LobbyID=lobby_id).first()
-        
-        # Check if the lobby exists
-        if lobby:
-            # If the lobby exists, return its maxPlayers value
-            return lobby.maxPlayers
-        else:
-            # If the lobby does not exist, return None
-            return None
+    def get_max_player_count(self):
+        return self.maxPlayers
+
 
     def is_full(self):
         return self.get_curr_player_count() >= self.get_max_player_count()

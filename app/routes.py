@@ -1,7 +1,9 @@
 from app import app, db
-from flask import render_template, redirect, url_for
+from app.model import Lobby, LobbyPlayers
+from flask import render_template, redirect, url_for, session, request, flash
 from app.forms import SignUpForm, LoginForm
 from app.model import Users, Games
+from flask_login import current_user, login_required
 
 @app.route("/")
 @app.route("/introduction")
@@ -23,10 +25,34 @@ def lobby_making():
   game_titles.sort()
   return render_template("lobby-making.html", game_titles=game_titles)
 
-@app.route("/lobby")
+@app.route("/lobby", methods=["GET"])
+@login_required
 def lobby_view():
-  # TODO: Render the right lobby using the lobby code
-  return render_template("lobby-view.html")
+    """Responds with the lobby view page
+    
+        This expects a query string with a "lobby_id" key which holds the 
+        code of the lobby that the user wants to join.
+    """
+    lobby_id = request.args.get("lobby_id")
+    lobby = Lobby.query.filter_by(LobbyID=lobby_id).first()
+    if lobby_id == None or lobby == None:
+        flash("Lobby not found")
+        return redirect(url_for("lobby_searching"))
+
+    # If the player is already in the lobby, render full lobby
+    lobby_players = LobbyPlayers.query.filter_by(LobbyID=lobby_id)
+    user_in_lobby = lobby_players.filter_by(UserID=current_user.get_id()).first() 
+    if user_in_lobby:
+        session["lobby_id"] = lobby_id
+        return render_template("lobby-view.html", template_folder="templates", 
+                lobby=lobby, user_in_lobby=user_in_lobby)
+
+    if lobby.is_full():
+        flash("Lobby is full, can't join.")
+        return redirect(url_for("lobby_searching"))
+
+    return render_template("lobby-view.html", template_folder="templates", 
+            lobby=lobby, user_in_lobby=None)
 
 @app.route("/account-creation", methods=["GET", "POST"])
 def account_creation():

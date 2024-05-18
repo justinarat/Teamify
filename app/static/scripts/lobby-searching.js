@@ -71,26 +71,27 @@ function createLobbyCard(lobbyCardData) {
 
   const lobbyIDSpan = document.createElement("span");
   lobbyIDSpan.classList.add("lobby-id");
-  lobbyIDSpan.innerHTML = lobbyCardData.lobby_id;
+  lobbyIDSpan.innerHTML = "lobby ID = " + lobbyCardData.lobby_id;
 
   const lobbyDescriptionParagraph = document.createElement("p");
   lobbyDescriptionParagraph.classList.add("lobby-description");
-  lobbyDescriptionParagraph.innerHTML = lobbyCardData.lobby_description;
+  lobbyDescriptionParagraph.innerHTML = "desc = " + lobbyCardData.lobby_description;
 
   const lobbyHostDiv = document.createElement("div");
   lobbyHostDiv.classList.add("lobby-host");
-  lobbyHostDiv.innerHTML = lobbyCardData.host;
+  lobbyHostDiv.innerHTML = "host = " + lobbyCardData.host;
 
   const otherLobbyPlayersDiv = document.createElement("div");
   otherLobbyPlayersDiv.classList.add("lobby-other-players");
-  for (player in lobbyCardData.players) {
-    otherLobbyPlayersDiv.innerHTML += player;
+  otherLobbyPlayersDiv.innerHTML = "players = "
+  for (let i = 0; i < lobbyCardData.players.length; i++) {
+    otherLobbyPlayersDiv.innerHTML += lobbyCardData.players[i] + " ";
   }
 
   const timeTableDiv = document.createElement("div");
   timeTableDiv.classList.add("lobby-time-schedule");
   let nextAvailableTime = ""; // TODO
-  timeTableDiv.innerHTML = nextAvailableTime;
+  timeTableDiv.innerHTML = "next time = " + nextAvailableTime;
 
   lobbyCard.appendChild(lobbyCardBodyDiv);
   lobbyCardBodyDiv.appendChild(gameNameHeader);

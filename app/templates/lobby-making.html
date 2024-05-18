@@ -11,12 +11,11 @@
     <div class="row">
       <div class="col-sm-4">
         <h4>Game Description</h4>
-        <input list="game-options" id="game-selected">
+        {{ lobby_making_form.game_select.label(class="game-list") }}
+        <!-- <input class="game-list" list="game-options" id="game-selected", placeholder="Search Games"> -->
+        {{ lobby_making_form.game(class="game-list") }}
         <datalist id="game-options">
-          <option disabled selected value="">Select Game</option>
-          {% for game in game_titles %}
-          <option value="{{game}}">{{game}}</option>
-          {% endfor %}
+          {{ lobby_making_form.game_select(class="game-list") }}
         </datalist>
         <br><br>
         {{ lobby_making_form.lobby_name.label }}

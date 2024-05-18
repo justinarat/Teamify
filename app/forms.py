@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import EmailField, PasswordField, StringField, SubmitField, RadioField, IntegerField
+from wtforms import EmailField, PasswordField, StringField, SubmitField, SelectField, IntegerField
 from wtforms.validators import DataRequired
+from app.model import Games
 
 class SignUpForm(FlaskForm):
     email = EmailField("Email", validators=[DataRequired()])
@@ -14,7 +15,12 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 class CreateLobbyForm(FlaskForm):
-    game = StringField("Game", validators=[DataRequired()], render_kw={"placeholder": "Enter Game Title"})
+    def __init__(self, *args, **kwargs):
+        game_titles = kwargs.pop('game_titles', [])
+        super(CreateLobbyForm, self).__init__(*args, **kwargs)
+        self.game_select.choices = [(title, title) for title in game_titles]
+    game = StringField(validators=[DataRequired()], render_kw={"list": "game-options", "placeholder": "Search Games"})
+    game_select = SelectField("Game Title", validators=[DataRequired()])
     lobby_name = StringField("Lobby Name", validators=[DataRequired()], render_kw={"placeholder": "Enter Lobby Name"})
     lobby_description = StringField("Lobby Description", validators=[DataRequired()], render_kw={"placeholder": "Enter Lobby Description"})
     capacity = IntegerField("Capacity", validators=[DataRequired()], render_kw={"placeholder": "Enter Max Capacity"})

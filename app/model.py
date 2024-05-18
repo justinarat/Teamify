@@ -46,6 +46,7 @@ class Lobby(db.Model):
     LobbyID = db.Column(db.Text(), primary_key=True, unique=True, nullable=False, default="4")
     GameID = db.Column(db.Text(), db.ForeignKey("Games.UID", name="fk_lobby_game"), nullable=False)
     Desc = db.Column(db.Text())
+    Name = db.Column(db.Text())
     game = db.relationship('Games', backref='games', lazy=True)
     maxPlayers = db.Column(db.Integer(), default=4)
     players: Mapped[List[Users]] = db.relationship(secondary='LobbyPlayers', backref='lobbyPlayers', lazy=True)

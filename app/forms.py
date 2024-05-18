@@ -24,5 +24,5 @@ class CreateLobbyForm(FlaskForm):
     lobby_name = StringField("Lobby Name", validators=[DataRequired()], render_kw={"placeholder": "Enter Lobby Name"})
     lobby_description = StringField("Lobby Description", validators=[DataRequired()], render_kw={"placeholder": "Enter Lobby Description"})
     capacity = IntegerField("Capacity", validators=[DataRequired()], render_kw={"placeholder": "Enter Max Capacity"})
-    hidden_tag_field = StringField()
+    tag1 = StringField(validators=[])
     #input field value attribute

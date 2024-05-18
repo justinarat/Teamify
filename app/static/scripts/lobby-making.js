@@ -34,22 +34,14 @@ addCustomTagButton.addEventListener("click", function () {
   customCount++;
 });
 
-function makeCustomTag() {
-  let customTags = document.getElementById("custom-tags");
-  let customTagHTML =
-    "<div id='customSection" +
-    customCount +
-    "'>" +
-    "  <input type='text' id ='custom-tag-" + customCount + "' placeholder='Enter custom tag'>" +
-    "  <button id='remove-custom-tag" + customCount + "' onclick='removeCustom(this)' type='button'>- Remove Custom Tag</button>" +
-    "  <br>" +
-    "</div>";
-
-  customTags.insertAdjacentHTML("beforeend", customTagHTML);
+function showCustomTag() {
+  let tagSec = document.getElementById("tag1");
+  tagSec.classList.remove("not-showing");
+  tagSec.value = "true";
 }
 
-function removeCustom(removeButton) {
-  let sectionID = removeButton.parentNode.id;
-  let customSection = document.getElementById(sectionID);
-  customSection.remove();
+function removeCustom(tag) {
+  let tagSec = document.getElementById(tag);
+  tagSec.classList.add("not-showing");
+  tagSec.value = "false";
 }

@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
-{% block css %}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="static/css/pages.css">
+{% endblock %}
 
 {% block headScripts %}{% endblock %}
 
@@ -12,7 +14,6 @@
       <div class="col-sm-4">
         <h4>Game Description</h4>
         {{ lobby_making_form.game_select.label(class="game-list") }}
-        <!-- <input class="game-list" list="game-options" id="game-selected", placeholder="Search Games"> -->
         {{ lobby_making_form.game(class="game-list") }}
         <datalist id="game-options">
           {{ lobby_making_form.game_select(class="game-list") }}
@@ -30,7 +31,11 @@
       <div class="col-sm-4">
         <h4>Tags</h4>
         <div id="custom-tags"></div>
-        <button id="add-custom-tag" onclick="makeCustomTag()" type="button">+ Add Custom Tag</button>
+        <div id="tag1" class="not-showing">
+          <input type="text" placeholder="Enter custom tag">
+          <button id="remove-custom-tag" onclick="removeCustom('tag1')">- Remove Custom Tag</button>
+        </div>
+        <button id="add-custom-tag" onclick="showCustomTag()" type="button">+ Add Custom Tag</button>
       </div>
 
       <div class="col-sm-4">

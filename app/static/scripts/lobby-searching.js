@@ -3,23 +3,21 @@ $(document).ready(function () {
 
   const DEFAULT_LOBBY_CARD_COUNT = 21;
 
-  loadLobbyCards(DEFAULT_LOBBY_CARD_COUNT, "world"); // "world" is temp
+  loadLobbyCards(DEFAULT_LOBBY_CARD_COUNT, ""); // "world" is temp
 
-  $("#lobby-search").keypress(function(e) {
-    let keyCode = e.keyCode || e.which;
-    if (keyCode === 13) { // "Enter" key code
-      clearLobbyCards()
+  $("#lobby-search").submit(function(e) {
+    e.preventDefault();
+    clearLobbyCards();
 
-      const searchString = "";
-      const searchTags = [];
-      // Decided to not include ignore tags due to time
+    let searchString = "";
+    let searchTags = [];
+    // Decided to not include ignore tags due to time
 
-      const search = $("#lobby-search input").val(); // Might error, could return a list instead of just one value
-      // search format: <searchString>:<tag1>,<tag2>,...
-      searchString, searchTags = parseSearch(search);
+    const search = $("#lobby-search input").val(); // Might error, could return a list instead of just one value
+    // search format: <searchString>:<tag1>,<tag2>,...
+    [searchString, searchTags] = parseSearch(search);
 
-      loadLobbyCards(DEFAULT_LOBBY_CARD_COUNT, searchString, searchTags);
-    }
+    loadLobbyCards(DEFAULT_LOBBY_CARD_COUNT, searchString, searchTags);
   });
 });
 
@@ -29,8 +27,12 @@ function clearLobbyCards() {
 
 // search format: <searchString>:<tag1>,<tag2>,...
 function parseSearch(search) {
-  const searchParts = search.split(":");
-  return searchParts[0], searchParts[1].split(",");
+  if (search.includes(":")) {
+    const searchParts = search.split(":");
+    return [searchParts[0], searchParts[1].split(",")];
+  } else {
+    return [search, []];
+  }
 }
 
 function loadLobbyCards(count, searchString, searchTags=[]) {

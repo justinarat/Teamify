@@ -10,8 +10,10 @@ def get_lobby_cards():
     """Endpoint for getting lobby cards for the lobby searching page
 
     This endpoint takes a GET request with the query string format:
-        ?count=<count>&search_tags=<tag1>&search_tags=<tag2>...&
-            ignore_tags=<tag1>&ignore_tags=<tag2>...
+        ?count=<count>
+        &search_string=<search_string>
+        &search_tags=<tag1>&search_tags=<tag2>...
+        &ignore_tags=<tag1>&ignore_tags=<tag2>...
 
     The body of the response will also have json as:
     body = {
@@ -52,17 +54,22 @@ def get_lobby_cards():
     if count < 0:
         return make_response("Parameter 'count' must be greater than or equal to 0", 400)
 
+    if "search_string" not in request.args:
+        return make_response("Parameter 'search_string' is missing", 400)
+
+    search_string = request.args.get("search_string")
+
+    search_tags = request.args.getlist("search_tags")
+
+    lobby_ids = search_db(count, search_string, search_tags)
+
     lobby_cards = []
 
     for i in range(count):
-        lobby_id = i + 1
-        # lobby_query = db.session.query(Lobby).filter_by(LobbyID=lobby_id).first()
-        lobby_query = db.session.query(Lobby).first()
+        lobby_query = Lobby.query.filter_by(LobbyID=lobby_ids[i]).first()
 
         if lobby_query:
-            game_query = (
-                db.session.query(Games).filter_by(UID=lobby_query.GameID).first()
-            )
+            game_query = Games.query.filter_by(UID=lobby_query.GameID).first()
             players_query = db.session.query(LobbyPlayers).filter_by(LobbyID=lobby_id)
             lobby_card = {
                 "lobby_id": lobby_query.LobbyID,
@@ -80,3 +87,11 @@ def get_lobby_cards():
     # ignore_tags = request.args.getlist("ignore_tags")
 
     return jsonify({"lobby_cards": lobby_cards})
+
+def search_db(count, search_string, search_tags):
+    """Based on search params, returns 'count' lobby IDs"""
+    lobby_ids = []
+
+    # TODO
+    
+    return lobby_ids

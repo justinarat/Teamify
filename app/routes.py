@@ -39,6 +39,7 @@ def lobby_view():
         flash("Lobby not found")
         return redirect(url_for("lobby_searching"))
 
+
     # If the player is already in the lobby, render full lobby
     lobby_players = LobbyPlayers.query.filter_by(LobbyID=lobby_id)
     user_in_lobby = lobby_players.filter_by(UserID=current_user.get_id()).first() 

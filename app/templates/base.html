@@ -33,27 +33,34 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('lobby_searching') }}">Search Lobby</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('lobby_making') }}">Make Lobby</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('lobby_view') }}">View Lobby</a>
-        </li>
+        {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('lobby_making') }}">Make Lobby</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('my_lobbies') }}">My Lobbies</a>
+          </li>
+        {% endif %}
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('my_lobbies') }}">My Lobbies</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('account_creation') }}">Login Or Sign Up</a>
-        </li>
+        {% if current_user.is_authenticated %}
+          {% if current_user.is_admin() %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
+            </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout_request') }}">Logout</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('account_creation') }}">Login/Sign Up</a>
+          </li>
+        {% endif %}
       </ul>
     </div>
   </nav>
-
+ 
   {# the content block will contain the page content #}
   {% block content %}{% endblock %}
 

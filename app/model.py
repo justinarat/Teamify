@@ -47,9 +47,16 @@ class Lobby(db.Model):
     players: Mapped[List[Users]] = db.relationship(secondary='LobbyPlayers', backref='lobbyPlayers', lazy=True)
     tags: Mapped[List[Tags]] = db.relationship(secondary='LobbyTags', backref='lobbyPlayers', lazy=True)
 
-    def is_full(self) -> bool:
+    def get_curr_player_count(self):
+        return len(self.players)
+
+    def get_max_player_count(self):
+        # Creating this for now since max player count column isn't set up yet
         # TODO
-        return False
+        return 3
+
+    def is_full(self):
+        return self.get_curr_player_count() >= self.get_max_player_count()
 
     def get_host(self): # There's probably be a better way of doing this
         host_rel = LobbyPlayers.query.filter_by(LobbyID=self.LobbyID, Authority="host").first()

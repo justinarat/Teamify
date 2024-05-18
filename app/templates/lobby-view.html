@@ -64,8 +64,13 @@
       </div>
       <p id="lobby-capacity">
         <span class="large-text">Lobby Capacity:</span>
-        <span id="current-num-players">4/4</span>
-        <span id="max-num-players"></span>
+        <span id="current-num-players">
+          {{ lobby.get_curr_player_count() }}
+        </span>
+        /
+        <span id="max-num-players">
+          {{ lobby.get_max_player_count() }}
+        </span>
       </p>
       <div id="time-schedule">
         <p class="d-inline large-text">Time Schedule:</p>

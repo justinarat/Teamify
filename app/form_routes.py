@@ -82,7 +82,7 @@ def join_lobby_request():
         return "lobby id does not exist.", 400
 
     if lobby.is_full():
-        flash("Lobby is full, can't join")
+        flash("Lobby is full, can't join.")
         return redirect(url_for("lobby_searching"))
 
     if not is_joining: 

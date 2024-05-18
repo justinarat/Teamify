@@ -3,7 +3,7 @@ $(document).ready(function () {
 
   const DEFAULT_LOBBY_CARD_COUNT = 21;
 
-  loadLobbyCards(DEFAULT_LOBBY_CARD_COUNT);
+  loadLobbyCards(DEFAULT_LOBBY_CARD_COUNT, "world"); // "world" is temp
 
   $("#lobby-search").keypress(function(e) {
     let keyCode = e.keyCode || e.which;
@@ -35,13 +35,13 @@ function parseSearch(search) {
 
 function loadLobbyCards(count, searchString, searchTags=[]) {
   let url =  "/get-lobby-cards?count=" + count;
-  url += "search_string=" + searchString;
+  url += "&search_string=" + searchString;
   for (tag in searchTags) {
     url += "&search_tags=" + tag;
   }
 
   $.ajax({url: url, success: function(lobbyCards) {
-    for (let lobbyCardData in lobbyCards) {
+    for (let lobbyCardData of lobbyCards.lobby_cards) {
       const lobbyCard = createLobbyCard(lobbyCardData);
       $("#lobbies").append(lobbyCard);
     }
@@ -56,7 +56,9 @@ function loadLobbyCards(count, searchString, searchTags=[]) {
  */
 function createLobbyCard(lobbyCardData) {
   const lobbyCard = document.createElement("div");
-  lobbyCard.classList.add("card bg-dark test-light");
+  lobbyCard.classList.add("card");
+  lobbyCard.classList.add("bg-dark");
+  lobbyCard.classList.add("text-light");
 
   const lobbyCardBodyDiv = document.createElement("div");
   lobbyCardBodyDiv.classList.add("card-body");
@@ -74,14 +76,13 @@ function createLobbyCard(lobbyCardData) {
   lobbyDescriptionParagraph.innerHTML = lobbyCardData.lobby_description;
 
   const lobbyHostDiv = document.createElement("div");
-  lobbyHostDiv.document.add("lobby-host");
+  lobbyHostDiv.classList.add("lobby-host");
   lobbyHostDiv.innerHTML = lobbyCardData.host;
 
   const otherLobbyPlayersDiv = document.createElement("div");
   otherLobbyPlayersDiv.classList.add("lobby-other-players");
-  const numPlayersToDisplay = 4
-  for (let i = 0; i < numPlayersToDisplay && i < lobbyCardData.players.length; i--) {
-    otherLobbyPlayersDiv.innerHTML.append(lobbyCardData.players[i]);
+  for (player in lobbyCardData.players) {
+    otherLobbyPlayersDiv.innerHTML += player;
   }
 
   const timeTableDiv = document.createElement("div");

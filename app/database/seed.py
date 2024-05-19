@@ -1,5 +1,4 @@
-import sys
-from app import app, db
+from app import db
 from app.model import (
     Games,
     Tags,
@@ -27,7 +26,7 @@ def empty_db():
 def seed_games():
     data = []
 
-    with open("database/games.txt", "r", encoding="utf-8") as file:
+    with open("app/database/games.txt", "r", encoding="utf-8") as file:
         for i, line in enumerate(file):
             data.append(Games(UID=i + 1, Name=line.strip()))
 
@@ -147,7 +146,7 @@ def seed_required():
     # Commit all changes
     db.session.commit()
 
-    print("Database committed with required seed data successfully!")
+    print("\nDatabase committed with required seed data successfully!")
 
 
 def seed_all():
@@ -164,16 +163,3 @@ def seed_all():
     db.session.commit()
 
     print("\nDatabase committed with all seed data successfully!")
-
-
-if __name__ == "__main__":
-    if len(sys.argv) > 2:
-        print("Usage: python3 seed.py <all/required>")
-        sys.exit(1)
-
-    with app.app_context():
-        empty_db()
-        if len(sys.argv) == 1 or sys.argv[1] != "all":
-            seed_required()
-        else:
-            seed_all()

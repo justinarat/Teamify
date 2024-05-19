@@ -36,6 +36,9 @@ class Users(UserMixin, db.Model):
     def get_id(self):
         return self.UID
 
+    def is_admin(self):
+        return self.IsAdmin == 1
+
 @login.user_loader
 def load_student(user_id):
     return Users.query.get(user_id)
@@ -57,7 +60,6 @@ class Lobby(db.Model):
 
     def get_max_player_count(self):
         return self.maxPlayers
-
 
     def is_full(self):
         return self.get_curr_player_count() >= self.get_max_player_count()

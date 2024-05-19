@@ -8,46 +8,29 @@ const daysFull = [
   "Saturday",
   "Sunday",
 ];
-const skillLevels = [
-  "Novice",
-  "Casual",
-  "Intermediate",
-  "Proficient",
-  "Expert",
-  "Master",
-];
 
-function timeDisplay() {
-  var selectedOption = document.getElementById("reoccuring-time");
-  var timeOptionChunk = document.getElementById("time-option");
-  if (selectedOption.checked == true) {
-    timeOptionChunk.innerHTML = "";
-    for (let i = 0; i < 7; i++) {
-      let currDay = days[i];
-      let currDayFull = daysFull[i];
-      let htmlChunk =
-        "<div id='"+ currDay + "-section'>"+
-        "<input type='checkbox' id='" + currDay + "-checkbox' onclick='showGeneral(this)'>" +
-        "<label for='" + currDay + "-checkbox'>" + currDayFull + ":</label>" +
-        "<div id='" + currDay + "'></div>" +
-        "<br />"+
-        "</div>";
-      timeOptionChunk.insertAdjacentHTML("beforeend", htmlChunk);
-    }
-    let htmlChunk =
-      "<div id='custom-events'></div>" +
-      "<button id='add-special-event' onclick='makeSpecialEvent()' type='button'>+ Add Special Event</button>";
-    timeOptionChunk.insertAdjacentHTML("beforeend", htmlChunk);
+function showGeneral(day) {
+  let daySec = document.getElementById(day);
+  let dayCheckboxID = day + "-checkbox";
+  let dayCheckbox = document.getElementById(dayCheckboxID);
+
+  let fromFieldID = day + "-from";
+  let toFieldID = day + "-to";
+
+  let fromField = document.getElementById(fromFieldID);
+  let toField = document.getElementById(toFieldID);
+
+  if(dayCheckbox.checked == true) {
+    daySec.classList.remove("not-showing");
+    fromField.setAttribute('required','required');
+    toField.setAttribute('required','required');
+
   } else {
-    timeOptionChunk.innerHTML = "";
-    let htmlChunk =
-      "<div id='onetimeSet'>" +
-      "  <label for='onetimeFrom'>From:</label>" +
-      "  <input type='datetime-local' id='onetimeFrom' />" +
-      "  <label for='onetimeTo'> To: </label>" +
-      "  <input type='datetime-local' id='onetimeFrom' />" +
-      "</div>";
-    timeOptionChunk.insertAdjacentHTML("beforeend", htmlChunk);
+    daySec.classList.add("not-showing");
+    fromField.removeAttribute('required','required');
+    toField.removeAttribute('required','required');
+    fromField.value = "";
+    toField.value = "";
   }
 }
 

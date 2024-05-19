@@ -2,7 +2,7 @@ from app import app, db
 from app.model import Lobby, Users, LobbyPlayers
 from app.forms import LoginForm, SignUpForm
 from flask import render_template, url_for, redirect, flash, request, session
-from flask_login import login_user, current_user, login_required
+from flask_login import login_user, current_user, login_required, logout_user
 from sqlalchemy import desc
 from werkzeug.security import generate_password_hash
 import flask_socketio
@@ -59,6 +59,16 @@ def signup_request():
             login_form = LoginForm({}) # {} is to init signup_form with empty data as for some reason it shares data with login_form
             return render_template("account-creation.html", title="Login or Sign Up", 
                     login_form=login_form, signup_form=signup_form)
+
+@app.route("/logout-request")
+@login_required
+def logout_request():
+    """Handles request for logging out
+    
+        Redirects user to the introduction page.
+    """
+    logout_user()
+    return redirect(url_for("introduction"))
 
 @app.route("/join-lobby-request", methods=["post"])
 @login_required

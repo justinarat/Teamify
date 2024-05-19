@@ -1,8 +1,8 @@
 """Defines all data routes that the server responds to"""
 
 from flask import request, make_response, jsonify
-from app import app, db
-from app.model import Lobby, LobbyPlayers, LobbyTags, LobbyTimes, Games
+from app import app
+from app.model import Lobby, Games
 
 
 @app.route("/get-lobby-cards", methods=["GET"])
@@ -46,6 +46,9 @@ def get_lobby_cards():
 
     count = request.args.get("count")
 
+    if count is None:
+        return make_response("Parameter 'count' is missing", 400)
+
     try:
         count = int(count)
     except ValueError:
@@ -87,8 +90,8 @@ def search_db(count, search_string, search_tags):
         lobby_query = lobby_query.filter(Lobby.tags.has(Name=tag))
 
     # Check if search_string is in the lobby game name
-    DEFAULT_SEARCH = ""
-    if search_string != DEFAULT_SEARCH:
-        lobby_query = lobby_query.join(Lobby.game).filter(Games.Name.contains(search_string))
+    default_search = ""
+    if search_string != default_search:
+        lobby_query = lobby_query.join(Games).filter(Games.Name.contains(search_string))
 
     return lobby_query.limit(count).all()

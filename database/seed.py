@@ -33,7 +33,7 @@ def seed_games():
 
     with open("database/games.txt", "r", encoding="utf-8") as file:
         for i, line in enumerate(file):
-            data.append(Games(UID=i, Name=line.strip()))
+            data.append(Games(UID=i + 1, Name=line.strip()))
 
     seed_table("Games", data)
 
@@ -47,15 +47,35 @@ def seed_tags():
     seed_table("Tags", data)
 
 
-def seed_users():
-    data = [
+def seed_users(only_required=True):
+    data = []
+    data.append(
         Users(
-            UID="1", Username="User1", Password="password1", Email="user1@example.com"
-        ),
-        Users(
-            UID="2", Username="User2", Password="password2", Email="user2@example.com"
-        ),
-    ]
+            UID="1",
+            Username="Admin",
+            Password="admin",
+            Email="admin@admin.com",
+            IsAdmin=1,
+        )
+    )
+
+    if not only_required:
+        data.append(
+            Users(
+                UID="2",
+                Username="CoffeeLover",
+                Password="password2",
+                Email="coffeelover@gmail.com",
+            )
+        )
+        data.append(
+            Users(
+                UID="3",
+                Username="Firebird",
+                Password="password3",
+                Email="firebird@outlook.com",
+            )
+        )
 
     seed_table("Users", data)
 
@@ -126,7 +146,7 @@ def seed_table(table, data):
 def seed_required():
     # Seed required data
     seed_games()
-    # TODO: Seed Admin
+    seed_users(only_required=True)
 
     # Commit all changes
     db.session.commit()
@@ -138,7 +158,7 @@ def seed_all():
     # Seed all data
     seed_games()
     seed_tags()
-    seed_users()
+    seed_users(only_required=False)
     seed_lobbies()
     seed_lobby_players()
     # TODO: Seed lobby_tags

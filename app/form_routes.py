@@ -1,5 +1,5 @@
 from app import app, db
-from app.model import Lobby, Users, LobbyPlayers, Games, Tags, LobbyTags
+from app.model import Lobby, Users, LobbyPlayers, Games, Tags, LobbyTags, LobbyTimes
 from app.forms import LoginForm, SignUpForm, CreateLobbyForm
 from flask import render_template, url_for, redirect, flash, request, session
 from flask_login import login_user, current_user, login_required, logout_user
@@ -114,27 +114,43 @@ def create_lobby_request():
             )
             db.session.add(lobby_tag)
             
+        time_froms = [
+            create_lobby_form.mon_from.data,
+            create_lobby_form.tue_from.data,
+            create_lobby_form.wed_from.data,
+            create_lobby_form.thu_from.data,
+            create_lobby_form.fri_from.data,
+            create_lobby_form.sat_from.data,
+            create_lobby_form.sun_from.data
+        ]
         
-        mon_from = create_lobby_form.mon_from.data
-        mon_to = create_lobby_form.mon_to.data
-        
-        tue_from = create_lobby_form.tue_from.data
-        tue_to = create_lobby_form.tue_to.data
-        
-        wed_from = create_lobby_form.wed_from.data
-        wed_to = create_lobby_form.wed_to.data
-        
-        thu_from = create_lobby_form.thu_from.data
-        thu_to = create_lobby_form.thu_to.data
-        
-        fri_from = create_lobby_form.fri_from.data
-        fri_to = create_lobby_form.fri_to.data
-        
-        sat_from = create_lobby_form.sat_from.data
-        sat_to = create_lobby_form.sat_to.data
-        
-        sun_from = create_lobby_form.sun_from.data
-        sun_to = create_lobby_form.sun_to.data
+        time_tos = [
+            create_lobby_form.mon_to.data,
+            create_lobby_form.tue_to.data,
+            create_lobby_form.wed_to.data,
+            create_lobby_form.thu_to.data,
+            create_lobby_form.fri_to.data,
+            create_lobby_form.sat_to.data,
+            create_lobby_form.sun_to.data
+        ]
+
+        for i in range(7):
+            time_from = time_froms[i]
+            time_to = time_tos[i]
+            
+            lobby_time_with_last_id=LobbyTimes.query.order_by(desc(LobbyTimes.RowID)).first()
+            new_lobby_time_id = int(lobby_time_with_last_id.RowID)+1
+            while LobbyTimes.query.filter_by(RowID=new_lobby_time_id).first() != None: # Guarantees that new_tag_id is unique id
+                new_lobby_time_id += 1
+                
+            new_lobby_time = LobbyTimes(
+                RowID=new_lobby_time_id,
+                LobbyID=new_lobby_id,
+                TimeBlockStart=time_from,
+                Repeat=i,
+                TimeBlockEnd=time_to
+            )
+            db.session.add(new_lobby_time)
         
         new_lobby = Lobby(
             LobbyID=new_lobby_id, 
@@ -147,7 +163,8 @@ def create_lobby_request():
         
         db.session.commit()
         
-    return redirect(url_for("introduction"))
+        # introduction for the sake of testing
+        return redirect(url_for("introduction"))
 
 @app.route("/logout-request")
 @login_required

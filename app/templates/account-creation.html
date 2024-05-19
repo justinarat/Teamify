@@ -13,13 +13,13 @@
     <h1 class="text-center">Login</h1>
     {{ login_form.email.label }}:
     <br>
-    {{ login_form.email(placeholder="Email") }}
-    <br><br>
+    {{ login_form.email(placeholder="Email", class="form-control") }}
+    <br>
     {{ login_form.password.label }}:
     <br>
-    {{ login_form.password(placeholder="Password") }}
-    <br><br>
-    {{ login_form.submit() }}
+    {{ login_form.password(placeholder="Password", class="form-control") }}
+    <br>
+    {{ login_form.submit(class="btn btn-light btn-outline-secondary") }}
   </form>
   <br>
   <form id="sign-up" class="account-form teamify-primary-colour" action="{{ url_for('signup_request') }}" method="post" onsubmit="return validateSignup(id)">
@@ -27,17 +27,17 @@
     <h1 class="text-center">Sign Up</h1>
     {{ signup_form.email.label }}:
     <br>
-    {{ signup_form.email(placeholder="Email") }}
-    <br><br>
+    {{ signup_form.email(placeholder="Email", class="form-control") }}
+    <br>
     {{ signup_form.username.label }}:
     <br>
-    {{ signup_form.username(placeholder="Username") }}
-    <br><br>
+    {{ signup_form.username(placeholder="Username", class="form-control") }}
+    <br>
     {{ signup_form.password.label }}:
     <br>
-    {{ signup_form.password(placeholder="Password") }}
-    <br><br>
-    {{ signup_form.submit() }}
+    {{ signup_form.password(placeholder="Password", class="form-control") }}
+    <br>
+    {{ signup_form.submit(class="btn btn-light btn-outline-secondary") }}
   </form>
   <br><br>
   {% with messages = get_flashed_messages() %}

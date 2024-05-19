@@ -71,6 +71,8 @@ function createLobbyCard(lobbyCardData) {
   const gameNameHeader = document.createElement("h3");
   gameNameHeader.classList.add("game-name");
   gameNameHeader.innerHTML = lobbyCardData.game_title;
+  gameNameHeader.style.cursor = 'pointer';
+  gameNameHeader.style.userSelect = 'none';
 
   const lobbyIDSpan = document.createElement("span");
   lobbyIDSpan.classList.add("lobby-id");

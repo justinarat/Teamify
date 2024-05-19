@@ -163,4 +163,3 @@ class UserTracker(db.Model):
     Action = db.Column(db.Text(), nullable=False)
     Desc = db.Column(db.Text())
     user2Rel = db.relationship("Users", backref="users2", lazy=True)
-    lobby2Rel = db.relationship("Lobby", backref="lobby4", lazy=True)

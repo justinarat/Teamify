@@ -77,44 +77,10 @@
         {% if lobby.time_blocks %}
           {% for time_block in lobby.time_blocks %}
             <div>
-            {{ time_block.DayOfWeek }}: {{ time_block.TimeBlockStart }}-{{ time_block.TimeBlockEnd }}
+            {{ time_block.get_day_string() }}: {{ time_block.TimeBlockStart }}-{{ time_block.TimeBlockEnd }}
             </div>
           {% endfor %}
         {% endif %}
-        <table>
-          <tr>
-            <th>Day</th>
-            <th>Time</th>
-          </tr>
-          <tr>
-            <td>Monday</td>
-            <td>8pm-9pm</td>
-          </tr>
-          <tr>
-            <td>Tuesday</td>
-            <td>8pm-11pm</td>
-          </tr>
-          <tr>
-            <td>Wednesday</td>
-            <td>N/A</td>
-          </tr>
-          <tr>
-            <td>Thursday</td>
-            <td>8pm-9pm</td>
-          </tr>
-          <tr>
-            <td>Friday</td>
-            <td>7pm-11pm</td>
-          </tr>
-          <tr>
-            <td>Saturday</td>
-            <td>2pm-10pm</td>
-          </tr>
-          <tr>
-            <td>Sunday</td>
-            <td>1pm-5pm</td>
-          </tr>
-        </table>
       </div>
     </div>
     <div id="chat-column" class="col-md-3">

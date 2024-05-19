@@ -98,6 +98,23 @@ class LobbyTimes(db.Model):
     DayOfWeek = db.Column(db.Text(), nullable=False)
     TimeBlockEnd = db.Column(db.Text(), nullable=False)
 
+    def get_day_string(self):
+        if self.DayOfWeek == "0":
+            return "MON"
+        if self.DayOfWeek == "1":
+            return "TUE"
+        if self.DayOfWeek == "2":
+            return "WED"
+        if self.DayOfWeek == "3":
+            return "THU"
+        if self.DayOfWeek == "4":
+            return "FRI"
+        if self.DayOfWeek == "5":
+            return "SAT"
+        if self.DayOfWeek == "6":
+            return "SUN"
+        return "TIME"
+
 
 class UserTracker(db.Model):
     __tablename__ = 'UserTracker'

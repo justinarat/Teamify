@@ -25,7 +25,7 @@ class Users(UserMixin, db.Model):
     Username = db.Column(db.Text(), nullable=False)
     Password = db.Column(db.Text(), nullable=False)
     Email = db.Column(db.Text(), unique=True, nullable=False)
-    IsAdmin = db.Column(db.Integer(), nullable=False,default=0)
+    IsAdmin = db.Column(db.Integer(), nullable=False, default=0)
 
     def set_password(self, password):
         self.Password = generate_password_hash(password)
@@ -76,10 +76,10 @@ class LobbyPlayers(db.Model):
     RowID = db.Column(db.Text(), primary_key=True, unique=True, nullable=False)
     LobbyID = db.Column(db.Text(), db.ForeignKey("Lobby.LobbyID", name="fk_lobby_players_lobby"), nullable=False)
     UserID = db.Column(db.Text(), db.ForeignKey("Users.UID", name="fk_lobby_players_user"), nullable=False)
-    Authority = db.Column(db.Text(), nullable=False)
+    IsHost = db.Column(db.Integer(), nullable=False, default=0)
 
     def is_host(self) -> bool:
-        return self.Authority == "host"
+        return self.IsHost == 1
 
 
 class LobbyTags(db.Model):

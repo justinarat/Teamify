@@ -25,7 +25,7 @@ def lobby_making():
   game_titles = game_titles[1:]
   game_titles.sort()
   lobby_making_form = CreateLobbyForm(game_titles=game_titles)
-  return render_template("lobby-making.html", lobby_making_form=lobby_making_form)
+  return render_template("lobby-making.html", title="Create Lobby", lobby_making_form=lobby_making_form)
 
 @app.route("/lobby", methods=["GET"])
 @login_required
@@ -40,6 +40,7 @@ def lobby_view():
     if lobby_id == None or lobby == None:
         flash("Lobby not found")
         return redirect(url_for("lobby_searching"))
+
     # If the player is already in the lobby, render full lobby
     lobby_players = LobbyPlayers.query.filter_by(LobbyID=lobby_id)
     user_in_lobby = lobby_players.filter_by(UserID=current_user.get_id()).first() 
@@ -68,9 +69,14 @@ def admin():
 
 @app.route("/my-lobbies")
 def my_lobbies():
-  # TODO: Render lobbies user belongs to
-  # TODO: Render lobbies user owns with choice to view them from user view or admin view
-  return render_template("my-lobbies.html")
+    uid = current_user.get_id()
+    if uid is not None:  # Ensure uid is not None
+        # Debug print to verify uid
+        print(f"Current user ID: {uid}")
+        lobby_ids = LobbyPlayers.get_lobby_ids_by_user(uid)
+        return render_template('my-lobbies.html', lobby_ids=lobby_ids)
+    else:
+        return "User not logged in", 403
 
 
 

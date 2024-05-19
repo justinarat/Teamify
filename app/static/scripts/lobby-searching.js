@@ -71,8 +71,8 @@ function createLobbyCard(lobbyCardData) {
   const gameNameHeader = document.createElement("h3");
   gameNameHeader.classList.add("game-name");
   gameNameHeader.innerHTML = lobbyCardData.game_title;
-  gameNameHeader.style.cursor = 'pointer';
-  gameNameHeader.style.userSelect = 'none';
+  gameNameHeader.style.cursor = "pointer";
+  gameNameHeader.style.userSelect = "none";
 
   const lobbyIDSpan = document.createElement("span");
   lobbyIDSpan.classList.add("lobby-id");
@@ -109,9 +109,9 @@ function createLobbyCard(lobbyCardData) {
 
   gameNameHeader.addEventListener("click", function (e) {
     e.preventDefault();
-    lobbyID = lobbyCardData.lobby_id;
-    window.location.pathname.replace("lobby");
-    window.location.search.replace("lobby_id=" + lobbyID);
+    var lobbyID = lobbyCardData.lobby_id;
+    var newUrl = "/lobby?lobby_id=" + lobbyID;
+    window.location.href = newUrl;
   });
 
   return lobbyCard;

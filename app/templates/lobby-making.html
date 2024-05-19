@@ -44,53 +44,88 @@
         <h4>Time Allocation Options</h4>
 
         <div id="mon-section">
-          <input type='checkbox' id="mon-checkbox" onclick="showGeneral(this)">
+          <input type='checkbox' id="mon-checkbox" onclick="showGeneral('mon')">
           <label for="mon-checkbox">Monday</label>
-          <div id="mon"></div>
-          <br>
+          <div id="mon" class="not-showing">
+            <label for="mon-from">From:</label>
+            <input type="time" id="mon-from">
+            <label for="mon-to">To:</label>
+            <input type="time" id="mon-to">
+          </div>
         </div>
+        <br>
 
         <div id="tue-section">
-          <input type='checkbox' id="tue-checkbox" onclick="showGeneral(this)">
+          <input type='checkbox' id="tue-checkbox" onclick="showGeneral('tue')">
           <label for="tue-checkbox">Tuesday</label>
-          <div id="tue"></div>
-          <br>
+          <div id="tue" class="not-showing">
+            <label for="tue-from">From:</label>
+            <input type="time" id="tue-from">
+            <label for="tue-to">To:</label>
+            <input type="time" id="tue-to">
+          </div>
         </div>
+        <br>
 
         <div id="wed-section">
-          <input type='checkbox' id="wed-checkbox" onclick="showGeneral(this)">
+          <input type='checkbox' id="wed-checkbox" onclick="showGeneral('wed')">
           <label for="wed-checkbox">Wednesday</label>
-          <div id="wed"></div>
-          <br>
+          <div id="wed" class="not-showing">
+            <label for="wed-from">From:</label>
+            <input type="time" id="wed-from">
+            <label for="wed-to">To:</label>
+            <input type="time" id="wed-to">
+          </div>
         </div>
+        <br>
 
         <div id="thu-section">
-          <input type='checkbox' id="thu-checkbox" onclick="showGeneral(this)">
+          <input type='checkbox' id="thu-checkbox" onclick="showGeneral('thu')">
           <label for="thu-checkbox">Thursday</label>
-          <div id="thu"></div>
-          <br>
+          <div id="thu" class="not-showing">
+            <label for="thu-from">From:</label>
+            <input type="time" id="thu-from">
+            <label for="thu-to">To:</label>
+            <input type="time" id="thu-to">
+          </div>
         </div>
+        <br>
 
         <div id="fri-section">
-          <input type='checkbox' id="fri-checkbox" onclick="showGeneral(this)">
+          <input type='checkbox' id="fri-checkbox" onclick="showGeneral('fri')">
           <label for="fri-checkbox">Friday</label>
-          <div id="fri"></div>
-          <br>
+          <div id="fri" class="not-showing">
+            <label for="fri-from">From:</label>
+            <input type="time" id="fri-from">
+            <label for="fri-to">To:</label>
+            <input type="time" id="fri-to">
+          </div>
         </div>
+        <br>
 
         <div id="sat-section">
-          <input type='checkbox' id="sat-checkbox" onclick="showGeneral(this)">
+          <input type='checkbox' id="sat-checkbox" onclick="showGeneral('sat')">
           <label for="sat-checkbox">Saturday</label>
-          <div id="sat"></div>
-          <br>
+          <div id="sat" class="not-showing">
+            <label for="sat-from">From:</label>
+            <input type="time" id="sat-from">
+            <label for="sat-to">To:</label>
+            <input type="time" id="sat-to">
+          </div>
         </div>
+        <br>
 
         <div id="sun-section">
-          <input type='checkbox' id="sun-checkbox" onclick="showGeneral(this)">
+          <input type='checkbox' id="sun-checkbox" onclick="showGeneral('sun')">
           <label for="sun-checkbox">Sunday</label>
-          <div id="sun"></div>
-          <br>
+          <div id="sun" class="not-showing">
+            <label for="sun-from">From:</label>
+            <input type="time" id="sun-from">
+            <label for="sun-to">To:</label>
+            <input type="time" id="sun-to">
+          </div>
         </div>
+        <br>
 
       </div>
     </div>

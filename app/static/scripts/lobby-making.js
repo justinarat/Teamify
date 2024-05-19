@@ -9,21 +9,22 @@ const daysFull = [
   "Sunday",
 ];
 
-function showGeneral(dayCheckbox) {
-  let sectionID = dayCheckbox.id;
-  let day = sectionID.substring(0, 3);
-  // let dayElement = document.getElementById("day");
-  let dayMainID = dayCheckbox.parentNode.id;
-  let dayMain = document.getElementById(dayMainID);
-  let dayElement = dayMain.children[2];
-  if (dayCheckbox.checked == true) {
-    dayElement.innerHTML =
-      "<label for='" + day + "-from'>From:</label>" +
-      "<input type='time' id='" + day + "-from' />" +
-      "<label for='" + day + "-to'> To: </label>" +
-      "<input type='time' id='" + day + "-to' />";
+function showGeneral(day) {
+  // let sectionID = dayCheckbox.id;
+  // let day = sectionID.substring(0, 3);
+  // // let dayElement = document.getElementById("day");
+  // let dayMainID = dayCheckbox.parentNode.id;
+  // let dayMain = document.getElementById(dayMainID);
+  // let dayElement = dayMain.children[2];
+  
+  let daySec = document.getElementById(day);
+  let dayCheckboxID = day + "-checkbox";
+  let dayCheckbox = document.getElementById(dayCheckboxID);
+
+  if(dayCheckbox.checked == true) {
+    daySec.classList.remove("not-showing");
   } else {
-    dayElement.innerHTML = "";
+    daySec.classList.add("not-showing");
   }
 }
 

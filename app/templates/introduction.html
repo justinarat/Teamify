@@ -20,15 +20,39 @@
       </p>
     </div>
     <br><br>
-    <div class="row">
+    <div class="row g-4">
       <div class="col-sm-4">
-        <a class="btn btn-outline-info btn-lg" href="{{ url_for('games_view') }}" role="button">Browse Games</a>
+        <div class="card text-white bg-dark h-100">
+          <div class="card-body">
+            <p class="fs-5">
+              View our catalogue of games.
+            </p>
+            <a class="btn btn-outline-info btn-lg" href="{{ url_for('games_view') }}" role="button">Browse Games</a>
+          </div>
+        </div>
       </div>
       <div class="col-sm-4">
-        <a class="btn btn-outline-info btn-lg" href="{{ url_for('lobby_searching') }}" role="button">Browse Lobbies</a>
+        <div class="card text-white bg-dark h-100">
+          <div class="card-body">
+            <p class="fs-5">
+              Find and join pre-exisiting lobbies.
+            </p>
+            <a class="btn btn-outline-info btn-lg" href="{{ url_for('lobby_searching') }}" role="button">Browse Lobbies</a>
+          </div>
+        </div>
       </div>
       <div class="col-sm-4">
-        <a class="btn btn-outline-info btn-lg" href="{{ url_for('account_creation') }}" role="button">Login/Signup</a>
+        <div class="card text-white bg-dark h-100">
+          <div class="card-body">
+            <p class="fs-5">
+              Want to create your own lobby?
+            </p>
+            <p class="fs-5">
+              Login or Signup here!
+            </p>
+            <a class="btn btn-outline-info btn-lg" href="{{ url_for('account_creation') }}" role="button">Login/Signup</a>
+          </div>
+        </div>
       </div>
     </div>
   </article>

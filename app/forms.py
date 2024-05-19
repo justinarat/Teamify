@@ -46,4 +46,5 @@ class CreateLobbyForm(FlaskForm):
     
     sun_from = TimeField("From:", format='%H:%M') 
     sun_to = TimeField("To:", format='%H:%M') 
-    #input field value attribute
+    
+    submit = SubmitField("Create Lobby")

@@ -146,11 +146,9 @@ def create_lobby_request():
             time_to = time_tos[i]
             
             if time_from is not None and time_to is not None:
-                lobby_time_with_last_id=LobbyTimes.query.order_by(desc(LobbyTimes.RowID)).first()
                 new_lobby_time_id = 0
-                if (lobby_time_with_last_id == None):
-                    new_lobby_time_id = 1
-                else:
+                lobby_time_with_last_id=LobbyTimes.query.order_by(desc(LobbyTimes.RowID)).first()
+                if (lobby_time_with_last_id != None):
                     new_lobby_time_id = int(lobby_time_with_last_id.RowID)+1
                     while LobbyTimes.query.filter_by(RowID=new_lobby_time_id).first() != None: # Guarantees that new_tag_id is unique id
                         new_lobby_time_id += 1
@@ -173,14 +171,13 @@ def create_lobby_request():
         )
         db.session.add(new_lobby)
 
-        lobby_player_with_last_id=LobbyPlayers.query.order_by(desc(LobbyPlayers.RowID)).first()
         new_lobby_players_id = 0
-        if (lobby_player_with_last_id == None):
-            new_lobby_players_id = 1
-        else:
+        lobby_player_with_last_id=LobbyPlayers.query.order_by(desc(LobbyPlayers.RowID)).first()
+        if (lobby_player_with_last_id != None):
             new_lobby_players_id = int(lobby_player_with_last_id.RowID)+1
             while LobbyPlayers.query.filter_by(RowID=new_lobby_players_id).first() != None: # Guarantees that new_tag_id is unique id
                 new_lobby_players_id += 1
+
         new_lobby_player = LobbyPlayers(
             RowID=new_lobby_players_id,
             LobbyID=new_lobby_id,

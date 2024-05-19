@@ -32,8 +32,6 @@ class Users(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.Password, password)
-    def is_admin(self):
-        return self.IsAdmin == 1
     
     def get_id(self):
         return self.UID

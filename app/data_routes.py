@@ -71,8 +71,12 @@ def get_lobby_cards():
     for lobby in lobbies:
         lobby_time_query = LobbyTimes.query.filter_by(LobbyID=lobby.LobbyID)
         lobby_time_list = lobby_time_query.all()
+
+        # TODO: Also add day of week
         next_available_time = (
-            str(lobby_time_list[0]) if len(lobby_time_list) > 0 else "No times available"
+            lobby_time_list[0].TimeBlockStart # TODO: Run this through function for formatting
+            if len(lobby_time_list) > 0
+            else "No times available"
         )
 
         player_usernames = [player.Username for player in lobby.players]

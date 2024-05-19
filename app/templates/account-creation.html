@@ -11,13 +11,13 @@
   <form id="login" class="account-form" action="{{ url_for('login_request') }}" method="post" onsubmit="return validateSignup(id)">
     {{ login_form.hidden_tag() }}
     <h1 class="text-center">Login</h1>
-    {{ login_form.email.label }}
+    {{ login_form.email.label }}:
     <br>
-    {{ login_form.email() }}
+    {{ login_form.email(placeholder="Email") }}
     <br><br>
-    {{ login_form.password.label }}
+    {{ login_form.password.label }}:
     <br>
-    {{ login_form.password() }}
+    {{ login_form.password(placeholder="Password") }}
     <br><br>
     {{ login_form.submit() }}
   </form>
@@ -25,17 +25,17 @@
   <form id="sign-up" class="account-form" action="{{ url_for('signup_request') }}" method="post" onsubmit="return validateSignup(id)">
     {{ signup_form.hidden_tag() }}
     <h1 class="text-center">Sign Up</h1>
-    {{ signup_form.email.label }}
+    {{ signup_form.email.label }}:
     <br>
-    {{ signup_form.email() }}
+    {{ signup_form.email(placeholder="Email") }}
     <br><br>
-    {{ signup_form.username.label }}
+    {{ signup_form.username.label }}:
     <br>
-    {{ signup_form.username() }}
+    {{ signup_form.username(placeholder="Username") }}
     <br><br>
-    {{ signup_form.password.label }}
+    {{ signup_form.password.label }}:
     <br>
-    {{ signup_form.password() }}
+    {{ signup_form.password(placeholder="Password") }}
     <br><br>
     {{ signup_form.submit() }}
   </form>

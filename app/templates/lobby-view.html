@@ -74,11 +74,13 @@
       </p>
       <div id="time-schedule">
         <p class="d-inline large-text">Time Schedule:</p>
-        {% for time_block in lobby.time_blocks %}
-          <div>
-          {{ time_block.Repeat }}: {{ time_block.TimeBlockStart }}-{{ time_block.TimeBlockEnd }}
-          </div>
-        {% endfor %}
+        {% if lobby.time_blocks %}
+          {% for time_block in lobby.time_blocks %}
+            <div>
+            {{ time_block.DayOfWeek }}: {{ time_block.TimeBlockStart }}-{{ time_block.TimeBlockEnd }}
+            </div>
+          {% endfor %}
+        {% endif %}
         <table>
           <tr>
             <th>Day</th>

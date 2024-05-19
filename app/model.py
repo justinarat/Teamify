@@ -95,9 +95,8 @@ class LobbyTimes(db.Model):
     RowID = db.Column(db.Text(), primary_key=True, unique=True, nullable=False)
     LobbyID = db.Column(db.Text(), db.ForeignKey("Lobby.LobbyID", name="fk_lobby_times_lobby"), nullable=False)
     TimeBlockStart = db.Column(db.Text(), nullable=False)
-    Repeat = db.Column(db.Text(), nullable=False)
+    DayOfWeek = db.Column(db.Text(), nullable=False)
     TimeBlockEnd = db.Column(db.Text(), nullable=False)
-    lobbyRel = db.relationship('Lobby', backref='lobby1', lazy=True)
 
 
 class UserTracker(db.Model):

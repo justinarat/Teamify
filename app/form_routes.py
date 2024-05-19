@@ -156,9 +156,9 @@ def create_lobby_request():
                 new_lobby_time = LobbyTimes(
                     RowID=new_lobby_time_id,
                     LobbyID=new_lobby_id,
-                    TimeBlockStart=time_from,
+                    TimeBlockStart=time_from.strftime("%H:%M"),
                     DayOfWeek=i,
-                    TimeBlockEnd=time_to
+                    TimeBlockEnd=time_to.strftime("%H:%M")
                 )
                 db.session.add(new_lobby_time)
         

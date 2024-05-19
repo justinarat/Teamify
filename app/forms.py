@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import EmailField, PasswordField, StringField, SubmitField, SelectField, IntegerField, TimeField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Optional
 class SignUpForm(FlaskForm):
     email = EmailField("Email", validators=[DataRequired()])
     username = StringField("Username", validators=[DataRequired()])
@@ -18,7 +18,7 @@ class CreateLobbyForm(FlaskForm):
         super(CreateLobbyForm, self).__init__(*args, **kwargs)
         self.game_select.choices = [(title, title) for title in game_titles]
     game = StringField(validators=[DataRequired()], render_kw={"list": "game-options", "placeholder": "Search Games"})
-    game_select = SelectField("Game Title")
+    game_select = SelectField("Game Title", validators=[Optional()])
     lobby_name = StringField("Lobby Name", validators=[DataRequired()], render_kw={"placeholder": "Enter Lobby Name"})
     lobby_description = StringField("Lobby Description", validators=[DataRequired()], render_kw={"placeholder": "Enter Lobby Description"})
     capacity = IntegerField("Capacity", validators=[DataRequired()], render_kw={"placeholder": "Enter Max Capacity"})
@@ -26,25 +26,25 @@ class CreateLobbyForm(FlaskForm):
     tag2 = StringField(render_kw={"placeholder": "Enter Tag Name"})
     tag3 = StringField(render_kw={"placeholder": "Enter Tag Name"})
     
-    mon_from = TimeField("From:", format='%H:%M') 
-    mon_to = TimeField("To:", format='%H:%M') 
+    mon_from = TimeField("From:", format='%H:%M', validators=[Optional()]) 
+    mon_to = TimeField("To:", format='%H:%M', validators=[Optional()]) 
     
-    tue_from = TimeField("From:", format='%H:%M') 
-    tue_to = TimeField("To:", format='%H:%M') 
+    tue_from = TimeField("From:", format='%H:%M', validators=[Optional()]) 
+    tue_to = TimeField("To:", format='%H:%M', validators=[Optional()]) 
     
-    wed_from = TimeField("From:", format='%H:%M') 
-    wed_to = TimeField("To:", format='%H:%M') 
+    wed_from = TimeField("From:", format='%H:%M', validators=[Optional()]) 
+    wed_to = TimeField("To:", format='%H:%M', validators=[Optional()]) 
     
-    thu_from = TimeField("From:", format='%H:%M') 
-    thu_to = TimeField("To:", format='%H:%M') 
+    thu_from = TimeField("From:", format='%H:%M', validators=[Optional()]) 
+    thu_to = TimeField("To:", format='%H:%M', validators=[Optional()]) 
     
-    fri_from = TimeField("From:", format='%H:%M') 
-    fri_to = TimeField("To:", format='%H:%M') 
+    fri_from = TimeField("From:", format='%H:%M', validators=[Optional()]) 
+    fri_to = TimeField("To:", format='%H:%M', validators=[Optional()]) 
     
-    sat_from = TimeField("From:", format='%H:%M') 
-    sat_to = TimeField("To:", format='%H:%M') 
+    sat_from = TimeField("From:", format='%H:%M', validators=[Optional()]) 
+    sat_to = TimeField("To:", format='%H:%M', validators=[Optional()]) 
     
-    sun_from = TimeField("From:", format='%H:%M') 
-    sun_to = TimeField("To:", format='%H:%M') 
+    sun_from = TimeField("From:", format='%H:%M', validators=[Optional()]) 
+    sun_to = TimeField("To:", format='%H:%M', validators=[Optional()]) 
     
     submit = SubmitField("Create Lobby")

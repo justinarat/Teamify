@@ -1,4 +1,4 @@
-# cits3403-project
+# Teamify
 
 ## About the project
 
@@ -10,8 +10,6 @@
 | 23431003 | Dominic Davies | dominictdavies |
 | 23395411  | John Giampaolo | JohnGiampaolo |
 | 22992693  | Fatimah Ali O Aljanobi | FAljanobi |
-
-## Summary of Application Architecture
 
 ## How to launch the application
 

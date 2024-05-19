@@ -17,7 +17,7 @@ from app.model import (
 
 
 def empty_db():
-    print("Emptying database...")
+    print("Emptying database")
     db.session.query(Games).delete()
     db.session.query(Tags).delete()
     db.session.query(Users).delete()
@@ -120,21 +120,22 @@ def seed_lobby_times():
 
 
 def seed_table(table, data):
-    print(f"Seeding {table}...")
+    print(f"Seeding {table}")
     db.session.add_all(data)
 
 
 def seed_required():
+    # Seed required data
     seed_games()
     # TODO: Seed Admin
 
-    print("Database committed with required seed data!")
+    # Commit all changes
+    db.session.commit()
+
+    print("Database committed with required seed data successfully!")
 
 
 def seed_all():
-    # Empty the database
-    empty_db()
-
     # Seed all data
     seed_games()
     seed_tags()
@@ -148,9 +149,10 @@ def seed_all():
     # Commit all changes
     db.session.commit()
 
-    print("Database committed with all seed data!")
+    print("Database committed with all seed data successfully!")
 
 
 if __name__ == "__main__":
     with app.app_context():
+        empty_db()
         seed_all()

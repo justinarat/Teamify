@@ -1,17 +1,36 @@
 {% extends "base.html" %}
 
-{% block css %}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="static/css/introduction.css">
+{% endblock %}
+
 
 {% block headScripts %}{% endblock %}
 
 {% block content %}
 <main id="content" class="container">
   <article class="text-center">
-    <h1>Introduction</h1>
-    <p>
-      Welcome to [name of website], a tool that'll allow you to gather a group of players to play whatever game
-      you'd like!
-    </p>
+    <br><br>
+    <div class="row">
+      <h1>Hello There!</h1>
+      <p class="fs-4">
+        Have you ever wanted to play a game with other people but didn't know who with?
+        If so, welcome to Teamify - a tool that'll allow you to gather a group of players to play whatever game
+        you'd like!
+      </p>
+    </div>
+    <br><br>
+    <div class="row">
+      <div class="col-sm-4">
+        <a class="btn btn-outline-info btn-lg" href="{{ url_for('games_view') }}" role="button">Browse Games</a>
+      </div>
+      <div class="col-sm-4">
+        <a class="btn btn-outline-info btn-lg" href="{{ url_for('lobby_searching') }}" role="button">Browse Lobbies</a>
+      </div>
+      <div class="col-sm-4">
+        <a class="btn btn-outline-info btn-lg" href="{{ url_for('lobby_making') }}" role="button">Make Lobby</a>
+      </div>
+    </div>
   </article>
 </main>
 {% endblock %}

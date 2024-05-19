@@ -1,8 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import EmailField, PasswordField, StringField, SubmitField, SelectField, IntegerField
 from wtforms.validators import DataRequired
-from app.model import Games
-
 class SignUpForm(FlaskForm):
     email = EmailField("Email", validators=[DataRequired()])
     username = StringField("Username", validators=[DataRequired()])
@@ -24,5 +22,7 @@ class CreateLobbyForm(FlaskForm):
     lobby_name = StringField("Lobby Name", validators=[DataRequired()], render_kw={"placeholder": "Enter Lobby Name"})
     lobby_description = StringField("Lobby Description", validators=[DataRequired()], render_kw={"placeholder": "Enter Lobby Description"})
     capacity = IntegerField("Capacity", validators=[DataRequired()], render_kw={"placeholder": "Enter Max Capacity"})
-    tag1 = StringField(validators=[])
+    tag1 = StringField(render_kw={"placeholder": "Enter Tag Name"})
+    tag2 = StringField(render_kw={"placeholder": "Enter Tag Name"})
+    tag3 = StringField(render_kw={"placeholder": "Enter Tag Name"})
     #input field value attribute

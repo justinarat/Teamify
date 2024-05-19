@@ -23,7 +23,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav me-auto">
       <li class="nav-item">
         <a class="nav-link" href="{{ url_for('introduction') }}">Home</a>
       </li>
@@ -39,6 +39,8 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ url_for('lobby_view') }}">View Lobby</a>
       </li>
+    </ul>
+    <ul class="navbar-nav ms-auto">
       <li class="nav-item">
         <a class="nav-link" href="{{ url_for('my_lobbies') }}">My Lobbies</a>
       </li>

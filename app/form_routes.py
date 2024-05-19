@@ -147,15 +147,19 @@ def create_lobby_request():
             
             if time_from is not None and time_to is not None:
                 lobby_time_with_last_id=LobbyTimes.query.order_by(desc(LobbyTimes.RowID)).first()
-                new_lobby_time_id = int(lobby_time_with_last_id.RowID)+1
-                while LobbyTimes.query.filter_by(RowID=new_lobby_time_id).first() != None: # Guarantees that new_tag_id is unique id
-                    new_lobby_time_id += 1
+                new_lobby_time_id = 0
+                if (lobby_time_with_last_id == None):
+                    new_lobby_time_id = 1
+                else:
+                    new_lobby_time_id = int(lobby_time_with_last_id.RowID)+1
+                    while LobbyTimes.query.filter_by(RowID=new_lobby_time_id).first() != None: # Guarantees that new_tag_id is unique id
+                        new_lobby_time_id += 1
                     
                 new_lobby_time = LobbyTimes(
                     RowID=new_lobby_time_id,
                     LobbyID=new_lobby_id,
                     TimeBlockStart=time_from,
-                    Repeat=i,
+                    DayOfWeek=i,
                     TimeBlockEnd=time_to
                 )
                 db.session.add(new_lobby_time)
@@ -166,13 +170,29 @@ def create_lobby_request():
             Desc=lobby_description, 
             Name=lobby_name, 
             maxPlayers=capacity
-            )
+        )
         db.session.add(new_lobby)
+
+        lobby_player_with_last_id=LobbyPlayers.query.order_by(desc(LobbyPlayers.RowID)).first()
+        new_lobby_players_id = 0
+        if (lobby_player_with_last_id == None):
+            new_lobby_players_id = 1
+        else:
+            new_lobby_players_id = int(lobby_player_with_last_id.RowID)+1
+            while LobbyPlayers.query.filter_by(RowID=new_lobby_players_id).first() != None: # Guarantees that new_tag_id is unique id
+                new_lobby_players_id += 1
+        new_lobby_player = LobbyPlayers(
+            RowID=new_lobby_players_id,
+            LobbyID=new_lobby_id,
+            UserID=current_user.get_id(),
+            Authority="host"
+        )
+        db.session.add(new_lobby_player)
         
         db.session.commit()
         
         # introduction for the sake of testing
-        return redirect(url_for("introduction"))
+        return redirect(url_for("lobby_view", lobby_id=new_lobby_id))
     print(create_lobby_form.errors)
     print("Form data:", create_lobby_form.data)
     return "Form validation failed. Please try again.", 400

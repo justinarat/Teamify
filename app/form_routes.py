@@ -83,11 +83,11 @@ def create_lobby_request():
         lobby_description = create_lobby_form.lobby_description.data
         capacity = create_lobby_form.capacity.data
         
-        tag1 = create_lobby_form.tag1.data
-        tag2 = create_lobby_form.tag2.data
-        tag3 = create_lobby_form.tag3.data
-        
-        tag_data_list = [tag1, tag2, tag3]
+        tag_data_list = [
+            create_lobby_form.tag1.data,
+            create_lobby_form.tag2.data,
+            create_lobby_form.tag3.data
+            ]
         
         for tag_name in tag_data_list:
             tag = Tags.query.filter_by(Name=tag_name).first() #check if tag name already exists
@@ -97,7 +97,7 @@ def create_lobby_request():
                 new_tag_id = int(tag_with_last_id.TagID)+1 # Gets theoretically new tag id
                 while Tags.query.filter_by(TagID=new_tag_id).first() != None: # Guarantees that new_tag_id is unique id
                     new_tag_id += 1
-                tagId = new_tag_id
+                tagID = new_tag_id
                 new_tag = Tags(TagID=tagID, Name=tag_name)
                 db.session.add(new_tag)
             else:
@@ -141,8 +141,7 @@ def create_lobby_request():
             GameID=gameID,
             Desc=lobby_description, 
             Name=lobby_name, 
-            maxPlayers=capacity,
-            # tags=
+            maxPlayers=capacity
             )
         db.session.add(new_lobby)
         

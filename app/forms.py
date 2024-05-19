@@ -26,24 +26,24 @@ class CreateLobbyForm(FlaskForm):
     tag2 = StringField(render_kw={"placeholder": "Enter Tag Name"})
     tag3 = StringField(render_kw={"placeholder": "Enter Tag Name"})
     
-    mon_from = TimeField("From:") 
-    mon_to = TimeField("To:") 
+    mon_from = TimeField("From:", format='%H:%M') 
+    mon_to = TimeField("To:", format='%H:%M') 
     
-    tue_from = TimeField("From:") 
-    tue_to = TimeField("To:") 
+    tue_from = TimeField("From:", format='%H:%M') 
+    tue_to = TimeField("To:", format='%H:%M') 
     
-    wed_from = TimeField("From:") 
-    wed_to = TimeField("To:") 
+    wed_from = TimeField("From:", format='%H:%M') 
+    wed_to = TimeField("To:", format='%H:%M') 
     
-    thu_from = TimeField("From:") 
-    thu_to = TimeField("To:") 
+    thu_from = TimeField("From:", format='%H:%M') 
+    thu_to = TimeField("To:", format='%H:%M') 
     
-    fri_from = TimeField("From:") 
-    fri_to = TimeField("To:") 
+    fri_from = TimeField("From:", format='%H:%M') 
+    fri_to = TimeField("To:", format='%H:%M') 
     
-    sat_from = TimeField("From:") 
-    sat_to = TimeField("To:") 
+    sat_from = TimeField("From:", format='%H:%M') 
+    sat_to = TimeField("To:", format='%H:%M') 
     
-    sun_from = TimeField("From:") 
-    sun_to = TimeField("To:") 
+    sun_from = TimeField("From:", format='%H:%M') 
+    sun_to = TimeField("To:", format='%H:%M') 
     #input field value attribute

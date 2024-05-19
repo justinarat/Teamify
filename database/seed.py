@@ -29,10 +29,11 @@ def empty_db():
 
 
 def seed_games():
-    data = [
-        Games(UID="1", Name="Game1"),
-        Games(UID="2", Name="Game2"),
-    ]
+    data = []
+
+    with open("database/games.txt", "r", encoding="utf-8") as file:
+        for i, line in enumerate(file):
+            data.append(Games(UID=i, Name=line.strip()))
 
     seed_table("Games", data)
 
@@ -62,15 +63,13 @@ def seed_users():
 def seed_user_tracker():
     data = [
         UserTracker(
-            RowID="1",
-            LobbyID="1",
+            Time="10/5/2024 12:11:59",
             UserID="1",
             Action="Joined",
             Desc="User1 joined the lobby",
         ),
         UserTracker(
-            RowID="2",
-            LobbyID="2",
+            Time="10/5/2024 17:30:24",
             UserID="2",
             Action="Joined",
             Desc="User2 joined the lobby",

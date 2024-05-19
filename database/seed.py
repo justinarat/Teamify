@@ -17,7 +17,7 @@ from app.model import (
 
 
 def empty_db():
-    print("Emptying database")
+    print("Emptying database...\n")
     db.session.query(Games).delete()
     db.session.query(Tags).delete()
     db.session.query(Users).delete()
@@ -139,7 +139,7 @@ def seed_lobby_times():
 
 
 def seed_table(table, data):
-    print(f"Seeding {table}")
+    print(f"Seeding {table}...")
     db.session.add_all(data)
 
 
@@ -167,7 +167,7 @@ def seed_all():
     # Commit all changes
     db.session.commit()
 
-    print("Database committed with all seed data successfully!")
+    print("\nDatabase committed with all seed data successfully!")
 
 
 if __name__ == "__main__":

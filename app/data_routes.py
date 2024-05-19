@@ -73,7 +73,7 @@ def get_lobby_cards():
         lobby_card = {
             "lobby_id": lobby.LobbyID,
             "game_title": lobby.game.Name,
-            "lobby_name": "Lobby Name",  # TODO: Change to lobby.Name when that's been merged
+            "lobby_name": lobby.Name,
             "lobby_description": lobby.Desc,
             "host": lobby.get_host().Username,
             "players": player_usernames,

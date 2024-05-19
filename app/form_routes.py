@@ -189,7 +189,7 @@ def create_lobby_request():
             RowID=new_lobby_players_id,
             LobbyID=new_lobby_id,
             UserID=current_user.get_id(),
-            Authority="host"
+            IsHost=1
         )
         db.session.add(new_lobby_player)
         
@@ -251,7 +251,7 @@ def join_lobby_request():
         RowID=new_row_id,
         LobbyID=lobby_id, 
         UserID=current_user.UID, 
-        Authority="player"
+        IsHost=0
     )
     db.session.add(new_lobby_player)
     db.session.commit()

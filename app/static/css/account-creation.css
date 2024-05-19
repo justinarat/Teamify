@@ -1,0 +1,21 @@
+.account-form:first-child {
+  margin-top: 20px;
+}
+
+.account-form {
+  background-color: rgb(26, 28, 39);
+  border-radius: 10px;
+
+  width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 16px;
+}
+
+.account-form input[type="email"],
+.account-form input[type="password"],
+.account-form input[type="text"] {
+  width: 100%;
+}
+

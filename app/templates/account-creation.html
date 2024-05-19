@@ -1,33 +1,40 @@
 {% extends "base.html" %}
 
-{% block css %}{% endblock %}
+{% block css %}
+  <link rel="stylesheet" href="static/css/account-creation.css">
+{% endblock %}
 
 {% block headScripts %}{% endblock %}
 
 {% block content %}
 <main class="container">
-  <form id="login" action="{{ url_for('login_request') }}" method="post" onsubmit="return validateSignup(id)">
+  <form id="login" class="account-form" action="{{ url_for('login_request') }}" method="post" onsubmit="return validateSignup(id)">
     {{ login_form.hidden_tag() }}
     <h1 class="text-center">Login</h1>
     {{ login_form.email.label }}
+    <br>
     {{ login_form.email() }}
     <br><br>
     {{ login_form.password.label }}
+    <br>
     {{ login_form.password() }}
     <br><br>
     {{ login_form.submit() }}
   </form>
   <br>
-  <form id="sign-up" action="{{ url_for('signup_request') }}" method="post" onsubmit="return validateSignup(id)">
+  <form id="sign-up" class="account-form" action="{{ url_for('signup_request') }}" method="post" onsubmit="return validateSignup(id)">
     {{ signup_form.hidden_tag() }}
     <h1 class="text-center">Sign Up</h1>
     {{ signup_form.email.label }}
+    <br>
     {{ signup_form.email() }}
     <br><br>
     {{ signup_form.username.label }}
+    <br>
     {{ signup_form.username() }}
     <br><br>
     {{ signup_form.password.label }}
+    <br>
     {{ signup_form.password() }}
     <br><br>
     {{ signup_form.submit() }}

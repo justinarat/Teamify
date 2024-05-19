@@ -2,7 +2,7 @@
 
 from flask import request, make_response, jsonify
 from app import app
-from app.model import Lobby, Games
+from app.model import Lobby, LobbyTimes, Games
 
 
 @app.route("/get-lobby-cards", methods=["GET"])
@@ -69,8 +69,13 @@ def get_lobby_cards():
 
     lobby_cards = []
     for lobby in lobbies:
+        lobby_time_query = LobbyTimes.query.filter_by(LobbyID=lobby.LobbyID)
+        lobby_time_list = lobby_time_query.all()
+        next_available_time = (
+            str(lobby_time_list[0]) if len(lobby_time_list) > 0 else "No times available"
+        )
+
         player_usernames = [player.Username for player in lobby.players]
-        next_available_time = ""  # TODO
         lobby_card = {
             "lobby_id": lobby.LobbyID,
             "game_title": lobby.game.Name,

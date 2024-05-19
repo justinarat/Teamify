@@ -94,8 +94,7 @@ function createLobbyCard(lobbyCardData) {
 
   const timeTableDiv = document.createElement("div");
   timeTableDiv.classList.add("lobby-time-schedule");
-  let nextAvailableTime = ""; // TODO
-  timeTableDiv.innerHTML = "next time = " + nextAvailableTime;
+  timeTableDiv.innerHTML = "next time = " + lobbyCardData.next_available_time;
 
   lobbyCard.appendChild(lobbyCardBodyDiv);
   lobbyCardBodyDiv.appendChild(gameNameHeader);

@@ -97,10 +97,12 @@ def create_lobby_request():
                 tag = Tags.query.filter_by(Name=tag_name).first() #check if tag name already exists
                 tagID = 0
                 if tag == None:
+                    new_tag_id = 1;
                     tag_with_last_id=Tags.query.order_by(desc(Tags.TagID)).first()
-                    new_tag_id = int(tag_with_last_id.TagID)+1 # Gets theoretically new tag id
-                    while Tags.query.filter_by(TagID=new_tag_id).first() != None: # Guarantees that new_tag_id is unique id
-                        new_tag_id += 1
+                    if tag_with_last_id != None:
+                        new_tag_id = int(tag_with_last_id.TagID)+1 # Gets theoretically new tag id
+                        while Tags.query.filter_by(TagID=new_tag_id).first() != None: # Guarantees that new_tag_id is unique id
+                            new_tag_id += 1
                     tagID = new_tag_id
                     new_tag = Tags(TagID=tagID, Name=tag_name)
                     db.session.add(new_tag)

@@ -69,16 +69,6 @@ def get_lobby_cards():
 
     lobby_cards = []
     for lobby in lobbies:
-        lobby_time_query = LobbyTimes.query.filter_by(LobbyID=lobby.LobbyID)
-        lobby_time_list = lobby_time_query.all()
-
-        # TODO: Also add day of week
-        next_available_time = (
-            lobby_time_list[0].TimeBlockStart # TODO: Run this through function for formatting
-            if len(lobby_time_list) > 0
-            else "No times available"
-        )
-
         player_usernames = [player.Username for player in lobby.players]
         lobby_card = {
             "lobby_id": lobby.LobbyID,
@@ -87,7 +77,7 @@ def get_lobby_cards():
             "lobby_description": lobby.Desc,
             "host": lobby.get_host().Username,
             "players": player_usernames,
-            "next_available_time": next_available_time,
+            "next_available_time": get_next_available_time(lobby),
         }
         lobby_cards.append(lobby_card)
 
@@ -107,3 +97,17 @@ def search_db(count, search_string, search_tags):
         lobby_query = lobby_query.join(Games).filter(Games.Name.contains(search_string))
 
     return lobby_query.limit(count).all()
+
+
+def get_next_available_time(lobby):
+    """Returns the next available time for a lobby"""
+    lobby_time_query = LobbyTimes.query.filter_by(LobbyID=lobby.LobbyID)
+    lobby_time_list = lobby_time_query.all()
+
+    next_time_str = "No available times"
+    if len(lobby_time_list) > 0:
+        next_time = lobby_time_list[0]
+        day = LobbyTimes.get_day_string(next_time)
+        next_time_str = f"{day}: {next_time.TimeBlockStart} - {next_time.TimeBlockEnd}"
+
+    return next_time_str

@@ -80,8 +80,18 @@ class Lobby(db.Model):
     def get_host(self):  # There's probably be a better way of doing this
         host_rel = LobbyPlayers.query.filter_by(LobbyID=self.LobbyID, IsHost=1).first()
         if host_rel == None:
-            return Users.query.filter_by(UID=0).first()
+            return self._get_missing_user()
         return Users.query.filter_by(UID=host_rel.UserID).first()
+
+    def _get_missing_user(self):
+        return Users(
+            UID=9999999999,
+            Username="MissingUser",
+            Password="",
+            Email="",
+            IsAdmin=0
+        )
+
 
 
 class LobbyPlayers(db.Model):

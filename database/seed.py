@@ -161,7 +161,6 @@ def seed_all():
     seed_users(only_required=False)
     seed_lobbies()
     seed_lobby_players()
-    # TODO: Seed lobby_tags
     seed_lobby_times()
     seed_user_tracker()
 
@@ -172,6 +171,13 @@ def seed_all():
 
 
 if __name__ == "__main__":
+    if len(sys.argv) > 2:
+        print("Usage: python3 seed.py <all/required>")
+        sys.exit(1)
+
     with app.app_context():
         empty_db()
-        seed_all()
+        if len(sys.argv) == 1 or sys.argv[1] != "all":
+            seed_required()
+        else:
+            seed_all()

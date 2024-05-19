@@ -22,7 +22,7 @@ import click
 @click.argument("all_str", type=str, default="required", required=False)
 def seed_command(all_str):
     """Seeds the database with just required, or all data"""
-    print("Dropping all tables...\n")
+    print("Dropping all data...\n")
     db.drop_all()
 
     db.create_all()

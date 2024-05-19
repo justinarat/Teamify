@@ -13,7 +13,7 @@
 
 ## Summary of Application Architecture
 
-## How to launch the application
+## Launching the application
 
 1. Create a virtual environment `python3 -m venv .venv`
 2. Activate the virtual environment `source .venv/bin/activate`
@@ -24,7 +24,14 @@
     `set CITS3403_FLASK_SECRET_KEY="poor secret"`
 5. Start up the flask server `flask run`
 
-## How to run the tests
+## Creating and seeding the database
+
+1. Run `flask db upgrade` to construct the database
+2. Run `flask seed` to seed the database with required data
+
+Extra testing data can be seeded instead with `flask seed all`
+
+## Running tests
 
 First, in a separate terminal start up the flask server if it's not running:
 `flask run`

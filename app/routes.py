@@ -25,14 +25,6 @@ def lobby_making():
   game_titles = game_titles[1:]
   game_titles.sort()
   lobby_making_form = CreateLobbyForm(game_titles=game_titles)
-  
-  if lobby_making_form.validate_on_submit():
-    mon_from = lobby_making_form.mon_from.data
-    mon_to = lobby_making_form.mon_to.data
-        
-      # Perform your processing here
-    print("From:", mon_from)  # Example: From: 14:30:00
-    print("To:", mon_to)      # E
   return render_template("lobby-making.html", lobby_making_form=lobby_making_form)
 
 @app.route("/lobby", methods=["GET"])

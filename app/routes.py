@@ -25,7 +25,7 @@ def lobby_making():
   game_titles = game_titles[1:]
   game_titles.sort()
   lobby_making_form = CreateLobbyForm(game_titles=game_titles)
-  return render_template("lobby-making.html", lobby_making_form=lobby_making_form)
+  return render_template("lobby-making.html", title="Create Lobby", lobby_making_form=lobby_making_form)
 
 @app.route("/lobby", methods=["GET"])
 @login_required

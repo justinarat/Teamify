@@ -1,6 +1,6 @@
 from app import app, db
-from app.model import Lobby, Users, LobbyPlayers
-from app.forms import LoginForm, SignUpForm
+from app.model import Lobby, Users, LobbyPlayers, Games, Tags
+from app.forms import LoginForm, SignUpForm, CreateLobbyForm
 from flask import render_template, url_for, redirect, flash, request, session
 from flask_login import login_user, current_user, login_required, logout_user
 from sqlalchemy import desc
@@ -59,6 +59,83 @@ def signup_request():
             login_form = LoginForm({}) # {} is to init signup_form with empty data as for some reason it shares data with login_form
             return render_template("account-creation.html", title="Login or Sign Up", 
                     login_form=login_form, signup_form=signup_form)
+
+@app.route("/create-lobby-request")
+@login_required
+def create_lobby_request():
+    """Handles lobby making requests
+    
+        Redirects user to page of lobby they just created
+    """
+    create_lobby_form = CreateLobbyForm()
+    
+    if create_lobby_form.validate_on_submit():
+        
+        lobby_with_last_id = Lobby.query.order_by(desc(Lobby.LobbyID)).first()
+        new_lobby_id = int(lobby_with_last_id.LobbyID)+1
+        while Lobby.query.filter_by(LobbyID=new_lobby_id).first() != None: # Guarantees that new_lobby_id is unique
+            new_lobby_id += 1
+            
+        game = create_lobby_form.game.data
+        gameID = int(Games.query.filter_by(Name=game).first().UID)
+        
+        lobby_name = create_lobby_form.lobby_name.data
+        lobby_description = create_lobby_form.lobby_description.data
+        capacity = create_lobby_form.capacity.data
+        
+        tag1 = create_lobby_form.tag1.data
+        tag2 = create_lobby_form.tag2.data
+        tag3 = create_lobby_form.tag3.data
+        
+        tag_data_list = [tag1, tag2, tag3]
+        tag_list = []
+        
+        for tag_name in tag_data_list:
+            tag = Tags.query.filter_by(Name=tag_name).first() #check if tag name already exists
+            if tag == None:
+                tag_with_last_id=Tags.query.order_by(desc(Tags.TagID)).first()
+                new_tag_id = int(tag_with_last_id.TagID)+1 # Gets theoretically new tag id
+                while Tags.query.filter_by(TagID=new_tag_id).first() != None: # Guarantees that new_tag_id is unique id
+                    new_tag_id += 1
+                new_tag = Tags(TagID=new_tag_id, Name=tag_name)
+                db.session.add(new_tag)
+            else:
+                tag_list.append(tag)
+        
+        mon_from = create_lobby_form.mon_from.data
+        mon_to = create_lobby_form.mon_to.data
+        
+        tue_from = create_lobby_form.tue_from.data
+        tue_to = create_lobby_form.tue_to.data
+        
+        wed_from = create_lobby_form.wed_from.data
+        wed_to = create_lobby_form.wed_to.data
+        
+        thu_from = create_lobby_form.thu_from.data
+        thu_to = create_lobby_form.thu_to.data
+        
+        fri_from = create_lobby_form.fri_from.data
+        fri_to = create_lobby_form.fri_to.data
+        
+        sat_from = create_lobby_form.sat_from.data
+        sat_to = create_lobby_form.sat_to.data
+        
+        sun_from = create_lobby_form.sun_from.data
+        sun_to = create_lobby_form.sun_to.data
+        
+        new_lobby = Lobby(
+            LobbyID=new_lobby_id, 
+            GameID=gameID,
+            Desc=lobby_description, 
+            Name=lobby_name, 
+            maxPlayers=capacity,
+            # tags=
+            )
+        db.session.add(new_lobby)
+        
+        db.session.commit()
+        
+    return redirect(url_for("introduction"))
 
 @app.route("/logout-request")
 @login_required

@@ -126,8 +126,7 @@ class LobbyTimes(db.Model):
 
 class UserTracker(db.Model):
     __tablename__ = 'UserTracker'
-    RowID = db.Column(db.Text(), primary_key=True, unique=True, nullable=False)
-    LobbyID = db.Column(db.Text(), db.ForeignKey("Lobby.LobbyID", name="fk_user_tracker_lobby"), nullable=False)
+    Time = db.Column(db.Text(), primary_key=True, unique=True, nullable=False)
     UserID = db.Column(db.Text(), db.ForeignKey("Users.UID", name="fk_user_tracker_user"), nullable=False)
     Action = db.Column(db.Text(), nullable=False)
     Desc = db.Column(db.Text())

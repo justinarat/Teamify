@@ -65,7 +65,7 @@ class Lobby(db.Model):
         return self.get_curr_player_count() >= self.get_max_player_count()
 
     def get_host(self): # There's probably be a better way of doing this
-        host_rel = LobbyPlayers.query.filter_by(LobbyID=self.LobbyID, Authority="host").first()
+        host_rel = LobbyPlayers.query.filter_by(LobbyID=self.LobbyID, IsHost=1).first()
         if host_rel == None:
             return Users.query.filter_by(UID=0).first()
         return Users.query.filter_by(UID=host_rel.UserID).first()

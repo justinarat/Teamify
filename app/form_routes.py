@@ -1,5 +1,5 @@
 from app import app, db
-from app.model import Lobby, Users, LobbyPlayers, Games, Tags
+from app.model import Lobby, Users, LobbyPlayers, Games, Tags, LobbyTags
 from app.forms import LoginForm, SignUpForm, CreateLobbyForm
 from flask import render_template, url_for, redirect, flash, request, session
 from flask_login import login_user, current_user, login_required, logout_user
@@ -88,19 +88,32 @@ def create_lobby_request():
         tag3 = create_lobby_form.tag3.data
         
         tag_data_list = [tag1, tag2, tag3]
-        tag_list = []
         
         for tag_name in tag_data_list:
             tag = Tags.query.filter_by(Name=tag_name).first() #check if tag name already exists
+            tagID = 0
             if tag == None:
                 tag_with_last_id=Tags.query.order_by(desc(Tags.TagID)).first()
                 new_tag_id = int(tag_with_last_id.TagID)+1 # Gets theoretically new tag id
                 while Tags.query.filter_by(TagID=new_tag_id).first() != None: # Guarantees that new_tag_id is unique id
                     new_tag_id += 1
-                new_tag = Tags(TagID=new_tag_id, Name=tag_name)
+                tagId = new_tag_id
+                new_tag = Tags(TagID=tagID, Name=tag_name)
                 db.session.add(new_tag)
             else:
-                tag_list.append(tag)
+                tagID = int(tag.TagID)
+                
+            lobby_tag_with_last_id=LobbyTags.query.order_by(desc(LobbyTags.RowID)).first()
+            new_lobby_tag_id = int(lobby_tag_with_last_id.RowID)+1
+            while LobbyTags.query.filter_by(RowID=new_lobby_tag_id).first() != None: # Guarantees that new_tag_id is unique id
+                new_lobby_tag_id += 1
+            lobby_tag = LobbyTags(
+                RowID=new_lobby_tag_id,
+                LobbyID=new_lobby_id,
+                TagID=tagID
+            )
+            db.session.add(lobby_tag)
+            
         
         mon_from = create_lobby_form.mon_from.data
         mon_to = create_lobby_form.mon_to.data

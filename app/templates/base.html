@@ -13,59 +13,11 @@
     <link rel="stylesheet" href="static/css/base.css">
     {% block css %}{% endblock %}
 
-<<<<<<< HEAD
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-=======
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
   {% block headScripts %}{% endblock %}
->>>>>>> integration-branch
 </head>
 <body>
-<<<<<<< HEAD
-<nav id="header" class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">LFG</a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav me-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('introduction') }}">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('games_view') }}">Games</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('lobby_searching') }}">Search Lobby</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('lobby_making') }}">Make Lobby</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('lobby_view') }}">View Lobby</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ms-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('my_lobbies') }}">My Lobbies</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('admin') }}">Admin</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('account_creation') }}">Login Or Sign Up</a>
-      </li>
-    </ul>
-  </div>  
-</nav>
-<br>
-
-<div id="content1" class="container-fluid mt-1"> 
-    {% block content %}{% endblock %}
-</div>
-=======
   <nav id="header" class="navbar navbar-expand-sm navbar-dark fixed-top">
     <div class="container-fluid">
       <ul class="nav navbar-nav">
@@ -108,7 +60,6 @@
  
   {# the content block will contain the page content #}
   {% block content %}{% endblock %}
->>>>>>> integration-branch
 
 <script>
   $(document).ready(function() {
@@ -118,8 +69,4 @@
   });
 </script>
 </body>
-<<<<<<< HEAD
-=======
-
->>>>>>> integration-branch
 </html>

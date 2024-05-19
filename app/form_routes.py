@@ -1,5 +1,5 @@
 from app import app, db
-from app.model import Lobby, Users, LobbyPlayers, Games, Tags, LobbyTags, LobbyTimes
+from app.model import Lobby, Users, LobbyPlayers, Games, Tags, LobbyTags, LobbyTimes, UserTracker
 from app.forms import LoginForm, SignUpForm, CreateLobbyForm
 from flask import render_template, url_for, redirect, flash, request, session
 from flask_login import login_user, current_user, login_required, logout_user
@@ -20,6 +20,9 @@ def login_request():
             if user.check_password(password):
                 # Authentication successful, redirect to some page
                 login_user(user)
+
+                UserTracker.log_login(user)
+
                 return redirect(url_for("games_view"))
 
         # Authentication failed, redirect back to login page
@@ -51,6 +54,8 @@ def signup_request():
             db.session.commit()
 
             login_user(user)
+
+            UserTracker.log_signup(user)
 
             return redirect(url_for("games_view"))
         else:
@@ -190,7 +195,8 @@ def create_lobby_request():
         
         db.session.commit()
         
-        # introduction for the sake of testing
+        UserTracker.log_make_lobby(current_user, new_lobby)
+
         return redirect(url_for("lobby_view", lobby_id=new_lobby_id))
     print(create_lobby_form.errors)
     print("Form data:", create_lobby_form.data)
@@ -204,6 +210,9 @@ def logout_request():
         Redirects user to the introduction page.
     """
     logout_user()
+
+    UserTracker.log_logout(user)
+
     return redirect(url_for("introduction"))
 
 @app.route("/join-lobby-request", methods=["post"])
@@ -253,6 +262,8 @@ def join_lobby_request():
     flask_socketio.emit("player_join", data_to_send, to=lobby_id, namespace="/")
     session["lobby_id"] = lobby_id
 
+    UserTracker.log_join_lobby(current_user, lobby)
+
     return redirect(url_for("lobby_view", lobby_id=lobby_id))
 
 @app.route("/leave-lobby-request", methods=["post"])
@@ -273,5 +284,8 @@ def leave_lobby_request():
         "sender_username": current_user.Username
     }
     flask_socketio.emit("player_leave", data_to_send, to=lobby_id, namespace="/")
+
+    lobby = Lobby.query.filter_by(LobbyID=lobby_id).first()
+    UserTracker.log_leave_lobby(current_user, lobby)
 
     return redirect(url_for("lobby_searching"))

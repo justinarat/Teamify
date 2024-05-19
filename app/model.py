@@ -168,6 +168,21 @@ class UserTracker(db.Model):
         db.session.add(log)
         db.session.commit()
 
+    @classmethod
+    def log_logout(cls, user):
+        current_time = datetime.now().strftime(cls._TIME_FORMAT)
+        action = f"{current_time} - {user.Username} logged out."
+        desc = f"user_id = {user.UID}"
+
+        log = cls(
+            Time=current_time,
+            UserID=user.UID,
+            Action=action,           
+            Desc=desc           
+        )
+        
+        db.session.add(log)
+        db.session.commit()
 
     @classmethod
     def log_join_lobby(cls, user, lobby):

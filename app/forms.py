@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import EmailField, PasswordField, StringField, SubmitField, SelectField, IntegerField
+from wtforms import EmailField, PasswordField, StringField, SubmitField, SelectField, IntegerField, TimeField
 from wtforms.validators import DataRequired
 class SignUpForm(FlaskForm):
     email = EmailField("Email", validators=[DataRequired()])
@@ -25,4 +25,25 @@ class CreateLobbyForm(FlaskForm):
     tag1 = StringField(render_kw={"placeholder": "Enter Tag Name"})
     tag2 = StringField(render_kw={"placeholder": "Enter Tag Name"})
     tag3 = StringField(render_kw={"placeholder": "Enter Tag Name"})
+    
+    mon_from = TimeField("From:") 
+    mon_to = TimeField("To:") 
+    
+    tue_from = TimeField("From:") 
+    tue_to = TimeField("To:") 
+    
+    wed_from = TimeField("From:") 
+    wed_to = TimeField("To:") 
+    
+    thu_from = TimeField("From:") 
+    thu_to = TimeField("To:") 
+    
+    fri_from = TimeField("From:") 
+    fri_to = TimeField("To:") 
+    
+    sat_from = TimeField("From:") 
+    sat_to = TimeField("To:") 
+    
+    sun_from = TimeField("From:") 
+    sun_to = TimeField("To:") 
     #input field value attribute

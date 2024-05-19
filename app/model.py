@@ -75,8 +75,10 @@ class LobbyPlayers(db.Model):
     LobbyID = db.Column(db.Text(), db.ForeignKey("Lobby.LobbyID", name="fk_lobby_players_lobby"), nullable=False)
     UserID = db.Column(db.Text(), db.ForeignKey("Users.UID", name="fk_lobby_players_user"), nullable=False)
     Authority = db.Column(db.Text(), nullable=False)
+    
+    @classmethod
     def get_lobby_ids_by_user(cls, user_id):
-        results = db.session.query(cls.LobbyID).filter_by(user_id=user_id).all()
+        results = db.session.query(cls.LobbyID).filter_by(UserID=user_id).all()
         lbby_ids = [result.LobbyID for result in results]
         return lbby_ids
 

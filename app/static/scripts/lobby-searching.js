@@ -1,6 +1,4 @@
 $(document).ready(function () {
-  console.log("Page is now ready");
-
   const DEFAULT_LOBBY_CARD_COUNT = 21;
 
   loadLobbyCards(DEFAULT_LOBBY_CARD_COUNT, ""); // "world" is temp

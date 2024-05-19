@@ -23,7 +23,7 @@ def login_request():
                 return redirect(url_for("games_view"))
 
         # Authentication failed, redirect back to login page
-        flash("Invalid username or password")
+        flash("Invalid email or password")
         signup_form = SignUpForm({}) # {} is to init signup_form with empty data as for some reason it shares data with login_form
         return render_template("account-creation.html", title="Login or Sign Up", 
                 login_form=login_form, signup_form=signup_form)

@@ -32,6 +32,8 @@ class Users(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.Password, password)
+    def is_admin(self):
+        return self.IsAdmin == 1
     
     def get_id(self):
         return self.UID
@@ -54,6 +56,7 @@ class Lobby(db.Model):
     maxPlayers = db.Column(db.Integer(), default=4)
     players: Mapped[List[Users]] = db.relationship(secondary='LobbyPlayers', backref='lobbyPlayers', lazy=True)
     tags: Mapped[List[Tags]] = db.relationship(secondary='LobbyTags', backref='lobbyPlayers', lazy=True)
+    time_blocks = db.relationship('LobbyTimes', backref='lobbytimes', lazy=True)
 
     def get_curr_player_count(self):
         return len(self.players)
@@ -77,6 +80,12 @@ class LobbyPlayers(db.Model):
     LobbyID = db.Column(db.Text(), db.ForeignKey("Lobby.LobbyID", name="fk_lobby_players_lobby"), nullable=False)
     UserID = db.Column(db.Text(), db.ForeignKey("Users.UID", name="fk_lobby_players_user"), nullable=False)
     Authority = db.Column(db.Text(), nullable=False)
+    
+    @classmethod
+    def get_lobby_ids_by_user(cls, user_id):
+        results = db.session.query(cls.LobbyID).filter_by(UserID=user_id).all()
+        lbby_ids = [result.LobbyID for result in results]
+        return lbby_ids
 
     def is_host(self) -> bool:
         return self.Authority == "host"
@@ -96,7 +105,23 @@ class LobbyTimes(db.Model):
     TimeBlockStart = db.Column(db.Text(), nullable=False)
     DayOfWeek = db.Column(db.Text(), nullable=False)
     TimeBlockEnd = db.Column(db.Text(), nullable=False)
-    lobbyRel = db.relationship('Lobby', backref='lobby1', lazy=True)
+
+    def get_day_string(self):
+        if self.DayOfWeek == "0":
+            return "MON"
+        if self.DayOfWeek == "1":
+            return "TUE"
+        if self.DayOfWeek == "2":
+            return "WED"
+        if self.DayOfWeek == "3":
+            return "THU"
+        if self.DayOfWeek == "4":
+            return "FRI"
+        if self.DayOfWeek == "5":
+            return "SAT"
+        if self.DayOfWeek == "6":
+            return "SUN"
+        return "TIME"
 
 
 class UserTracker(db.Model):

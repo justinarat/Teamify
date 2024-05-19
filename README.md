@@ -1,15 +1,15 @@
-# cits3403-project
+# Teamify
 
 ## About the project
 
 ## Project Group
 
-| UWA ID   | Name        | Github     |
-| -------- | ----------- | ---------- |
-| 23080798 | Justin Arat | justinarat |
-| 23431003 | Dominic Davies | dominictdavies |
-| 23395411  | John Giampaolo | JohnGiampaolo |
-| 22992693  | Fatimah Ali O Aljanobi | FAljanobi |
+| UWA ID   | Name                   | Github         |
+|----------|------------------------|----------------|
+| 23080798 | Justin Arat            | justinarat     |
+| 23431003 | Dominic Davies         | dominictdavies |
+| 23395411 | John Giampaolo         | JohnGiampaolo  |
+| 22992693 | Fatimah Ali O Aljanobi | FAljanobi      |
 
 ## Summary of Application Architecture
 
@@ -19,9 +19,9 @@
 2. Activate the virtual environment `source .venv/bin/activate`
 3. Install project requirements `pip install -r requirements.txt`
 4. Set the environment variable (use a different key instead of "poor secret")
-    `export CITS3403_FLASK_SECRET_KEY="poor secret"` 
-	for windows:
-	`set CITS3403_FLASK_SECRET_KEY="poor secret"` 
+    `export CITS3403_FLASK_SECRET_KEY="poor secret"`
+    for windows:
+    `set CITS3403_FLASK_SECRET_KEY="poor secret"`
 5. Start up the flask server `flask run`
 
 ## How to run the tests

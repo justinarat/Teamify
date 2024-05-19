@@ -10,6 +10,7 @@
 <div id="lobby-making" class="container">
   <h2 id="lobby-making-title">Creating Lobby</h2>
   <form id="lobby-making-form" action="{{ url_for('create_lobby_request')}}" method="post">
+    {{ lobby_making_form.hidden_tag() }}
     <div class="row">
       <div class="col-sm-4">
         <h4>Game Description</h4>

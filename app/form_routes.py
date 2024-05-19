@@ -68,7 +68,6 @@ def create_lobby_request():
         Redirects user to page of lobby they just created
     """
     create_lobby_form = CreateLobbyForm()
-    
     if create_lobby_form.validate_on_submit():
         
         lobby_with_last_id = Lobby.query.order_by(desc(Lobby.LobbyID)).first()
@@ -90,29 +89,30 @@ def create_lobby_request():
             ]
         
         for tag_name in tag_data_list:
-            tag = Tags.query.filter_by(Name=tag_name).first() #check if tag name already exists
-            tagID = 0
-            if tag == None:
-                tag_with_last_id=Tags.query.order_by(desc(Tags.TagID)).first()
-                new_tag_id = int(tag_with_last_id.TagID)+1 # Gets theoretically new tag id
-                while Tags.query.filter_by(TagID=new_tag_id).first() != None: # Guarantees that new_tag_id is unique id
-                    new_tag_id += 1
-                tagID = new_tag_id
-                new_tag = Tags(TagID=tagID, Name=tag_name)
-                db.session.add(new_tag)
-            else:
-                tagID = int(tag.TagID)
-                
-            lobby_tag_with_last_id=LobbyTags.query.order_by(desc(LobbyTags.RowID)).first()
-            new_lobby_tag_id = int(lobby_tag_with_last_id.RowID)+1
-            while LobbyTags.query.filter_by(RowID=new_lobby_tag_id).first() != None: # Guarantees that new_tag_id is unique id
-                new_lobby_tag_id += 1
-            lobby_tag = LobbyTags(
-                RowID=new_lobby_tag_id,
-                LobbyID=new_lobby_id,
-                TagID=tagID
-            )
-            db.session.add(lobby_tag)
+            if tag_name is not None:
+                tag = Tags.query.filter_by(Name=tag_name).first() #check if tag name already exists
+                tagID = 0
+                if tag == None:
+                    tag_with_last_id=Tags.query.order_by(desc(Tags.TagID)).first()
+                    new_tag_id = int(tag_with_last_id.TagID)+1 # Gets theoretically new tag id
+                    while Tags.query.filter_by(TagID=new_tag_id).first() != None: # Guarantees that new_tag_id is unique id
+                        new_tag_id += 1
+                    tagID = new_tag_id
+                    new_tag = Tags(TagID=tagID, Name=tag_name)
+                    db.session.add(new_tag)
+                else:
+                    tagID = int(tag.TagID)
+                    
+                lobby_tag_with_last_id=LobbyTags.query.order_by(desc(LobbyTags.RowID)).first()
+                new_lobby_tag_id = int(lobby_tag_with_last_id.RowID)+1
+                while LobbyTags.query.filter_by(RowID=new_lobby_tag_id).first() != None: # Guarantees that new_tag_id is unique id
+                    new_lobby_tag_id += 1
+                lobby_tag = LobbyTags(
+                    RowID=new_lobby_tag_id,
+                    LobbyID=new_lobby_id,
+                    TagID=tagID
+                )
+                db.session.add(lobby_tag)
             
         time_froms = [
             create_lobby_form.mon_from.data,
@@ -138,19 +138,20 @@ def create_lobby_request():
             time_from = time_froms[i]
             time_to = time_tos[i]
             
-            lobby_time_with_last_id=LobbyTimes.query.order_by(desc(LobbyTimes.RowID)).first()
-            new_lobby_time_id = int(lobby_time_with_last_id.RowID)+1
-            while LobbyTimes.query.filter_by(RowID=new_lobby_time_id).first() != None: # Guarantees that new_tag_id is unique id
-                new_lobby_time_id += 1
-                
-            new_lobby_time = LobbyTimes(
-                RowID=new_lobby_time_id,
-                LobbyID=new_lobby_id,
-                TimeBlockStart=time_from,
-                Repeat=i,
-                TimeBlockEnd=time_to
-            )
-            db.session.add(new_lobby_time)
+            if time_from is not None and time_to is not None:
+                lobby_time_with_last_id=LobbyTimes.query.order_by(desc(LobbyTimes.RowID)).first()
+                new_lobby_time_id = int(lobby_time_with_last_id.RowID)+1
+                while LobbyTimes.query.filter_by(RowID=new_lobby_time_id).first() != None: # Guarantees that new_tag_id is unique id
+                    new_lobby_time_id += 1
+                    
+                new_lobby_time = LobbyTimes(
+                    RowID=new_lobby_time_id,
+                    LobbyID=new_lobby_id,
+                    TimeBlockStart=time_from,
+                    Repeat=i,
+                    TimeBlockEnd=time_to
+                )
+                db.session.add(new_lobby_time)
         
         new_lobby = Lobby(
             LobbyID=new_lobby_id, 
@@ -165,6 +166,8 @@ def create_lobby_request():
         
         # introduction for the sake of testing
         return redirect(url_for("introduction"))
+    print(create_lobby_form.errors)
+    print("Form data:", create_lobby_form.data)
     return "Form validation failed. Please try again.", 400
 
 @app.route("/logout-request")

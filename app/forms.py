@@ -18,7 +18,7 @@ class CreateLobbyForm(FlaskForm):
         super(CreateLobbyForm, self).__init__(*args, **kwargs)
         self.game_select.choices = [(title, title) for title in game_titles]
     game = StringField(validators=[DataRequired()], render_kw={"list": "game-options", "placeholder": "Search Games"})
-    game_select = SelectField("Game Title", validators=[DataRequired()])
+    game_select = SelectField("Game Title")
     lobby_name = StringField("Lobby Name", validators=[DataRequired()], render_kw={"placeholder": "Enter Lobby Name"})
     lobby_description = StringField("Lobby Description", validators=[DataRequired()], render_kw={"placeholder": "Enter Lobby Description"})
     capacity = IntegerField("Capacity", validators=[DataRequired()], render_kw={"placeholder": "Enter Max Capacity"})

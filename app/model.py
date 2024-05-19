@@ -32,6 +32,8 @@ class Users(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.Password, password)
+    def is_admin(self):
+        return self.IsAdmin == 1
     
     def get_id(self):
         return self.UID
@@ -54,6 +56,7 @@ class Lobby(db.Model):
     maxPlayers = db.Column(db.Integer(), default=4)
     players: Mapped[List[Users]] = db.relationship(secondary='LobbyPlayers', backref='lobbyPlayers', lazy=True)
     tags: Mapped[List[Tags]] = db.relationship(secondary='LobbyTags', backref='lobbyPlayers', lazy=True)
+    time_blocks = db.relationship('LobbyTimes', backref='lobbytimes', lazy=True)
 
     def get_curr_player_count(self):
         return len(self.players)
@@ -77,6 +80,12 @@ class LobbyPlayers(db.Model):
     LobbyID = db.Column(db.Text(), db.ForeignKey("Lobby.LobbyID", name="fk_lobby_players_lobby"), nullable=False)
     UserID = db.Column(db.Text(), db.ForeignKey("Users.UID", name="fk_lobby_players_user"), nullable=False)
     IsHost = db.Column(db.Integer(), nullable=False, default=0)
+    
+    @classmethod
+    def get_lobby_ids_by_user(cls, user_id):
+        results = db.session.query(cls.LobbyID).filter_by(UserID=user_id).all()
+        lbby_ids = [result.LobbyID for result in results]
+        return lbby_ids
 
     def is_host(self) -> bool:
         return self.IsHost == 1

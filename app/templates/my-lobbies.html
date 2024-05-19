@@ -9,6 +9,15 @@
 {% block content %}
 <main class="container">
   <h1 class="text-center">My Lobbies</h1>
+  <h1>My Lobbies</h1>
+    <p>Lobbies for User ID: {{ current_user.get_id() }}</p>
+    <p>
+        {% if lobby_ids %}
+            {{ lobby_ids | join(', ') }}
+        {% else %}
+            No lobbies found for this user.
+        {% endif %}
+    </p>
   <div class="row">
     <div class="col-sm-4">
       <div class="card bg-dark text-light">

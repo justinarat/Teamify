@@ -20,6 +20,8 @@
 3. Install project requirements `pip install -r requirements.txt`
 4. Set the environment variable (use a different key instead of "poor secret")
     `export CITS3403_FLASK_SECRET_KEY="poor secret"` 
+	for windows:
+	`set CITS3403_FLASK_SECRET_KEY="poor secret"` 
 5. Start up the flask server `flask run`
 
 ## How to run the tests

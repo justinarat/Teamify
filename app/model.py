@@ -54,6 +54,7 @@ class Lobby(db.Model):
     maxPlayers = db.Column(db.Integer(), default=4)
     players: Mapped[List[Users]] = db.relationship(secondary='LobbyPlayers', backref='lobbyPlayers', lazy=True)
     tags: Mapped[List[Tags]] = db.relationship(secondary='LobbyTags', backref='lobbyPlayers', lazy=True)
+    time_blocks = db.relationship('LobbyTimes', backref='lobbytimes', lazy=True)
 
     def get_curr_player_count(self):
         return len(self.players)

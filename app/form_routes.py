@@ -60,7 +60,7 @@ def signup_request():
             return render_template("account-creation.html", title="Login or Sign Up", 
                     login_form=login_form, signup_form=signup_form)
 
-@app.route("/create-lobby-request")
+@app.route("/create-lobby-request", methods=["post"])
 @login_required
 def create_lobby_request():
     """Handles lobby making requests
@@ -165,6 +165,7 @@ def create_lobby_request():
         
         # introduction for the sake of testing
         return redirect(url_for("introduction"))
+    return "Form validation failed. Please try again.", 400
 
 @app.route("/logout-request")
 @login_required

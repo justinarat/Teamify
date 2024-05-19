@@ -55,7 +55,9 @@ def get_lobby_cards():
         return make_response("Parameter 'count' must be an integer", 400)
 
     if count < 0:
-        return make_response("Parameter 'count' must be greater than or equal to 0", 400)
+        return make_response(
+            "Parameter 'count' must be greater than or equal to 0", 400
+        )
 
     if "search_string" not in request.args:
         return make_response("Parameter 'search_string' is missing", 400)
@@ -68,11 +70,11 @@ def get_lobby_cards():
     lobby_cards = []
     for lobby in lobbies:
         player_usernames = [player.Username for player in lobby.players]
-        next_available_time = "" # TODO
+        next_available_time = ""  # TODO
         lobby_card = {
             "lobby_id": lobby.LobbyID,
             "game_title": lobby.game.Name,
-            "lobby_name": "Lobby Name", # TODO: Change to lobby.Name when that's been merged
+            "lobby_name": "Lobby Name",  # TODO: Change to lobby.Name when that's been merged
             "lobby_description": lobby.Desc,
             "host": lobby.get_host().Username,
             "players": player_usernames,
@@ -81,6 +83,7 @@ def get_lobby_cards():
         lobby_cards.append(lobby_card)
 
     return jsonify({"lobby_cards": lobby_cards})
+
 
 def search_db(count, search_string, search_tags):
     """Returns 'count' lobby IDs based on search params"""

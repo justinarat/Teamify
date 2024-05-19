@@ -3,6 +3,7 @@ from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from sqlalchemy.orm import Mapped
+from datetime import datetime
 
     
 class Games(db.Model):
@@ -126,10 +127,93 @@ class LobbyTimes(db.Model):
 
 class UserTracker(db.Model):
     __tablename__ = 'UserTracker'
-    RowID = db.Column(db.Text(), primary_key=True, unique=True, nullable=False)
+    Time = db.Column(db.Text(), primary_key=True, unique=True, nullable=False)
     LobbyID = db.Column(db.Text(), db.ForeignKey("Lobby.LobbyID", name="fk_user_tracker_lobby"), nullable=False)
     UserID = db.Column(db.Text(), db.ForeignKey("Users.UID", name="fk_user_tracker_user"), nullable=False)
     Action = db.Column(db.Text(), nullable=False)
     Desc = db.Column(db.Text())
-    user2Rel = db.relationship('Users', backref='users2', lazy=True)
-    lobby2Rel = db.relationship('Lobby', backref='lobby4', lazy=True)
+
+
+    _TIME_FORMAT = "%d/%m/%Y %H:%M:%S"
+
+    @classmethod
+    def log_login(cls, user):
+        current_time = datetime.now().strftime(cls._TIME_FORMAT)
+        action = f"{current_time} - {user.Username} logged in."
+        desc = f"user_id = {user.UID}"
+
+        log = cls(
+            Time=current_time,
+            UserID=user.UID,
+            Action=action,           
+            Desc=desc           
+        )
+        
+        db.session.add(log)
+        db.session.commit()
+
+    @classmethod
+    def log_signup(cls, user):
+        current_time = datetime.now().strftime(cls._TIME_FORMAT)
+        action = f"{current_time} - {user.Username} signed up."
+        desc = f"user_id = {user.UID}"
+
+        log = cls(
+            Time=current_time,
+            UserID=user.UID,
+            Action=action,           
+            Desc=desc           
+        )
+        
+        db.session.add(log)
+        db.session.commit()
+
+
+    @classmethod
+    def log_join_lobby(cls, user, lobby):
+        current_time = datetime.now().strftime(cls._TIME_FORMAT)
+        action = f"{current_time} - {user.Username} joined {lobby.Name}."
+        desc = f"user_id = {user.UID} | lobby_id = {lobby.LobbyID}"
+
+        log = cls(
+            Time=current_time,
+            UserID=user.UID,
+            Action=action,           
+            Desc=desc           
+        )
+        
+        db.session.add(log)
+        db.session.commit()
+
+    @classmethod
+    def log_leave_lobby(cls, user, lobby):
+        current_time = datetime.now().strftime(cls._TIME_FORMAT)
+        action = f"{current_time} - {user.Username} left {lobby.Name}."
+        desc = f"user_id = {user.UID} | lobby_id = {lobby.LobbyID}"
+
+        log = cls(
+            Time=current_time,
+            UserID=user.UID,
+            Action=action,           
+            Desc=desc           
+        )
+        
+        db.session.add(log)
+        db.session.commit()
+
+    @classmethod
+    def log_make_lobby(cls, user, lobby):
+        current_time = datetime.now().strftime(cls._TIME_FORMAT)
+        action = f"{current_time} - {user.Username} created {lobby.Name}."
+        desc = f"user_id = {user.UID} | lobby_id = {lobby.LobbyID}"
+
+        log = cls(
+            Time=current_time,
+            UserID=user.UID,
+            Action=action,           
+            Desc=desc           
+        )
+        
+        db.session.add(log)
+        db.session.commit()
+

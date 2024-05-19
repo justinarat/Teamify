@@ -26,10 +26,6 @@ def lobby_making():
   game_titles.sort()
   lobby_making_form = CreateLobbyForm(game_titles=game_titles)
   
-  if request.method == "POST":
-    if request.form.get("tag1") == "true":
-      lobby_making_form.tag1.validators.append(DataRequired())
-      lobby_making_form.tag1.flags.required = True
   return render_template("lobby-making.html", lobby_making_form=lobby_making_form)
 
 @app.route("/lobby", methods=["GET"])

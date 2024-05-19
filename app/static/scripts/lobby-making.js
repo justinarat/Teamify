@@ -29,5 +29,7 @@ function showGeneral(day) {
     daySec.classList.add("not-showing");
     fromField.removeAttribute('required','required');
     toField.removeAttribute('required','required');
+    fromField.value = "";
+    toField.value = "";
   }
 }

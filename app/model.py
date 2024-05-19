@@ -36,6 +36,9 @@ class Users(UserMixin, db.Model):
     def get_id(self):
         return self.UID
 
+    def is_admin(self):
+        return self.IsAdmin == 1
+
 @login.user_loader
 def load_student(user_id):
     return Users.query.get(user_id)
@@ -43,10 +46,12 @@ def load_student(user_id):
 
 class Lobby(db.Model):
     __tablename__ = 'Lobby'
-    LobbyID = db.Column(db.Text(), primary_key=True, unique=True, nullable=False)
+    LobbyID = db.Column(db.Text(), primary_key=True, unique=True, nullable=False, default="4")
     GameID = db.Column(db.Text(), db.ForeignKey("Games.UID", name="fk_lobby_game"), nullable=False)
     Desc = db.Column(db.Text())
+    Name = db.Column(db.Text())
     game = db.relationship('Games', backref='games', lazy=True)
+    maxPlayers = db.Column(db.Integer(), default=4)
     players: Mapped[List[Users]] = db.relationship(secondary='LobbyPlayers', backref='lobbyPlayers', lazy=True)
     tags: Mapped[List[Tags]] = db.relationship(secondary='LobbyTags', backref='lobbyPlayers', lazy=True)
 
@@ -54,9 +59,7 @@ class Lobby(db.Model):
         return len(self.players)
 
     def get_max_player_count(self):
-        # Creating this for now since max player count column isn't set up yet
-        # TODO
-        return 3
+        return self.maxPlayers
 
     def is_full(self):
         return self.get_curr_player_count() >= self.get_max_player_count()
@@ -91,7 +94,7 @@ class LobbyTimes(db.Model):
     RowID = db.Column(db.Text(), primary_key=True, unique=True, nullable=False)
     LobbyID = db.Column(db.Text(), db.ForeignKey("Lobby.LobbyID", name="fk_lobby_times_lobby"), nullable=False)
     TimeBlockStart = db.Column(db.Text(), nullable=False)
-    Repeat = db.Column(db.Text(), unique=True, nullable=False)
+    Repeat = db.Column(db.Text(), nullable=False)
     TimeBlockEnd = db.Column(db.Text(), nullable=False)
     lobbyRel = db.relationship('Lobby', backref='lobby1', lazy=True)
 

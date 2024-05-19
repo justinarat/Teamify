@@ -209,9 +209,9 @@ def logout_request():
     
         Redirects user to the introduction page.
     """
-    logout_user()
+    UserTracker.log_logout(current_user)
 
-    UserTracker.log_logout(user)
+    logout_user()
 
     return redirect(url_for("introduction"))
 
@@ -289,6 +289,7 @@ def leave_lobby_request():
     flask_socketio.emit("player_leave", data_to_send, to=lobby_id, namespace="/")
 
     lobby = Lobby.query.filter_by(LobbyID=lobby_id).first()
+
     UserTracker.log_leave_lobby(current_user, lobby)
 
     return redirect(url_for("lobby_searching"))

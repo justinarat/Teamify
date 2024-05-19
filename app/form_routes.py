@@ -277,6 +277,9 @@ def leave_lobby_request():
     user_id = current_user.get_id()
     lobby_id = session["lobby_id"]
 
+    # Both user_id and lobby_id should exist in LobbyPlayers since the leave button 
+    # won't render unless they're in the lobby, so no error checking done
+
     LobbyPlayers.query.filter_by(UserID=user_id, LobbyID=lobby_id).delete()
     db.session.commit()
 

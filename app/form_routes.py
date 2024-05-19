@@ -67,7 +67,11 @@ def create_lobby_request():
     
         Redirects user to page of lobby they just created
     """
-    create_lobby_form = CreateLobbyForm()
+    game_titles = [game[0] for game in Games.query.values(Games.Name)]
+    game_titles = game_titles[1:]
+    game_titles.sort()
+    
+    create_lobby_form = CreateLobbyForm(game_titles=game_titles)
     if create_lobby_form.validate_on_submit():
         
         lobby_with_last_id = Lobby.query.order_by(desc(Lobby.LobbyID)).first()
@@ -104,7 +108,10 @@ def create_lobby_request():
                     tagID = int(tag.TagID)
                     
                 lobby_tag_with_last_id=LobbyTags.query.order_by(desc(LobbyTags.RowID)).first()
-                new_lobby_tag_id = int(lobby_tag_with_last_id.RowID)+1
+                if lobby_tag_with_last_id is not None:
+                    new_lobby_tag_id = int(lobby_tag_with_last_id.RowID)+1
+                else:
+                    new_lobby_tag_id = 0
                 while LobbyTags.query.filter_by(RowID=new_lobby_tag_id).first() != None: # Guarantees that new_tag_id is unique id
                     new_lobby_tag_id += 1
                 lobby_tag = LobbyTags(

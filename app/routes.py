@@ -1,9 +1,10 @@
 from app import app, db
 from app.model import Lobby, LobbyPlayers
-from flask import render_template, redirect, url_for, session, request, flash
-from app.forms import SignUpForm, LoginForm
+from app.forms import SignUpForm, LoginForm, CreateLobbyForm
+from flask import render_template, redirect, url_for, session, request, flash,jsonify
 from app.model import Users, Games
 from flask_login import current_user, login_required
+from wtforms.validators import DataRequired
 
 @app.route("/")
 @app.route("/introduction")
@@ -23,7 +24,8 @@ def lobby_making():
   game_titles = [game[0] for game in Games.query.values(Games.Name)]
   game_titles = game_titles[1:]
   game_titles.sort()
-  return render_template("lobby-making.html", game_titles=game_titles)
+  lobby_making_form = CreateLobbyForm(game_titles=game_titles)
+  return render_template("lobby-making.html", lobby_making_form=lobby_making_form)
 
 @app.route("/lobby", methods=["GET"])
 @login_required
@@ -38,8 +40,6 @@ def lobby_view():
     if lobby_id == None or lobby == None:
         flash("Lobby not found")
         return redirect(url_for("lobby_searching"))
-
-
     # If the player is already in the lobby, render full lobby
     lobby_players = LobbyPlayers.query.filter_by(LobbyID=lobby_id)
     user_in_lobby = lobby_players.filter_by(UserID=current_user.get_id()).first() 
@@ -71,3 +71,21 @@ def my_lobbies():
   # TODO: Render lobbies user belongs to
   # TODO: Render lobbies user owns with choice to view them from user view or admin view
   return render_template("my-lobbies.html")
+
+
+
+#CODE HERE
+def get_max_players(lobby_id):
+    lobby = Lobby.query.filter_by(LobbyID=lobby_id).first()
+    if lobby:
+        return lobby.maxPlayers
+    else:
+        return None
+
+@app.route('/get_max_players/<int:lobby_id>', methods=['GET'])
+def get_max_players_route(lobby_id):
+    max_players = get_max_players(lobby_id)
+    if max_players is not None:
+        return jsonify({'max_players': max_players}), 200
+    else:
+        return jsonify({'error': 'Lobby not found'}), 404

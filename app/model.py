@@ -39,6 +39,12 @@ class Users(UserMixin, db.Model):
     def is_admin(self):
         return self.IsAdmin == 1
 
+    def get_joined_lobbies(self):
+        lobbies = Lobby.query.join(LobbyPlayers.LobbyID) \
+                        .filter_by(UserID=self.UID) \
+                        .all()
+        return lobbies
+
 @login.user_loader
 def load_student(user_id):
     return Users.query.get(user_id)

@@ -8,128 +8,138 @@
 
 {% block content %}
 <div id="lobby-making" class="container">
-  <h2 id="lobby-making-title">Creating Lobby</h2>
-  <form id="lobby-making-form" action="{{ url_for('create_lobby_request')}}" method="post">
+  <br>
+  <form id="lobby-making-form" class="lobby-form teamify-primary-colour" action="{{ url_for('create_lobby_request')}}" method="post">
     {{ lobby_making_form.hidden_tag() }}
+    <h1 id="lobby-making-title" class="text-center">Creating Lobby</h1>
+    <br>
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-sm-4 game-column">
         <h4>Game Description</h4>
-        {{ lobby_making_form.game.label(class="game-list") }}
-        {{ lobby_making_form.game(class="game-list") }}
+        <br>
+        {{ lobby_making_form.game.label(class="game-list h6") }}
+        <br>
+        {{ lobby_making_form.game(class="game-list form-control field") }}
         <datalist id="game-options">
           {{ lobby_making_form.game_select(class="game-list") }}
         </datalist>
         <br><br>
-        {{ lobby_making_form.lobby_name.label }}
-        {{ lobby_making_form.lobby_name() }}
-        <br><br>
-        {{ lobby_making_form.lobby_description.label }}
-        {{ lobby_making_form.lobby_description() }}
-        <br><br>
-        {{ lobby_making_form.capacity.label }}
-        {{ lobby_making_form.capacity(min="2") }}
-      </div>
-      <div class="col-sm-4">
-        <h4>Tags</h4>
-        <h6>Optional Fields</h6>
+        {{ lobby_making_form.lobby_name.label(class="h6") }}
         <br>
-        <div id="custom-tags"></div>
-        {{ lobby_making_form.tag1() }}
+        {{ lobby_making_form.lobby_name(class="form-control field") }}
         <br><br>
-        {{ lobby_making_form.tag2() }}
+        {{ lobby_making_form.lobby_description.label(class="h6") }}
+        <br>
+        {{ lobby_making_form.lobby_description(class="form-control field") }}
         <br><br>
-        {{ lobby_making_form.tag3() }}
+        {{ lobby_making_form.capacity.label(class="h6") }}
+        <br>
+        {{ lobby_making_form.capacity(min="2", class="form-control field") }}
+      </div>
+      <div class="col-sm-4 ">
+        <h4 class="text-center">Tags</h4>
+        <h6 class="text-center">Optional Fields</h6>
+        <br>
+        <div class = "tag-column">
+          <div id="custom-tags">
+            {{ lobby_making_form.tag1(class="form-control field") }}
+            <br><br>
+            {{ lobby_making_form.tag2(class="form-control field") }}
+            <br><br>
+            {{ lobby_making_form.tag3(class="form-control field") }}
+          </div>
+        </div>
       </div>
 
-      <div class="col-sm-4">
+      <div class="col-sm-4 time-column">
         <h4>Time Allocation Options</h4>
-
+        <br>
         <div id="mon-section">
-          <input type='checkbox' id="mon-checkbox" onclick="showGeneral('mon')">
-          <label for="mon-checkbox">Monday</label>
+          <input type='checkbox' id="mon-checkbox" class="form-check-input" onclick="showGeneral('mon')">
+          <label for="mon-checkbox" class="h6">Monday</label>
           <div id="mon" class="not-showing">
-            {{ lobby_making_form.mon_from.label }}
+            {{ lobby_making_form.mon_from.label(class="h6") }}
             {{ lobby_making_form.mon_from(id="mon-from") }}
 
-            {{ lobby_making_form.mon_to.label }}
+            {{ lobby_making_form.mon_to.label(class="h6") }}
             {{ lobby_making_form.mon_to(id="mon-to") }}
           </div>
         </div>
         <br>
 
         <div id="tue-section">
-          <input type='checkbox' id="tue-checkbox" onclick="showGeneral('tue')">
-          <label for="tue-checkbox">Tuesday</label>
+          <input type='checkbox' id="tue-checkbox" class="form-check-input" onclick="showGeneral('tue')">
+          <label for="tue-checkbox" class="h6">Tuesday</label>
           <div id="tue" class="not-showing">
-            {{ lobby_making_form.tue_from.label }}
+            {{ lobby_making_form.tue_from.label(class="h6") }}
             {{ lobby_making_form.tue_from(id="tue-from") }}
             
-            {{ lobby_making_form.tue_to.label }}
+            {{ lobby_making_form.tue_to.label(class="h6") }}
             {{ lobby_making_form.tue_to(id="tue-to") }}
           </div>
         </div>
         <br>
 
         <div id="wed-section">
-          <input type='checkbox' id="wed-checkbox" onclick="showGeneral('wed')">
-          <label for="wed-checkbox">Wednesday</label>
+          <input type='checkbox' id="wed-checkbox" class="form-check-input" onclick="showGeneral('wed')">
+          <label for="wed-checkbox" class="h6">Wednesday</label>
           <div id="wed" class="not-showing">
-            {{ lobby_making_form.wed_from.label }}
+            {{ lobby_making_form.wed_from.label(class="h6") }}
             {{ lobby_making_form.wed_from(id="wed-from") }}
             
-            {{ lobby_making_form.wed_to.label }}
+            {{ lobby_making_form.wed_to.label(class="h6") }}
             {{ lobby_making_form.wed_to(id="wed-to") }}
           </div>
         </div>
         <br>
 
         <div id="thu-section">
-          <input type='checkbox' id="thu-checkbox" onclick="showGeneral('thu')">
-          <label for="thu-checkbox">Thursday</label>
+          <input type='checkbox' id="thu-checkbox" class="form-check-input" onclick="showGeneral('thu')">
+          <label for="thu-checkbox" class="h6">Thursday</label>
           <div id="thu" class="not-showing">
-            {{ lobby_making_form.thu_from.label }}
+            {{ lobby_making_form.thu_from.label(class="h6") }}
             {{ lobby_making_form.thu_from(id="thu-from") }}
             
-            {{ lobby_making_form.thu_to.label }}
+            {{ lobby_making_form.thu_to.label(class="h6") }}
             {{ lobby_making_form.thu_to(id="thu-to") }}
           </div>
         </div>
         <br>
 
         <div id="fri-section">
-          <input type='checkbox' id="fri-checkbox" onclick="showGeneral('fri')">
-          <label for="fri-checkbox">Friday</label>
+          <input type='checkbox' id="fri-checkbox" class="form-check-input" onclick="showGeneral('fri')">
+          <label for="fri-checkbox" class="h6">Friday</label>
           <div id="fri" class="not-showing">
-            {{ lobby_making_form.fri_from.label }}
+            {{ lobby_making_form.fri_from.label(class="h6") }}
             {{ lobby_making_form.fri_from(id="fri-from") }}
             
-            {{ lobby_making_form.fri_to.label }}
+            {{ lobby_making_form.fri_to.label(class="h6") }}
             {{ lobby_making_form.fri_to(id="fri-to") }}
           </div>
         </div>
         <br>
 
         <div id="sat-section">
-          <input type='checkbox' id="sat-checkbox" onclick="showGeneral('sat')">
-          <label for="sat-checkbox">Saturday</label>
+          <input type='checkbox' id="sat-checkbox" class="form-check-input" onclick="showGeneral('sat')">
+          <label for="sat-checkbox" class="h6">Saturday</label>
           <div id="sat" class="not-showing">
-            {{ lobby_making_form.sat_from.label }}
+            {{ lobby_making_form.sat_from.label(class="h6") }}
             {{ lobby_making_form.sat_from(id="sat-from") }}
             
-            {{ lobby_making_form.sat_to.label }}
+            {{ lobby_making_form.sat_to.label(class="h6") }}
             {{ lobby_making_form.sat_to(id="sat-to") }}
           </div>
         </div>
         <br>
 
         <div id="sun-section">
-          <input type='checkbox' id="sun-checkbox" onclick="showGeneral('sun')">
-          <label for="sun-checkbox">Sunday</label>
+          <input type='checkbox' id="sun-checkbox" class="form-check-input" onclick="showGeneral('sun')">
+          <label for="sun-checkbox" class="h6">Sunday</label>
           <div id="sun" class="not-showing">
-            {{ lobby_making_form.sun_from.label }}
+            {{ lobby_making_form.sun_from.label(class="h6") }}
             {{ lobby_making_form.sun_from(id="sun-from") }}
             
-            {{ lobby_making_form.sun_to.label }}
+            {{ lobby_making_form.sun_to.label(class="h6") }}
             {{ lobby_making_form.sun_to(id="sun-to") }}
           </div>
         </div>
@@ -138,7 +148,11 @@
       </div>
     </div>
     <br>
-    {{ lobby_making_form.submit() }}
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        {{ lobby_making_form.submit(class="btn btn-light btn-outline-secondary") }}
+      </div>
+    </div>
   </form>
 </div>
 

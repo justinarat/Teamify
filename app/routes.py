@@ -11,10 +11,6 @@ from wtforms.validators import DataRequired
 def introduction():
   return render_template("introduction.html", template_folder="templates")
 
-@app.route("/games")
-def games_view():
-  return render_template("games.html")
-
 @app.route("/lobby-searching")
 def lobby_searching():
   return render_template("lobby-searching.html")

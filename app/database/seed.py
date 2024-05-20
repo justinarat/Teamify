@@ -25,25 +25,30 @@ def empty_db():
 
 
 def seed_games():
-    data = []
+    print(f"Seeding Games...")
 
+    data = []
     with open("app/database/games.txt", "r", encoding="utf-8") as file:
         for i, line in enumerate(file):
             data.append(Games(UID=i + 1, Name=line.strip()))
 
-    seed_table("Games", data)
+    db.session.add_all(data)
 
 
 def seed_tags():
+    print(f"Seeding Tags...")
+
     data = [
         Tags(TagID="1", Name="Tag1"),
         Tags(TagID="2", Name="Tag2"),
     ]
 
-    seed_table("Tags", data)
+    db.session.add_all(data)
 
 
 def seed_users(only_required=True):
+    print(f"Seeding Users...")
+
     data = []
     data.append(
         Users(
@@ -115,10 +120,12 @@ def seed_users(only_required=True):
         for user in extra_data:
             data.append(user)
 
-    seed_table("Users", data)
+    db.session.add_all(data)
 
 
-def seed_lobbies():
+def seed_lobby():
+    print(f"Seeding Lobby...")
+
     data = [
         Lobby(
             LobbyID="1",
@@ -184,19 +191,81 @@ def seed_lobbies():
         ),
     ]
 
-    seed_table("Lobby", data)
+    db.session.add_all(data)
 
 
 def seed_lobby_players():
+    print(f"Seeding LobbyPlayers...")
+
     data = [
-        LobbyPlayers(RowID="1", LobbyID="1", UserID="1", IsHost=1),
-        LobbyPlayers(RowID="2", LobbyID="2", UserID="2", IsHost=0),
+        LobbyPlayers(
+            RowID="1",
+            LobbyID="1",
+            UserID="2",
+            IsHost=1,
+        ),
+        LobbyPlayers(
+            RowID="2",
+            LobbyID="2",
+            UserID="2",
+            IsHost=1,
+        ),
+        LobbyPlayers(
+            RowID="3",
+            LobbyID="3",
+            UserID="3",
+            IsHost=1,
+        ),
+        LobbyPlayers(
+            RowID="4",
+            LobbyID="4",
+            UserID="4",
+            IsHost=1,
+        ),
+        LobbyPlayers(
+            RowID="5",
+            LobbyID="5",
+            UserID="5",
+            IsHost=1,
+        ),
+        LobbyPlayers(
+            RowID="6",
+            LobbyID="6",
+            UserID="6",
+            IsHost=1,
+        ),
+        LobbyPlayers(
+            RowID="7",
+            LobbyID="7",
+            UserID="7",
+            IsHost=1,
+        ),
+        LobbyPlayers(
+            RowID="8",
+            LobbyID="8",
+            UserID="8",
+            IsHost=1,
+        ),
+        LobbyPlayers(
+            RowID="9",
+            LobbyID="9",
+            UserID="9",
+            IsHost=1,
+        ),
+        LobbyPlayers(
+            RowID="10",
+            LobbyID="10",
+            UserID="10",
+            IsHost=1,
+        ),
     ]
 
-    seed_table("LobbyPlayers", data)
+    db.session.add_all(data)
 
 
 def seed_lobby_times():
+    print(f"Seeding LobbyTimes...")
+
     data = [
         LobbyTimes(
             RowID="1",
@@ -277,11 +346,6 @@ def seed_lobby_times():
         ),
     ]
 
-    seed_table("LobbyTimes", data)
-
-
-def seed_table(table, data):
-    print(f"Seeding {table}...")
     db.session.add_all(data)
 
 
@@ -301,7 +365,7 @@ def seed_all():
     seed_games()
     seed_tags()
     seed_users(only_required=False)
-    seed_lobbies()
+    seed_lobby()
     seed_lobby_players()
     seed_lobby_times()
 

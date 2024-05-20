@@ -13,6 +13,7 @@ the app is meant to allow players who are looking for a group of people to play 
 | 22992693 | Fatimah Ali O Aljanobi | FAljanobi      |
 
 ## Summary of Application Architecture
+```
 app
 	database
 		main.db(to be genned)
@@ -41,7 +42,8 @@ migrations
 		(hold test scripts)
 readme.md(you are here)
 requriements.txt(states all project requirements)
-	
+```
+
 ## Launching the application
 
 1. Create a virtual environment `python3 -m venv .venv`

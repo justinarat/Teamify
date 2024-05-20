@@ -109,8 +109,9 @@
 
 {% block bodyScripts %}
 {% if user_in_lobby %}
-  <script src="static/scripts/socket-events.js"></script>
-  <script src="static/scripts/lobby-view-player.js"></script>
-{% endif %}
+<script src="static/scripts/socket-events.js"></script>
+<script src="static/scripts/lobby-view-player.js"></script>
+{% else %}
 <script src="static/scripts/lobby-view.js"></script>
+{% endif %}
 {% endblock %}

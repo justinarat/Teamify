@@ -4,52 +4,17 @@
 <link rel="stylesheet" href="static/css/lobby-view.css">
 {% endblock %}
 
-{% block headScripts %}{% endblock %}
+{% block headScripts %}
+<script src="static/scripts/lobby-card.js"></script>
+{% endblock %}
 
 {% block content %}
 <main class="container">
   <h1 class="text-center">My Lobbies</h1>
-  <h1>My Lobbies</h1>
-    <p>Lobbies for User ID: {{ current_user.get_id() }}</p>
-    <p>
-        {% if lobby_ids %}
-            {{ lobby_ids | join(', ') }}
-        {% else %}
-            No lobbies found for this user.
-        {% endif %}
-    </p>
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="card bg-dark text-light">
-        <div class="card-body">
-          <h5 class="card-title">MinecraftLobby#64</h5>
-          <p class="card-text">Lobby description</p>
-          <a href="lobby-view.html" class="card-link">View</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-sm-4">
-      <div class="card bg-dark text-light">
-        <div class="card-body">
-          <h5 class="card-title">FortniteLobby#73</h5>
-          <p class="card-text">Lobby Description</p>
-          <a href="lobby-view.html" class="card-link">View</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-sm-4">
-      <div class="card bg-dark text-light">
-        <div class="card-body">
-          <h5 class="card-title">ValorantLobby#99</h5>
-          <p class="card-text">Lobby description</p>
-          <a href="lobby-view.html" class="card-link">View</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <section id="lobbies" class="row"></section>
 </main>
 {% endblock %}
 
-{% block bodyScripts %}{% endblock %}
+{% block bodyScripts %}
+<script src="static/scripts/my-lobbies.js"></script>
+{% endblock %}

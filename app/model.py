@@ -40,7 +40,7 @@ class Users(UserMixin, db.Model):
         return self.IsAdmin == 1
 
     def get_joined_lobbies(self):
-        lobbies = Lobby.query.join(LobbyPlayers.LobbyID) \
+        lobbies = Lobby.query.join(LobbyPlayers) \
                         .filter_by(UserID=self.UID) \
                         .all()
         return lobbies

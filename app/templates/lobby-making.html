@@ -35,16 +35,19 @@
         <br>
         {{ lobby_making_form.capacity(class="form-control field") }}
       </div>
-      <div class="col-sm-4 tag-column">
-        <h4>Tags</h4>
-        <h6>Optional Fields</h6>
+      <div class="col-sm-4 ">
+        <h4 class="text-center">Tags</h4>
+        <h6 class="text-center">Optional Fields</h6>
         <br>
-        <div id="custom-tags"></div>
-        {{ lobby_making_form.tag1(class="form-control field") }}
-        <br><br>
-        {{ lobby_making_form.tag2(class="form-control field") }}
-        <br><br>
-        {{ lobby_making_form.tag3(class="form-control field") }}
+        <div class = "tag-column">
+          <div id="custom-tags">
+            {{ lobby_making_form.tag1(class="form-control field") }}
+            <br><br>
+            {{ lobby_making_form.tag2(class="form-control field") }}
+            <br><br>
+            {{ lobby_making_form.tag3(class="form-control field") }}
+          </div>
+        </div>
       </div>
 
       <div class="col-sm-4 time-column">

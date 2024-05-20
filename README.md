@@ -15,32 +15,32 @@ the app is meant to allow players who are looking for a group of people to play 
 ## Summary of Application Architecture
 app
 	database
-		main.db<to be genned>
-		seed.py<helps in creation and population of db>
+		main.db(to be genned)
+		seed.py(helps in creation and population of db)
 	static
 		css
-			<holds all css files we made>
-			base.css<used as base css in all pages>
+			(holds all css files we made)
+			base.css(used as base css in all pages)
 			introduction.css
 			lobby-making.css
 			lobby-view.css
 		scripts
-			<holds all js>
+			(holds all js)
 	templates
-		<has all html files>
-		base.html<used to make the header consistant>
-		<all other html are based on a page>
+		(has all html files)
+		base.html(used to make the header consistant)
+		(all other html are based on a page)
 deliverables
 migrations
 	versions
-		<holds all migration code>
+		(holds all migration code)
 	alembic.ini
 	env.py
 	script.py.mako
 	tests
-		<hold test scripts>
-readme.md<you are here>
-requriements.txt<states all project requirements>
+		(hold test scripts)
+readme.md(you are here)
+requriements.txt(states all project requirements)
 	
 ## Launching the application
 

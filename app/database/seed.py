@@ -117,29 +117,70 @@ def seed_users(only_required=True):
     seed_table("Users", data)
 
 
-def seed_user_tracker():
-    data = [
-        UserTracker(
-            Time="10/5/2024 12:11:59",
-            UserID="1",
-            Action="Joined",
-            Desc="User1 joined the lobby",
-        ),
-        UserTracker(
-            Time="10/5/2024 17:30:24",
-            UserID="2",
-            Action="Joined",
-            Desc="User2 joined the lobby",
-        ),
-    ]
-
-    seed_table("UserTracker", data)
-
-
 def seed_lobbies():
     data = [
-        Lobby(LobbyID="1", GameID="1", Desc="Lobby1", Name="First Lobby"),
-        Lobby(LobbyID="2", GameID="2", Desc="Lobby2", Name="Second Lobby"),
+        Lobby(
+            LobbyID="1",
+            GameID="1",
+            Name="Chill & Chat",
+            Desc="Let's chill with some Tetris and have a chat!",
+            maxPlayers=3,
+        ),
+        Lobby(
+            LobbyID="2",
+            GameID="2",
+            Name="Speedrun Race",
+            Desc="Race me in a speedrun",
+            maxPlayers=2,
+        ),
+        Lobby(
+            LobbyID="3",
+            GameID="3",
+            Name="Need Help?",
+            Desc="I'll help you get all the stars!",
+        ),
+        Lobby(
+            LobbyID="4",
+            GameID="4",
+            Name="Secrets",
+            Desc="Let's explore some secret spots in this game",
+        ),
+        Lobby(
+            LobbyID="5",
+            GameID="8",
+            Name="Deathwing",
+            Desc="I rly need help with this raid",
+        ),
+        Lobby(
+            LobbyID="6",
+            GameID="10",
+            Name="Smartfridge Gaming",
+            Desc="I got the game running on my smartfridge, check it out!!",
+        ),
+        Lobby(
+            LobbyID="7",
+            GameID="5",
+            Name="Help I'm Scared",
+            Desc="I'm scared of this game, help me get through it!",
+        ),
+        Lobby(
+            LobbyID="8",
+            GameID="21",
+            Name="4 Player Server",
+            Desc="Long-term server, looking for 3 more players",
+        ),
+        Lobby(
+            LobbyID="9",
+            GameID="1",
+            Name="Reach The Rebirth",
+            Desc="Wanna make some attempts to reach the rebirth?",
+        ),
+        Lobby(
+            LobbyID="10",
+            GameID="20",
+            Name="Multiplayer",
+            Desc="Need a partner to do the co-op with!",
+        ),
     ]
 
     seed_table("Lobby", data)
@@ -199,7 +240,6 @@ def seed_all():
     seed_lobbies()
     seed_lobby_players()
     seed_lobby_times()
-    seed_user_tracker()
 
     # Commit all changes
     db.session.commit()

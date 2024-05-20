@@ -1,3 +1,4 @@
+from werkzeug.security import generate_password_hash
 from app import db
 from app.model import (
     Games,
@@ -48,7 +49,7 @@ def seed_users(only_required=True):
         Users(
             UID="1",
             Username="Admin",
-            Password="admin",
+            Password=generate_password_hash("admin"),
             Email="admin@admin.com",
             IsAdmin=1,
         )
@@ -59,55 +60,55 @@ def seed_users(only_required=True):
             Users(
                 UID="2",
                 Username="CoffeeLover",
-                Password="password2",
+                Password=generate_password_hash("password2"),
                 Email="coffeelover@gmail.com",
             ),
             Users(
                 UID="3",
                 Username="Firebird",
-                Password="password3",
+                Password=generate_password_hash("password3"),
                 Email="firebird@outlook.com",
             ),
             Users(
                 UID="4",
                 Username="Skywalker",
-                Password="password4",
+                Password=generate_password_hash("password4"),
                 Email="skywalker@gmail.com",
             ),
             Users(
                 UID="5",
                 Username="Starlord",
-                Password="password5",
+                Password=generate_password_hash("password5"),
                 Email="starlord@yahoo.com",
             ),
             Users(
                 UID="6",
                 Username="Moonlight",
-                Password="password6",
+                Password=generate_password_hash("password6"),
                 Email="moonlight@outlook.com",
             ),
             Users(
                 UID="7",
                 Username="NightOwl",
-                Password="password7",
+                Password=generate_password_hash("password7"),
                 Email="nightowl@gmail.com",
             ),
             Users(
                 UID="8",
                 Username="Sunshine",
-                Password="password8",
+                Password=generate_password_hash("password8"),
                 Email="sunshine@gmail.com",
             ),
             Users(
                 UID="9",
                 Username="Rainfall",
-                Password="password9",
+                Password=generate_password_hash("password9"),
                 Email="rainfall@outlook.com",
             ),
             Users(
                 UID="10",
                 Username="Snowflake",
-                Password="password10",
+                Password=generate_password_hash("password10"),
                 Email="snowflake@gmail.com",
             ),
         ]

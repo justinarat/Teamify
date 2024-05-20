@@ -6,8 +6,8 @@
  */
 function createLobbyCard(lobbyCardData) {
   const lobbyCard = document.createElement("div");
+  lobbyCard.classList.add("teamify-secondary-colour");
   lobbyCard.classList.add("card");
-  lobbyCard.classList.add("bg-dark");
   lobbyCard.classList.add("text-light");
 
   const lobbyCardBodyDiv = document.createElement("div");

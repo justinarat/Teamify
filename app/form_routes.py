@@ -23,7 +23,7 @@ def login_request():
 
                 UserTracker.log_login(user)
 
-                return redirect(url_for("games_view"))
+                return redirect(url_for("lobby_searching"))
 
         # Authentication failed, redirect back to login page
         flash("Invalid email or password")
@@ -57,7 +57,7 @@ def signup_request():
 
             UserTracker.log_signup(user)
 
-            return redirect(url_for("games_view"))
+            return redirect(url_for("lobby_searching"))
         else:
             # Authentication failed, redirect back to login page
             flash("Invalid Email")

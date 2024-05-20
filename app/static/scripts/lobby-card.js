@@ -6,8 +6,8 @@
  */
 function createLobbyCard(lobbyCardData) {
   const lobbyCard = document.createElement("div");
+  lobbyCard.classList.add("teamify-secondary-colour");
   lobbyCard.classList.add("card");
-  lobbyCard.classList.add("bg-dark");
   lobbyCard.classList.add("text-light");
 
   const lobbyCardBodyDiv = document.createElement("div");
@@ -26,25 +26,19 @@ function createLobbyCard(lobbyCardData) {
   lobbyNameHeader.innerHTML = lobbyCardData.lobby_name;
   lobbyCardBodyDiv.appendChild(lobbyNameHeader);
 
-  const lobbyIDSpan = document.createElement("span");
-  lobbyIDSpan.classList.add("lobby-id");
-  lobbyIDSpan.innerHTML = "lobby ID = " + lobbyCardData.lobby_id;
-  lobbyCardBodyDiv.appendChild(lobbyIDSpan);
-
   const lobbyDescriptionParagraph = document.createElement("p");
   lobbyDescriptionParagraph.classList.add("lobby-description");
-  lobbyDescriptionParagraph.innerHTML =
-    "desc = " + lobbyCardData.lobby_description;
+  lobbyDescriptionParagraph.innerHTML = lobbyCardData.lobby_description;
   lobbyCardBodyDiv.appendChild(lobbyDescriptionParagraph);
 
   const lobbyHostDiv = document.createElement("div");
   lobbyHostDiv.classList.add("lobby-host");
-  lobbyHostDiv.innerHTML = "host = " + lobbyCardData.host;
+  lobbyHostDiv.innerHTML = lobbyCardData.host + " is hosting";
   lobbyCardBodyDiv.appendChild(lobbyHostDiv);
 
   const otherLobbyPlayersDiv = document.createElement("div");
   otherLobbyPlayersDiv.classList.add("lobby-other-players");
-  otherLobbyPlayersDiv.innerHTML = "players = ";
+  otherLobbyPlayersDiv.innerHTML = "Current players: ";
   for (let i = 0; i < lobbyCardData.players.length; i++) {
     otherLobbyPlayersDiv.innerHTML += lobbyCardData.players[i] + " ";
   }
@@ -52,7 +46,7 @@ function createLobbyCard(lobbyCardData) {
 
   const timeTableDiv = document.createElement("div");
   timeTableDiv.classList.add("lobby-time-schedule");
-  timeTableDiv.innerHTML = "next time = " + lobbyCardData.next_available_time;
+  timeTableDiv.innerHTML = "Next available time: " + lobbyCardData.next_available_time;
   lobbyCardBodyDiv.appendChild(timeTableDiv);
 
   gameNameHeader.addEventListener("click", function (e) {

@@ -23,7 +23,7 @@ def login_request():
 
                 UserTracker.log_login(user)
 
-                return redirect(url_for("games_view"))
+                return redirect(url_for("lobby_searching"))
 
         # Authentication failed, redirect back to login page
         flash("Invalid email or password")
@@ -57,7 +57,7 @@ def signup_request():
 
             UserTracker.log_signup(user)
 
-            return redirect(url_for("games_view"))
+            return redirect(url_for("lobby_searching"))
         else:
             # Authentication failed, redirect back to login page
             flash("Invalid Email")
@@ -86,7 +86,11 @@ def create_lobby_request():
                 new_lobby_id += 1
             
         game = create_lobby_form.game.data
-        gameID = int(Games.query.filter_by(Name=game).first().UID)
+        game_data = Games.query.filter_by(Name=game).first()
+        if game_data == None:
+            flash("Entered game isn't supported")
+            return render_template("lobby-making.html", title="Create Lobby", lobby_making_form=create_lobby_form)
+        gameID = int(game_data.UID)
         
         lobby_name = create_lobby_form.lobby_name.data
         lobby_description = create_lobby_form.lobby_description.data

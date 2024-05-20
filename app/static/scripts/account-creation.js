@@ -12,3 +12,6 @@ function validateSignup(formID) {
     }
   }
 }
+
+$("#login").submit(validateSignup)
+$("#signup").submit(validateSignup)

@@ -20,13 +20,6 @@
     margin-bottom: 0.5rem; /* Equivalent to h6 margin-bottom in Bootstrap */
 }
 
-.offset-center {
-    position: relative;
-    left: -13%;
-}
-
 .field {
     width: 200px;
-    margin-left: auto;
-    margin-right: auto
 }

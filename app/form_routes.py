@@ -73,11 +73,12 @@ def create_lobby_request():
     
     create_lobby_form = CreateLobbyForm(game_titles=game_titles)
     if create_lobby_form.validate_on_submit():
-        
+        new_lobby_id = 1
         lobby_with_last_id = Lobby.query.order_by(desc(Lobby.LobbyID)).first()
-        new_lobby_id = int(lobby_with_last_id.LobbyID)+1
-        while Lobby.query.filter_by(LobbyID=new_lobby_id).first() != None: # Guarantees that new_lobby_id is unique
-            new_lobby_id += 1
+        if lobby_with_last_id != None:
+            new_lobby_id = int(lobby_with_last_id.LobbyID)+1
+            while Lobby.query.filter_by(LobbyID=new_lobby_id).first() != None: # Guarantees that new_lobby_id is unique
+                new_lobby_id += 1
             
         game = create_lobby_form.game.data
         gameID = int(Games.query.filter_by(Name=game).first().UID)
@@ -150,7 +151,7 @@ def create_lobby_request():
             if time_from is not None and time_to is not None:
                 new_lobby_time_id = 0
                 lobby_time_with_last_id=LobbyTimes.query.order_by(desc(LobbyTimes.RowID)).first()
-                if (lobby_time_with_last_id != None):
+                if lobby_time_with_last_id != None:
                     new_lobby_time_id = int(lobby_time_with_last_id.RowID)+1
                     while LobbyTimes.query.filter_by(RowID=new_lobby_time_id).first() != None: # Guarantees that new_tag_id is unique id
                         new_lobby_time_id += 1
@@ -175,7 +176,7 @@ def create_lobby_request():
 
         new_lobby_players_id = 0
         lobby_player_with_last_id=LobbyPlayers.query.order_by(desc(LobbyPlayers.RowID)).first()
-        if (lobby_player_with_last_id != None):
+        if lobby_player_with_last_id != None:
             new_lobby_players_id = int(lobby_player_with_last_id.RowID)+1
             while LobbyPlayers.query.filter_by(RowID=new_lobby_players_id).first() != None: # Guarantees that new_tag_id is unique id
                 new_lobby_players_id += 1

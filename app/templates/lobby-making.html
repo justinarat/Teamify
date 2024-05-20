@@ -16,22 +16,22 @@
     <div class="row text-center">
       <div class="col-sm-4">
         <h4>Game Description</h4>
-        {{ lobby_making_form.game.label(class="game-list h6 offset-center") }}
+        {{ lobby_making_form.game.label(class="game-list h6") }}
         <br>
         {{ lobby_making_form.game(class="game-list form-control field") }}
         <datalist id="game-options">
           {{ lobby_making_form.game_select(class="game-list") }}
         </datalist>
         <br><br>
-        {{ lobby_making_form.lobby_name.label(class="h6 offset-center") }}
+        {{ lobby_making_form.lobby_name.label(class="h6") }}
         <br>
         {{ lobby_making_form.lobby_name(class="form-control field") }}
         <br><br>
-        {{ lobby_making_form.lobby_description.label(class="h6 offset-center") }}
+        {{ lobby_making_form.lobby_description.label(class="h6") }}
         <br>
         {{ lobby_making_form.lobby_description(class="form-control field") }}
         <br><br>
-        {{ lobby_making_form.capacity.label(class="h6 offset-center") }}
+        {{ lobby_making_form.capacity.label(class="h6") }}
         <br>
         {{ lobby_making_form.capacity(class="form-control field") }}
       </div>

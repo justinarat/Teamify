@@ -138,7 +138,7 @@ def search_db(count, search_string, search_tags):
     # Filter by tags
     lobby_query = Lobby.query
     for tag in search_tags:
-        lobby_query = lobby_query.filter(Lobby.tags.has(Name=tag))
+        lobby_query = lobby_query.filter(Lobby.tags.any(Name=tag))
 
     # Check if search_string is in the lobby game name
     default_search = ""

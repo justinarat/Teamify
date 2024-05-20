@@ -86,7 +86,10 @@ def create_lobby_request():
                 new_lobby_id += 1
             
         game = create_lobby_form.game.data
-        gameID = int(Games.query.filter_by(Name=game).first().UID)
+        game_data = Games.query.filter_by(Name=game).first()
+        if game_data == None:
+            return "Entered game isn't supported", 400
+        gameID = int(game_data.UID)
         
         lobby_name = create_lobby_form.lobby_name.data
         lobby_description = create_lobby_form.lobby_description.data

@@ -23,3 +23,15 @@
 .field {
     width: 200px;
 }
+
+.game-column {
+    padding-left: 100px;
+}
+
+.tag-column {
+    padding-left: 110px;
+}
+
+.time-column {
+    padding-left: 80px;
+}

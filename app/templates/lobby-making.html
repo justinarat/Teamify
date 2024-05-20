@@ -14,7 +14,7 @@
     <h1 id="lobby-making-title" class="text-center">Creating Lobby</h1>
     <br>
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-sm-4 game-column">
         <h4>Game Description</h4>
         {{ lobby_making_form.game.label(class="game-list h6") }}
         <br>
@@ -35,7 +35,7 @@
         <br>
         {{ lobby_making_form.capacity(class="form-control field") }}
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-4 tag-column">
         <h4>Tags</h4>
         <h6>Optional Fields</h6>
         <br>
@@ -47,7 +47,7 @@
         {{ lobby_making_form.tag3(class="form-control field") }}
       </div>
 
-      <div class="col-sm-4">
+      <div class="col-sm-4 time-column">
         <h4>Time Allocation Options</h4>
 
         <div id="mon-section">

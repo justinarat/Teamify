@@ -3,12 +3,16 @@
   It styles the page background and header/navbar
 */
 
-#header {
-  background-color: rgb(21, 23, 29);
+.teamify-primary-colour {
+  background-color: rgb(21, 25, 36);
+}
+
+.teamify-secondary-colour {
+  background-color: rgb(29, 33, 45);
 }
 
 body {
   background-color: rgb(15, 16, 20);
   color: rgb(204, 204, 204);
-  padding-top: 56px;
+  padding-top: 0px;
 }

@@ -1,35 +1,54 @@
 {% extends "base.html" %}
 
-{% block css %}{% endblock %}
+{% block css %}
+  <link rel="stylesheet" href="static/css/account-creation.css">
+{% endblock %}
 
 {% block headScripts %}{% endblock %}
 
 {% block content %}
 <main class="container">
-  <form id="sign-up" onsubmit="return validateSignup(id)">
-    <h1 class="text-center">Sign Up</h1>
-    <label for="new-email"> Email: </label>
-    <input type="email" id="new-email" autocomplete="email">
-    <br><br>
-    <label for="new-username"> Username: </label>
-    <input type="text" id="new-username" autocomplete="username">
-    <br><br>
-    <label for="new-password"> Password: </label>
-    <input type="password" id="new-password" autocomplete="new-password">
-    <br><br>
-    <input type="submit" value="Submit">
+  <form id="login" class="account-form teamify-primary-colour" action="{{ url_for('login_request') }}" method="post">
+    {{ login_form.hidden_tag() }}
+    <h1 class="text-center">Login</h1>
+    {{ login_form.email.label }}:
+    <br>
+    {{ login_form.email(placeholder="Email", class="form-control") }}
+    <br>
+    {{ login_form.password.label }}:
+    <br>
+    {{ login_form.password(placeholder="Password", class="form-control") }}
+    <br>
+    {{ login_form.submit(class="btn btn-light btn-outline-secondary") }}
   </form>
   <br>
-  <form id="login" onsubmit="return validateSignup(id)">
-    <h1 class="text-center">Login</h1>
-    <label for="username"> Username: </label>
-    <input type="text" id="username" autocomplete="username">
-    <br><br>
-    <label for="password"> Password: </label>
-    <input type="password" id="password" autocomplete="current-password">
-    <br><br>
-    <input type="submit" value="Submit">
+  <form id="sign-up" class="account-form teamify-primary-colour" action="{{ url_for('signup_request') }}" method="post">
+    {{ signup_form.hidden_tag() }}
+    <h1 class="text-center">Sign Up</h1>
+    {{ signup_form.email.label }}:
+    <br>
+    {{ signup_form.email(placeholder="Email", class="form-control") }}
+    <br>
+    {{ signup_form.username.label }}:
+    <br>
+    {{ signup_form.username(placeholder="Username", class="form-control") }}
+    <br>
+    {{ signup_form.password.label }}:
+    <br>
+    {{ signup_form.password(placeholder="Password", class="form-control") }}
+    <br>
+    {{ signup_form.submit(class="btn btn-light btn-outline-secondary") }}
   </form>
+  <br><br>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
 </main>
 {% endblock %}
 

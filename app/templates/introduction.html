@@ -1,17 +1,57 @@
 {% extends "base.html" %}
 
-{% block css %}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="static/css/introduction.css">
+{% endblock %}
+
 
 {% block headScripts %}{% endblock %}
 
 {% block content %}
 <main id="content" class="container">
   <article class="text-center">
-    <h1>Introduction</h1>
-    <p>
-      Welcome to [name of website], a tool that'll allow you to gather a group of players to play whatever game
-      you'd like!
-    </p>
+    <br><br>
+    <div class="row">
+      <h1>Hello There!</h1>
+      <p class="fs-4">
+        Have you ever wanted to play a game with other people but didn't know who with?
+        If so, welcome to Teamify - a tool that'll allow you to gather a group of players to play whatever game
+        you'd like!
+      </p>
+    </div>
+    <br><br>
+    <div class="row g-4">
+      <div class="col-sm-4">
+        <div class="card text-white teamify-secondary-colour h-100">
+          <div class="card-body">
+            <p class="fs-5">
+              We suppor the top 1000 games of all time. View our refined catalogue here!
+            </p>
+            <a class="btn btn-outline-info btn-lg" href="https://playthatgame.co.uk/?action=mainlist" target="_blank" role="button">Browse Games</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="card text-white teamify-secondary-colour h-100">
+          <div class="card-body">
+            <p class="fs-5">
+              Find pre-existing lobbies. See something you like? Join and play!
+            </p>
+            <a class="btn btn-outline-info btn-lg" href="{{ url_for('lobby_searching') }}" role="button">Browse Lobbies</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="card text-white teamify-secondary-colour h-100">
+          <div class="card-body">
+            <p class="fs-5">
+              Don't have a Teamify account? Signup here to join lobbies and create your own!
+            </p>
+            <a class="btn btn-outline-info btn-lg" href="{{ url_for('account_creation') }}" role="button">Signup</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </article>
 </main>
 {% endblock %}

@@ -1,39 +1,171 @@
 {% extends "base.html" %}
 
-{% block css %}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="static/css/lobby-making.css">
+{% endblock %}
 
 {% block headScripts %}{% endblock %}
 
 {% block content %}
 <div id="lobby-making" class="container">
-  <h2 id="lobby-making-title">Creating Lobby</h2>
-  <form id="lobby-making-form">
+  <br>
+  <form id="lobby-making-form" class="lobby-form teamify-primary-colour" action="{{ url_for('create_lobby_request')}}" method="post">
+    {{ lobby_making_form.hidden_tag() }}
+    <h1 id="lobby-making-title" class="text-center">Creating Lobby</h1>
+    <br>
     <div class="row">
-      <div class="col-sm-6">
-        <input type="text" id="lobby-making-game" placeholder="Enter game" name="game">
+      <div class="col-sm-4 game-column">
+        <h4>Game Description</h4>
         <br>
-        <input type="text" id="lobby-making-description" placeholder="Enter description">
+        {{ lobby_making_form.game.label(class="game-list h6") }}
+        <br>
+        {{ lobby_making_form.game(class="game-list form-control field") }}
+        <datalist id="game-options">
+          {{ lobby_making_form.game_select(class="game-list") }}
+        </datalist>
+        <br><br>
+        {{ lobby_making_form.lobby_name.label(class="h6") }}
+        <br>
+        {{ lobby_making_form.lobby_name(class="form-control field") }}
+        <br><br>
+        {{ lobby_making_form.lobby_description.label(class="h6") }}
+        <br>
+        {{ lobby_making_form.lobby_description(class="form-control field") }}
+        <br><br>
+        {{ lobby_making_form.capacity.label(class="h6") }}
+        <br>
+        {{ lobby_making_form.capacity(min="2", class="form-control field") }}
       </div>
-      <div class="col-sm-6">
-        <label for="time-type">Time allocation:</label>
-        <select id="time-type">
-          <option value="" disabled selected>Select</option>
-          <option value="general">General Schedule</option>
-          <option value="calendar-based">Calendar Based</option>
-        </select>
+      <div class="col-sm-4 ">
+        <h4 class="text-center">Tags</h4>
+        <h6 class="text-center">Optional Fields</h6>
+        <br>
+        <div class = "tag-column">
+          <div id="custom-tags">
+            {{ lobby_making_form.tag1(class="form-control field") }}
+            <br><br>
+            {{ lobby_making_form.tag2(class="form-control field") }}
+            <br><br>
+            {{ lobby_making_form.tag3(class="form-control field") }}
+          </div>
+        </div>
       </div>
-    </div>
 
-    <br>
-    <br>
-    <div class="row">
-      <div class="col-sm-6" id="time-option"></div>
+      <div class="col-sm-4 time-column">
+        <h4>Time Allocation Options</h4>
+        <br>
+        <div id="mon-section">
+          <input type='checkbox' id="mon-checkbox" class="form-check-input" onclick="showGeneral('mon')">
+          <label for="mon-checkbox" class="h6">Monday</label>
+          <div id="mon" class="not-showing">
+            {{ lobby_making_form.mon_from.label(class="h6") }}
+            {{ lobby_making_form.mon_from(id="mon-from") }}
+
+            {{ lobby_making_form.mon_to.label(class="h6") }}
+            {{ lobby_making_form.mon_to(id="mon-to") }}
+          </div>
+        </div>
+        <br>
+
+        <div id="tue-section">
+          <input type='checkbox' id="tue-checkbox" class="form-check-input" onclick="showGeneral('tue')">
+          <label for="tue-checkbox" class="h6">Tuesday</label>
+          <div id="tue" class="not-showing">
+            {{ lobby_making_form.tue_from.label(class="h6") }}
+            {{ lobby_making_form.tue_from(id="tue-from") }}
+            
+            {{ lobby_making_form.tue_to.label(class="h6") }}
+            {{ lobby_making_form.tue_to(id="tue-to") }}
+          </div>
+        </div>
+        <br>
+
+        <div id="wed-section">
+          <input type='checkbox' id="wed-checkbox" class="form-check-input" onclick="showGeneral('wed')">
+          <label for="wed-checkbox" class="h6">Wednesday</label>
+          <div id="wed" class="not-showing">
+            {{ lobby_making_form.wed_from.label(class="h6") }}
+            {{ lobby_making_form.wed_from(id="wed-from") }}
+            
+            {{ lobby_making_form.wed_to.label(class="h6") }}
+            {{ lobby_making_form.wed_to(id="wed-to") }}
+          </div>
+        </div>
+        <br>
+
+        <div id="thu-section">
+          <input type='checkbox' id="thu-checkbox" class="form-check-input" onclick="showGeneral('thu')">
+          <label for="thu-checkbox" class="h6">Thursday</label>
+          <div id="thu" class="not-showing">
+            {{ lobby_making_form.thu_from.label(class="h6") }}
+            {{ lobby_making_form.thu_from(id="thu-from") }}
+            
+            {{ lobby_making_form.thu_to.label(class="h6") }}
+            {{ lobby_making_form.thu_to(id="thu-to") }}
+          </div>
+        </div>
+        <br>
+
+        <div id="fri-section">
+          <input type='checkbox' id="fri-checkbox" class="form-check-input" onclick="showGeneral('fri')">
+          <label for="fri-checkbox" class="h6">Friday</label>
+          <div id="fri" class="not-showing">
+            {{ lobby_making_form.fri_from.label(class="h6") }}
+            {{ lobby_making_form.fri_from(id="fri-from") }}
+            
+            {{ lobby_making_form.fri_to.label(class="h6") }}
+            {{ lobby_making_form.fri_to(id="fri-to") }}
+          </div>
+        </div>
+        <br>
+
+        <div id="sat-section">
+          <input type='checkbox' id="sat-checkbox" class="form-check-input" onclick="showGeneral('sat')">
+          <label for="sat-checkbox" class="h6">Saturday</label>
+          <div id="sat" class="not-showing">
+            {{ lobby_making_form.sat_from.label(class="h6") }}
+            {{ lobby_making_form.sat_from(id="sat-from") }}
+            
+            {{ lobby_making_form.sat_to.label(class="h6") }}
+            {{ lobby_making_form.sat_to(id="sat-to") }}
+          </div>
+        </div>
+        <br>
+
+        <div id="sun-section">
+          <input type='checkbox' id="sun-checkbox" class="form-check-input" onclick="showGeneral('sun')">
+          <label for="sun-checkbox" class="h6">Sunday</label>
+          <div id="sun" class="not-showing">
+            {{ lobby_making_form.sun_from.label(class="h6") }}
+            {{ lobby_making_form.sun_from(id="sun-from") }}
+            
+            {{ lobby_making_form.sun_to.label(class="h6") }}
+            {{ lobby_making_form.sun_to(id="sun-to") }}
+          </div>
+        </div>
+        <br>
+
+      </div>
     </div>
     <br>
-    <br>
-    <input type="submit" value="Submit">
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        {{ lobby_making_form.submit(class="btn btn-light btn-outline-secondary") }}
+      </div>
+    </div>
   </form>
 </div>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
 {% endblock %}
 
 {% block bodyScripts %}

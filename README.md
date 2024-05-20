@@ -2,6 +2,8 @@
 
 ## About the project
 
+This app allows players who are looking for a group of people to play with to find other players without having to mess with scheduling conflicts or figuring out crossplay. Using teamify, users can create lobbies with tags that allow users to see at a glance what the lobby is looking for in a player and find a group of players that match their playstyle. Through lobby chat, players can coordinate setup of a multplayer game, and learn about each other and decide if they want to play together before actually allowing other people into game servers.
+
 ## Project Group
 
 | UWA ID   | Name                   | Github         |
@@ -12,6 +14,37 @@
 | 22992693 | Fatimah Ali O Aljanobi | FAljanobi      |
 
 ## Summary of Application Architecture
+
+```plaintext
+app
+ database
+  main.db(to be genned)
+  seed.py(helps in creation and population of db)
+ static
+  css
+   (holds all css files we made)
+   base.css(used as base css in all pages)
+   introduction.css
+   lobby-making.css
+   lobby-view.css
+  scripts
+   (holds all js)
+ templates
+  (has all html files)
+  base.html(used to make the header consistant)
+  (all other html are based on a page)
+deliverables
+migrations
+ versions
+  (holds all migration code)
+ alembic.ini
+ env.py
+ script.py.mako
+ tests
+  (hold test scripts)
+readme.md(you are here)
+requriements.txt(states all project requirements)
+```
 
 ## Launching the application
 

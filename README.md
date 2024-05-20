@@ -2,7 +2,7 @@
 
 ## About the project
 
-the app is meant to allow players who are looking for a group of people to play with to find other players without having to mess with scheduling conflicts or figuring out crossplay or playstyle. using teamify users can create lobbies with tags that allow users to see at a glance what the lobby is looking for in a player and find a group of players that match their playstyle. with lobby chat, players can coordinate setup and joining of a multplayer game, and learn about each other and decide if they want to play together before actually allowing other people into game servers.
+This app allows players who are looking for a group of people to play with to find other players without having to mess with scheduling conflicts or figuring out crossplay. Using teamify, users can create lobbies with tags that allow users to see at a glance what the lobby is looking for in a player and find a group of players that match their playstyle. Through lobby chat, players can coordinate setup of a multplayer game, and learn about each other and decide if they want to play together before actually allowing other people into game servers.
 
 ## Project Group
 

@@ -1,7 +1,9 @@
+"""Initialise flask app and database"""
+
 from flask import Flask
-from app.config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from app.config import Config
 from flask_login import LoginManager
 from flask_socketio import SocketIO
 
@@ -13,7 +15,7 @@ login = LoginManager(app)
 login.login_view = "account_creation"
 socketio = SocketIO(app, manage_session=False)
 
-from app import routes, form_routes, model, socketevents
+from app import routes, form_routes, model, socketevents, data_routes
 from app.database.seed import seed_required, seed_all
 import click
 

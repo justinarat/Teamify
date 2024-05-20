@@ -36,8 +36,8 @@ function parseSearch(search) {
 function loadLobbyCards(count, searchString, searchTags = []) {
   let url = "/get-lobby-cards?count=" + count;
   url += "&search_string=" + searchString;
-  for (tag in searchTags) {
-    url += "&search_tags=" + tag;
+  for (let i = 0; i < searchTags.length; i++) {
+    url += "&search_tags=" + searchTags[i];
   }
 
   $.ajax({

@@ -5,6 +5,7 @@ from app import app
 from app.model import Lobby, LobbyTimes, Games
 from flask_login import login_required, current_user
 
+
 @app.route("/get-lobby-cards", methods=["GET"])
 def get_lobby_cards():
     """Endpoint for getting lobby cards for the lobby searching page

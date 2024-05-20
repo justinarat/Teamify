@@ -88,7 +88,8 @@ def create_lobby_request():
         game = create_lobby_form.game.data
         game_data = Games.query.filter_by(Name=game).first()
         if game_data == None:
-            return "Entered game isn't supported", 400
+            flash("Entered game isn't supported")
+            return render_template("lobby-making.html", title="Create Lobby", lobby_making_form=create_lobby_form)
         gameID = int(game_data.UID)
         
         lobby_name = create_lobby_form.lobby_name.data

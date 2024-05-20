@@ -2,76 +2,41 @@
 
 {% block css %}{% endblock %}
 
-{% block headScripts %}{% endblock %}
+{% block headScripts %}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="static/scripts/lobby-card.js"></script>
+{% endblock %}
 
 {% block content %}
 <main class="container">
-  <section id="lobbies" class="row">
-    <h1 class="text-center">Search Lobbies</h1>
+  <h1 class="text-center">Search Lobbies</h1>
 
-    <form id="lobby-search" class="row justify-content-center" action="lobby-searching.html" method="GET">
-      <div class="col-sm-6">
-        <div class="input-group mb-3">
-          <input type="text" placeholder="Lobby content" aria-label="Lobby content" name="search" class="form-control">
-          <button type="submit" aria-label="Submit search" class="btn btn-outline-secondary">
-            <i class="bi bi-search" aria-hidden="true"></i>
-          </button>
-        </div>
+  <form id="lobby-search" class="row justify-content-center" action="lobby-searching.html" method="GET">
+    <div class="col-sm-6">
+      <div class="input-group mb-3">
+        <input type="text" placeholder="Lobby content" aria-label="Lobby content" name="search" class="form-control">
+        <button type="submit" aria-label="Submit search" class="btn btn-outline-secondary">
+          <i class="bi bi-search" aria-hidden="true"></i>
+        </button>
       </div>
-    </form>
+    </div>
+  </form>
 
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul class="flashes">
-      {% for message in messages %}
-      <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class="flashes">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
 
-    <article class="col-sm-4">
-      <div class="card bg-dark text-light">
-        <div class="card-body">
-          <h3 class="game-name">Game 1</h3>
-          <p class="lobby-description">Lobby 1 description.</p>
-          <div class="lobby-host">Host Username</div>
-          <div class="lobby-other-players">Player 1</div>
-          <p class="time-available">FRI 7pm-3am</p>
-          <!--Maybe show next available time-->
-        </div>
-      </div>
-    </article>
-
-    <article class="col-sm-4">
-      <div class="card bg-dark text-light">
-        <div class="card-body">
-          <h3 class="game-name">Game 2</h3>
-          <p class="lobby-description">Lobby 2 description.</p>
-          <div class="lobby-host">Host Username</div>
-          <div class="lobby-other-players">Player 1, Player 2</div>
-          <p class="time-available">SAT 1pm-10pm</p>
-          <!--Maybe show next available time-->
-        </div>
-      </div>
-    </article>
-
-    <article class="col-sm-4">
-      <div class="card bg-dark text-light">
-        <div class="card-body">
-          <h3 class="game-name">Game 3</h3>
-          <p class="lobby-description">Lobby 3 description.</p>
-          <div class="lobby-host">Host Username</div>
-          <div class="lobby-other-players">
-            Player 1, Player 2, Player 3
-          </div>
-          <p class="time-available">SUN 1pm-5pm</p>
-          <!--Maybe show next available time-->
-        </div>
-      </div>
-    </article>
-  </section>
+  <section id="lobbies" class="row"></section>
 </main>
 {% endblock %}
 
-{% block bodyScripts %}{% endblock %}
+{% block bodyScripts %}
+<script src="static/scripts/lobby-searching.js"></script>
+{% endblock %}

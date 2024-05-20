@@ -55,22 +55,64 @@ def seed_users(only_required=True):
     )
 
     if not only_required:
-        data.append(
+        extra_data = [
             Users(
                 UID="2",
                 Username="CoffeeLover",
                 Password="password2",
                 Email="coffeelover@gmail.com",
-            )
-        )
-        data.append(
+            ),
             Users(
                 UID="3",
                 Username="Firebird",
                 Password="password3",
                 Email="firebird@outlook.com",
-            )
-        )
+            ),
+            Users(
+                UID="4",
+                Username="Skywalker",
+                Password="password4",
+                Email="skywalker@gmail.com",
+            ),
+            Users(
+                UID="5",
+                Username="Starlord",
+                Password="password5",
+                Email="starlord@yahoo.com",
+            ),
+            Users(
+                UID="6",
+                Username="Moonlight",
+                Password="password6",
+                Email="moonlight@outlook.com",
+            ),
+            Users(
+                UID="7",
+                Username="NightOwl",
+                Password="password7",
+                Email="nightowl@gmail.com",
+            ),
+            Users(
+                UID="8",
+                Username="Sunshine",
+                Password="password8",
+                Email="sunshine@gmail.com",
+            ),
+            Users(
+                UID="9",
+                Username="Rainfall",
+                Password="password9",
+                Email="rainfall@outlook.com",
+            ),
+            Users(
+                UID="10",
+                Username="Snowflake",
+                Password="password10",
+                Email="snowflake@gmail.com",
+            ),
+        ]
+        for user in extra_data:
+            data.append(user)
 
     seed_table("Users", data)
 

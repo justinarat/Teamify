@@ -1,5 +1,5 @@
 from app import app, db
-from app.model import Lobby, Users, LobbyPlayers, Games, Tags, LobbyTags, LobbyTimes
+from app.model import Lobby, Users, LobbyPlayers, Games, Tags, LobbyTags, LobbyTimes, UserTracker
 from app.forms import LoginForm, SignUpForm, CreateLobbyForm
 from flask import render_template, url_for, redirect, flash, request, session
 from flask_login import login_user, current_user, login_required, logout_user
@@ -20,6 +20,9 @@ def login_request():
             if user.check_password(password):
                 # Authentication successful, redirect to some page
                 login_user(user)
+
+                UserTracker.log_login(user)
+
                 return redirect(url_for("games_view"))
 
         # Authentication failed, redirect back to login page
@@ -52,6 +55,8 @@ def signup_request():
 
             login_user(user)
 
+            UserTracker.log_signup(user)
+
             return redirect(url_for("games_view"))
         else:
             # Authentication failed, redirect back to login page
@@ -73,11 +78,12 @@ def create_lobby_request():
     
     create_lobby_form = CreateLobbyForm(game_titles=game_titles)
     if create_lobby_form.validate_on_submit():
-        
+        new_lobby_id = 1
         lobby_with_last_id = Lobby.query.order_by(desc(Lobby.LobbyID)).first()
-        new_lobby_id = int(lobby_with_last_id.LobbyID)+1
-        while Lobby.query.filter_by(LobbyID=new_lobby_id).first() != None: # Guarantees that new_lobby_id is unique
-            new_lobby_id += 1
+        if lobby_with_last_id != None:
+            new_lobby_id = int(lobby_with_last_id.LobbyID)+1
+            while Lobby.query.filter_by(LobbyID=new_lobby_id).first() != None: # Guarantees that new_lobby_id is unique
+                new_lobby_id += 1
             
         game = create_lobby_form.game.data
         gameID = int(Games.query.filter_by(Name=game).first().UID)
@@ -150,7 +156,7 @@ def create_lobby_request():
             if time_from is not None and time_to is not None:
                 new_lobby_time_id = 0
                 lobby_time_with_last_id=LobbyTimes.query.order_by(desc(LobbyTimes.RowID)).first()
-                if (lobby_time_with_last_id != None):
+                if lobby_time_with_last_id != None:
                     new_lobby_time_id = int(lobby_time_with_last_id.RowID)+1
                     while LobbyTimes.query.filter_by(RowID=new_lobby_time_id).first() != None: # Guarantees that new_tag_id is unique id
                         new_lobby_time_id += 1
@@ -175,7 +181,7 @@ def create_lobby_request():
 
         new_lobby_players_id = 0
         lobby_player_with_last_id=LobbyPlayers.query.order_by(desc(LobbyPlayers.RowID)).first()
-        if (lobby_player_with_last_id != None):
+        if lobby_player_with_last_id != None:
             new_lobby_players_id = int(lobby_player_with_last_id.RowID)+1
             while LobbyPlayers.query.filter_by(RowID=new_lobby_players_id).first() != None: # Guarantees that new_tag_id is unique id
                 new_lobby_players_id += 1
@@ -190,7 +196,8 @@ def create_lobby_request():
         
         db.session.commit()
         
-        # introduction for the sake of testing
+        UserTracker.log_make_lobby(current_user, new_lobby)
+
         return redirect(url_for("lobby_view", lobby_id=new_lobby_id))
     print(create_lobby_form.errors)
     print("Form data:", create_lobby_form.data)
@@ -203,7 +210,10 @@ def logout_request():
     
         Redirects user to the introduction page.
     """
+    UserTracker.log_logout(current_user)
+
     logout_user()
+
     return redirect(url_for("introduction"))
 
 @app.route("/join-lobby-request", methods=["post"])
@@ -253,6 +263,8 @@ def join_lobby_request():
     flask_socketio.emit("player_join", data_to_send, to=lobby_id, namespace="/")
     session["lobby_id"] = lobby_id
 
+    UserTracker.log_join_lobby(current_user, lobby)
+
     return redirect(url_for("lobby_view", lobby_id=lobby_id))
 
 @app.route("/leave-lobby-request", methods=["post"])
@@ -266,6 +278,9 @@ def leave_lobby_request():
     user_id = current_user.get_id()
     lobby_id = session["lobby_id"]
 
+    # Both user_id and lobby_id should exist in LobbyPlayers since the leave button 
+    # won't render unless they're in the lobby, so no error checking done
+
     LobbyPlayers.query.filter_by(UserID=user_id, LobbyID=lobby_id).delete()
     db.session.commit()
 
@@ -273,5 +288,9 @@ def leave_lobby_request():
         "sender_username": current_user.Username
     }
     flask_socketio.emit("player_leave", data_to_send, to=lobby_id, namespace="/")
+
+    lobby = Lobby.query.filter_by(LobbyID=lobby_id).first()
+
+    UserTracker.log_leave_lobby(current_user, lobby)
 
     return redirect(url_for("lobby_searching"))

@@ -3,6 +3,7 @@
 from flask import request, make_response, jsonify
 from app import app
 from app.model import Lobby, LobbyTimes, Games
+from flask_login import login_required, current_user
 
 
 @app.route("/get-lobby-cards", methods=["GET"])
@@ -83,13 +84,61 @@ def get_lobby_cards():
 
     return jsonify({"lobby_cards": lobby_cards})
 
+@app.route("/get-joined-lobbies", methods=["GET"])
+@login_required
+def get_joined_lobbies():
+    """Endpoint for getting cards for the lobbies the user has joined
+
+    The body of the response will also have json as:
+    body = {
+        "lobby_cards"=[
+        {
+            "lobby_id" : "1",
+            "game_title": "game1_title",
+            "lobby_name": "lobby1_name",
+            "lobby_descrition": "lobby1_desc",
+            "host": "host1",
+            "players": ["player_1", "player_2", ...],
+            "next_available_time": "timeblock format...",
+        },
+        {
+            "lobby_id" : "2",
+            "game_title": "game2_title",
+            "lobby_name": "lobby2_name",
+            "lobby_descrition": "lobby2_desc",
+            "host": "host2",
+            "players": ["player_a", "player_b", ...],
+            "next_available_time": "timeblock format...",
+        },
+        ...
+        ]
+    }
+    """
+
+    lobbies = current_user.get_joined_lobbies()
+
+    lobby_cards = []
+    for lobby in lobbies:
+        player_usernames = [player.Username for player in lobby.players]
+        lobby_card = {
+            "lobby_id": lobby.LobbyID,
+            "game_title": lobby.game.Name,
+            "lobby_name": lobby.Name,
+            "lobby_description": lobby.Desc,
+            "host": lobby.get_host().Username,
+            "players": player_usernames,
+            "next_available_time": get_next_available_time(lobby),
+        }
+        lobby_cards.append(lobby_card)
+
+    return jsonify({"lobby_cards": lobby_cards})
 
 def search_db(count, search_string, search_tags):
     """Returns 'count' lobby IDs based on search params"""
     # Filter by tags
     lobby_query = Lobby.query
     for tag in search_tags:
-        lobby_query = lobby_query.filter(Lobby.tags.has(Name=tag))
+        lobby_query = lobby_query.filter(Lobby.tags.any(Name=tag))
 
     # Check if search_string is in the lobby game name
     default_search = ""

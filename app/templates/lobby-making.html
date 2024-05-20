@@ -27,7 +27,7 @@
         {{ lobby_making_form.lobby_description() }}
         <br><br>
         {{ lobby_making_form.capacity.label }}
-        {{ lobby_making_form.capacity() }}
+        {{ lobby_making_form.capacity(min="2") }}
       </div>
       <div class="col-sm-4">
         <h4>Tags</h4>
